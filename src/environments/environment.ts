@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCtcfjvpLVUXqZqoxeO4W97aa4WohYUloo",
-    authDomain: "final-tp-javier-francia.firebaseapp.com",
-    databaseURL: "https://final-tp-javier-francia.firebaseio.com",
-    projectId: "final-tp-javier-francia",
-    storageBucket: "final-tp-javier-francia.appspot.com",
-    messagingSenderId: "252111642848",
-    appId: "1:252111642848:web:1cec70ed1f198f2901b085"
+    apiKey: "AIzaSyD24zD8u5Sw4cetYTdTB7SyDNibFTcmkp8",
+    authDomain: "javier-francia-tp-final.firebaseapp.com",
+    databaseURL: "https://javier-francia-tp-final.firebaseio.com",
+    projectId: "javier-francia-tp-final",
+    storageBucket: "javier-francia-tp-final.appspot.com",
+    messagingSenderId: "216357679273",
+    appId: "1:216357679273:web:df9f25161b1ccd8586b9b8"
   }
 };
 
