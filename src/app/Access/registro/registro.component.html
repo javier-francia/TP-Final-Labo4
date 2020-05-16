@@ -1,0 +1,48 @@
+<form   novalidate
+        (ngSubmit)="tryRegister(loginForm)"
+        #loginForm="ngForm">
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input  class="form-control"
+                id="inputEmail"
+                type="email" 
+                placeholder="Ej: micorreo@gmail.com"
+                required
+                email
+                [(ngModel)]="email"
+                name="email"
+                #emailVar="ngModel"
+                [ngClass]="{'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid }">
+        <span class="invalid-feedback">
+          <span *ngIf="emailVar.errors?.required">
+            Por favor ingrese su correo.
+          </span>
+          <span *ngIf="emailVar.errors?.email">
+            Por favor ingrese una dirección de correo válida.
+          </span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Contraseña</label>
+        <input  class="form-control"
+                id="inputPassword"
+                type="password"
+                required
+                minlength="6"
+                [(ngModel)]="pass"
+                name="password"
+                #passwordVar="ngModel"
+                [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }">
+        <span class="invalid-feedback">
+          <span *ngIf="passwordVar.errors?.required">
+            Por favor ingrese su contraseña.
+          </span>
+          <span *ngIf="passwordVar.errors?.minlength">
+            La contraseña debe tener al menos 6 caracteres.
+          </span>
+        </span>     
+      </div>
+      <button type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!loginForm.valid || !loginForm.dirty">Sign In</button>
+</form>

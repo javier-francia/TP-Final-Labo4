@@ -1,0 +1,5 @@
+<h1 *ngIf="accessService.user | async">Welcome {{ (accessService.user | async)?.email }}!</h1>
+
+<button (click)="LogOut()" *ngIf="accessService.user | async">
+  Logout
+</button>
