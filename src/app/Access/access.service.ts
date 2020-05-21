@@ -15,24 +15,40 @@ export class AccessService {
   }
 
 
-  RegisterWithEmail(email: string, pass: string)
+  RegisterWithEmail(email: string, pass: string) : Promise<firebase.auth.UserCredential>
   {
     return this.fireAuth.createUserWithEmailAndPassword(email, pass);
   }
 
-  LoginWithEmail(email: string, pass: string)
+  LoginWithEmail(email: string, pass: string) : Promise<firebase.auth.UserCredential>
   {
     return this.fireAuth.signInWithEmailAndPassword(email, pass);
   }
 
-  LogOut(): Promise<void>
+  LogOut() : Promise<void>
   {
     return this.fireAuth.signOut();
   }
 
-  GetCurrentUser(): Promise<firebase.User>
+  GetCurrentUser() : Promise<firebase.User>
   {
     return this.fireAuth.currentUser;
   }
 
+  ResetPassword(email: string) : Promise<void>
+  {
+    return this.fireAuth.sendPasswordResetEmail(email);
+  }
+
+  DeleteUser() : any
+  {
+    let user = this.fireAuth.currentUser;
+    user
+      .then(res => {
+        return res.delete()
+          .then(() => {return true;})
+          .catch(() => {return false;}); // Implementar
+      })
+      .catch(() => {return false;});
+  }
 }

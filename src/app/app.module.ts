@@ -1,44 +1,35 @@
 //            External Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { Routes, RouterModule } from '@angular/router';
 //            Project Modules
-
-
+import { AccessModule } from './Access/access.module';
+import { UsuariosModule } from './Usuarios/usuarios.module';
+import { NavegacionModule } from './Navegacion/navegacion.module';
 //            Components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './Access/login/login.component';
-import { RegistroComponent } from './Access/registro/registro.component';
-
 //            Environment
 import { environment } from '../environments/environment.prod';
-import { HomeComponent } from './Navegacion/home/home.component';
-import { MenuComponent } from './Navegacion/menu/menu.component';
-import { ErrorComponent } from './Navegacion/error/error.component';
 
-
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegistroComponent,
-    HomeComponent,
-    MenuComponent,
-    ErrorComponent
+
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes),
+    AccessModule,
+    UsuariosModule,
+    NavegacionModule // Ultimo por contener '**'
   ],
   providers: [],
   bootstrap: [AppComponent]
