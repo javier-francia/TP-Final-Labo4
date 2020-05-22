@@ -1,4 +1,16 @@
-<form   novalidate
+<button class="btn btn-primary" (click)="entidad = 'paciente'">Paciente</button>
+<button class="btn btn-primary" (click)="entidad = 'profesional'">Profesional</button>
+<button class="btn btn-primary" (click)="entidad = 'admin'">Admin</button>
+
+
+<div>
+  <app-paciente-form *ngIf="entidad == 'paciente'"></app-paciente-form>
+  <app-profesional-form *ngIf="entidad == 'profesional'"></app-profesional-form>
+  <app-admin-form *ngIf="entidad == 'admin'"></app-admin-form>
+</div>
+
+
+<!--form   novalidate
         (ngSubmit)="tryRegister(loginForm)"
         #loginForm="ngForm">
     <div class="form-group">
@@ -45,4 +57,4 @@
       <button type="submit"
                   class="btn btn-primary"
                   [disabled]="!loginForm.valid || !loginForm.dirty">Sign In</button>
-</form>
+</form-->

@@ -1,6 +1,7 @@
 //            External Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 //            Components
 import { AdminFormComponent } from './Admin/admin-form/admin-form.component';
@@ -23,7 +24,13 @@ import { PacienteHistorialComponent } from './Paciente/paciente-historial/pacien
     PacienteHistorialComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
+  ],
+  exports: [
+    AdminFormComponent,
+    PacienteFormComponent,
+    ProfesionalFormComponent
   ]
 })
 export class UsuariosModule { }

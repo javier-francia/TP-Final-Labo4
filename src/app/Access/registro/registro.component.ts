@@ -10,6 +10,9 @@ import { AccessService } from '../access.service';
 })
 export class RegistroComponent implements OnInit {
 
+  entidad = "paciente";
+
+
   email: string;
   pass: string;
 
