@@ -1,12 +1,13 @@
-<button class="btn btn-primary" (click)="entidad = 'paciente'">Paciente</button>
-<button class="btn btn-primary" (click)="entidad = 'profesional'">Profesional</button>
-<button class="btn btn-primary" (click)="entidad = 'admin'">Admin</button>
+<button class="btn btn-primary" (click)="entidad = 'Paciente'">Paciente</button>
+<button class="btn btn-primary" (click)="entidad = 'Profesional'">Profesional</button>
+<button class="btn btn-primary" (click)="entidad = 'Admin'">Admin</button>
 
 
 <div>
-  <app-paciente-form *ngIf="entidad == 'paciente'"></app-paciente-form>
-  <app-profesional-form *ngIf="entidad == 'profesional'"></app-profesional-form>
-  <app-admin-form *ngIf="entidad == 'admin'"></app-admin-form>
+  <app-paciente-form *ngIf="entidad == 'Paciente'"></app-paciente-form>
+  <app-profesional-form *ngIf="entidad == 'Profesional'"></app-profesional-form>
+  <app-admin-form *ngIf="entidad == 'Admin'"
+                  (registrarUsuario)="tryRegister($event)"></app-admin-form>
 </div>
 
 

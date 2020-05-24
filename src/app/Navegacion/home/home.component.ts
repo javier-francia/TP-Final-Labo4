@@ -9,16 +9,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public accessService: AccessService,
+  constructor(public accessSvc: AccessService,
               private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
   LogOut()
   {
-    this.accessService.LogOut()
+    this.accessSvc.LogOut()
       .then(() => {
+        this.accessSvc.CleanLocalStorage();
         this.router.navigate(['']);
       })
       .catch();

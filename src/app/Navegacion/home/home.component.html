@@ -1,5 +1,6 @@
-<h1 *ngIf="accessService.user | async">Welcome {{ (accessService.user | async)?.email }}!</h1>
+<app-menu></app-menu>
+<h1 *ngIf="accessSvc.user | async">Welcome {{ (accessSvc.user | async)?.email }}!</h1>
 
-<button (click)="LogOut()" *ngIf="accessService.user | async">
+<button (click)="LogOut()" *ngIf="accessSvc.user | async">
   Logout
 </button>

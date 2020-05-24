@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AccessService } from '../../Access/access.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  perfil: string;
+
+  constructor(private accessSvc: AccessService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    if(this.accessSvc.ValidateLocalStorage())
+    {
+      this.perfil = this.accessSvc.GetPerfil();
+      console.log(this.perfil);
+    }
   }
 
 }
