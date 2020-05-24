@@ -13,6 +13,8 @@ import { NavegacionModule } from './Navegacion/navegacion.module';
 import { AppComponent } from './app.component';
 //            Environment
 import { environment } from '../environments/environment.prod';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [];
 
@@ -29,7 +31,9 @@ const routes: Routes = [];
     RouterModule.forRoot(routes),
     AccessModule,
     UsuariosModule,
-    NavegacionModule // Ultimo por contener '**'
+    NavegacionModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule // Ultimo por contener '**'
   ],
   providers: [],
   bootstrap: [AppComponent]
