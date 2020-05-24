@@ -1,0 +1,22 @@
+{
+  "files.exclude": {
+    "tslint.json": true,
+    "tsconfig.spec.json": true,
+    "tsconfig.json": true,
+    "tsconfig.app.json": true,
+    "storage.rules": true,
+    "karma.conf.js": true,
+    "browserslist": true,
+    ".gitignore": true,
+    ".firebaserc": true,
+    ".editorconfig": true,
+    "node_modules": true,
+    "e2e": true,
+    ".firebase": true,
+    "dist": true,
+    "src\\test.ts": true,
+    "src\\polyfills.ts": true,
+    "src\\main.ts": true,
+    "src\\favicon.ico": true
+  }
+}
