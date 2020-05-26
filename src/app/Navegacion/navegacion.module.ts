@@ -9,6 +9,9 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { ErrorComponent } from './error/error.component';
 
+//            MD_Bootstrap
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
@@ -24,7 +27,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MDBBootstrapModule.forRoot(),
   ]
 })
 export class NavegacionModule { }
