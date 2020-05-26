@@ -1,1 +1,15 @@
-<p>profesional-form works!</p>
+<div>
+    <form>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" [(ngModel)]="usuario.nombre">
+        <label for="apellido">Apellido</label>
+        <input type="text" name="apellido" [(ngModel)]="usuario.apellido">
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)]="usuario.email">
+        <div *ngIf="modo == 'insert'">
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" [(ngModel)]="password">
+        </div>
+        <input class="btn btn-success" type="button" value="Registrarse" (click)="Registrar_OnClick()">        
+    </form>
+</div>
