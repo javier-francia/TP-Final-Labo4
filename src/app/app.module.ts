@@ -9,6 +9,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccessModule } from './Access/access.module';
 import { UsuariosModule } from './Usuarios/usuarios.module';
 import { NavegacionModule } from './Navegacion/navegacion.module';
+import { GestionModule } from './Gestion/gestion.module';
+import { ErrorRoutingModule } from './Navegacion/error-routing.module';
+
 //            Components
 import { AppComponent } from './app.component';
 //            Environment
@@ -16,12 +19,12 @@ import { environment } from '../environments/environment.prod';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 const routes: Routes = [];
 
 @NgModule({
   declarations: [
-    AppComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +34,11 @@ const routes: Routes = [];
     RouterModule.forRoot(routes),
     AccessModule,
     UsuariosModule,
-    NavegacionModule,
+    GestionModule,
+    NavegacionModule, 
+    ErrorRoutingModule,// Ultimo feature module por contener '**'
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule // Ultimo por contener '**'
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
