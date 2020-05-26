@@ -23,4 +23,14 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  LogOut()
+  {
+    this.accessSvc.LogOut()
+      .then(() => {
+        this.accessSvc.CleanLocalStorage();
+        this.router.navigate(['']);
+      })
+      .catch();
+  }
+
 }

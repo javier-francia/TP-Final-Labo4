@@ -1,1 +1,116 @@
-<p>menu works!</p>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark purple-gradient" [containerInside]="false">
+
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/Home">Clínica OnLine</a></mdb-navbar-brand>
+
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Paciente'" class="nav-item">
+        <a routerLink="/PedirTurno" class="nav-link waves-light" mdbWavesEffect>Pedir turno</a>
+      </li>
+      <li *ngIf="perfil == 'Paciente'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Paciente'" class="nav-item">
+        <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
+      </li>
+      <li *ngIf="perfil == 'Profesional'" class="nav-item">
+        <a routerLink="/AtenderPaciente" class="nav-link waves-light" mdbWavesEffect>Atender paciente</a>
+      </li>
+      <li *ngIf="perfil == 'Profesional'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Profesional'" class="nav-item">
+        <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>Agenda</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Admin'" class="nav-item">
+        <a routerLink="/AdminProfesionales" class="nav-link waves-light" mdbWavesEffect>Administrar profesionales</a>
+      </li>
+      <li *ngIf="perfil == 'Admin'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Admin'" class="nav-item">
+        <a routerLink="/AdministradoresABM" class="nav-link waves-light" mdbWavesEffect>ABM Administradores</a>
+      </li>
+    </ul>
+
+    
+
+    
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" routerLink="/MiPerfil">Mi perfil</a>
+              <a *ngIf="perfil == 'Paciente'" class="dropdown-item" routerLink="/MisTurnos">Mis turnos</a>
+              <a *ngIf="perfil == 'Paciente'" class="dropdown-item" routerLink="/Historial">Historial</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" (click)="LogOut()">Salir <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
+
+
+
+<!--ul *ngIF="perfil == 'Paciente'" class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/PedirTurno" class="nav-link waves-light" mdbWavesEffect>Pedir turno</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
+  </li>
+</ul>
+
+<ul *ngIF="perfil == 'Profesional'" class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/AtenderPaciente" class="nav-link waves-light" mdbWavesEffect>Atender paciente</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>Agenda</a>
+  </li>
+</ul>
+
+<ul *ngIF="perfil == 'Admin'" class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/AtenderPaciente" class="nav-link waves-light" mdbWavesEffect>Administrar profesionales</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link waves-light" mdbWavesEffect></a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>ABM Administradores</a>
+  </li>
+</ul-->

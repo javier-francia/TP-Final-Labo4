@@ -16,6 +16,11 @@ export class ProfesionalesService {
     return this.fireStore.collection(this.collectionName).snapshotChanges();
   }
 
+  GetByEmail(email: string)
+  {
+    return this.fireStore.collection(this.collectionName, ref => ref.where('email', '==', email));
+  }
+
   Insert(item: Profesional) : Promise<void>
   {
     return this.fireStore.collection(this.collectionName).doc(item.id.toString()).set({
