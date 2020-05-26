@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   perfil: string;
+  habilitado = false;
 
   constructor(private accessSvc: AccessService,
               private router: Router) { }
@@ -19,7 +20,7 @@ export class MenuComponent implements OnInit {
     if(this.accessSvc.ValidateLocalStorage())
     {
       this.perfil = this.accessSvc.GetPerfil();
-      console.log(this.perfil);
+      this.habilitado = this.accessSvc.IsHabilitado();
     }
   }
 
