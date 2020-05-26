@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccessService } from '../access.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { UsuariosService } from '../../Usuarios/usuarios.service';
-import { filter } from 'rxjs/operators';
+import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 
 
 @Component({

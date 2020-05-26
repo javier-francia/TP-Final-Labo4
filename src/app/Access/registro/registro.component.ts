@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccessService } from '../access.service';
-import { UsuariosService } from '../../Usuarios/usuarios.service';
+import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 import { AdministradoresService } from '../../Usuarios/Admin/administradores.service';
 import { PacientesService } from '../../Usuarios/Paciente/pacientes.service';
 import { ProfesionalesService } from '../../Usuarios/Profesional/profesionales.service';
