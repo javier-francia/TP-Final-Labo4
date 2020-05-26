@@ -22,11 +22,12 @@ export class UsuariosService {
     return this.fireStore.collection(this.collectionName, ref => ref.where('email', '==', email));
   }
 
-  Insert(id: number, email: string, perfil: string) : Promise<void>
+  Insert(id: number, email: string, perfil: string, habilitado: boolean) : Promise<void>
   {
     return this.fireStore.collection(this.collectionName).doc(id.toString()).set({
       email: email,
-      perfil: perfil
+      perfil: perfil,
+      habilitado: habilitado
     });
   }
 

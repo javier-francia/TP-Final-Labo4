@@ -44,7 +44,10 @@ export class RegistroComponent implements OnInit {
         // Implementacion de registro OK
         this.accessSvc.GetCurrentUser()
           .then(user => {
-            this.usuariosSvc.Insert(this.newId, input.obj.email, this.entidad)
+            let habilitado = true;
+            if(this.entidad == "Profesional") habilitado = false;
+
+            this.usuariosSvc.Insert(this.newId, input.obj.email, this.entidad, habilitado)
               .then(() => {
                 // Mando mail de validacion
                 user.sendEmailVerification()
@@ -56,30 +59,30 @@ export class RegistroComponent implements OnInit {
                   case "Paciente":
                     {  
                       let paciente = new Paciente();
-                      paciente.id = this.newId; paciente.nombre = input.obj.nombre; paciente.apellido = input.obj.apellido;
-                      paciente.email = input.obj.email; paciente.perfil = this.entidad; paciente.img1 = input.obj.img1; paciente.img2 = input.obj.img2;
+                      paciente.id = this.newId; paciente.nombre = input.obj.nombre; paciente.apellido = input.obj.apellido; paciente.email = input.obj.email;
+                      paciente.perfil = this.entidad; paciente.img1 = input.obj.img1; paciente.img2 = input.obj.img2;
                       this.pacientesSvc.Insert(paciente);
                     }
                     break;
                   case "Profesional":
                     {
                       let profesional = new Profesional();
-                      profesional.id = this.newId; profesional.nombre = input.obj.nombre; profesional.apellido = input.obj.apellido;
-                      profesional.email = input.obj.email; profesional.perfil = this.entidad; profesional.especialidades = input.obj.especialidades;
+                      profesional.id = this.newId; profesional.nombre = input.obj.nombre; profesional.apellido = input.obj.apellido; profesional.email = input.obj.email;
+                      profesional.perfil = this.entidad; profesional.especialidades = input.obj.especialidades;
                       this.profesionalesSvc.Insert(profesional);
                     }
                     break;
                   case "Admin":
                     {
                       let admin = new Admin();
-                      admin.id = this.newId; admin.nombre = input.obj.nombre; admin.apellido = input.obj.apellido;
-                      admin.email = input.obj.email; admin.perfil = this.entidad; admin.superUser = false;
+                      admin.id = this.newId; admin.nombre = input.obj.nombre; admin.apellido = input.obj.apellido; admin.email = input.obj.email;
+                      admin.perfil = this.entidad; admin.superUser = false;
                       this.adminSvc.Insert(admin);
                     }
                     break;
                 }
 
-                this.accessSvc.LoadLocalStorage(input.obj.email, this.entidad);
+                this.accessSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado);
 
                 // Redirecciono al Home
                 this.router.navigate(['Home']);

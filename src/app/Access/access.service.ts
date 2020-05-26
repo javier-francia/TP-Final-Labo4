@@ -55,12 +55,12 @@ export class AccessService {
       .catch(() => {return false;});
   }
 
-
-  LoadLocalStorage(email: string, perfil: string)
+  LoadLocalStorage(email: string, perfil: string, habilitado: boolean)
   {
     let objeto = {
       email: email,
-      perfil: perfil
+      perfil: perfil,
+      habilitado: habilitado
     };
     let encrypted = CryptoJS.AES.encrypt(JSON.stringify(objeto), environment.encryptionKey);
 ​    localStorage.setItem(this.localStorageKey, encrypted.toString());
@@ -71,7 +71,7 @@ export class AccessService {
   {
     if (localStorage.getItem(this.localStorageKey) !== undefined && localStorage.getItem(this.localStorageKey) !== null)
     {
-      let usuario = JSON.parse(this.GetUsuarioLocalStorage());
+      let usuario = this.GetUsuarioLocalStorage();
       this.GetCurrentUser().then(user => {
         if(user.email !== usuario.email)
         {
@@ -89,14 +89,24 @@ export class AccessService {
     return true;
   }
 
-  GetUsuarioLocalStorage() : string
+  private GetUsuarioLocalStorage() : any
   {
-    return CryptoJS.AES.decrypt(localStorage.getItem(this.localStorageKey), environment.encryptionKey).toString(CryptoJS.enc.Utf8);
+    return JSON.parse(CryptoJS.AES.decrypt(localStorage.getItem(this.localStorageKey), environment.encryptionKey).toString(CryptoJS.enc.Utf8));
   }
 
   GetPerfil() : string
   {
-    return JSON.parse(this.GetUsuarioLocalStorage()).perfil;
+    return this.GetUsuarioLocalStorage().perfil;
+  }
+
+  GetEmail() : string
+  {
+    return this.GetUsuarioLocalStorage().email;
+  }
+
+  IsHabilitado() : boolean
+  {
+    return this.GetUsuarioLocalStorage().habilitado;
   }
 
   CleanLocalStorage()

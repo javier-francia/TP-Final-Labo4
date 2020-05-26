@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
           if(userSnapshot.length > 0)
           {
             perfil = userSnapshot[0].payload.doc.data().perfil;
-            this.accessSvc.LoadLocalStorage(this.email, perfil);
+            let habilitado: boolean = userSnapshot[0].payload.doc.data().habilitado;
+
+            this.accessSvc.LoadLocalStorage(this.email, perfil, habilitado);
             this.router.navigate(['Home']);
             console.info(`Logged with email: ${this.email}`);
           }
@@ -56,6 +58,32 @@ export class LoginComponent implements OnInit {
         }
         console.error(err);
       });
+  }
+
+  HardcodeoUsuarios(perfil: string)
+  {
+    switch(perfil)
+    {
+      case "Admin":
+        this.email = "administrador@tpfinal.com";
+        this.pass = "tpfinalJF!";
+        break;
+      case "Paciente":
+        this.email = "johndoe@tpfinal.com";
+        this.pass = "tpfinalJF!";
+        break;
+      case "ProfesionalHabilitado":
+        this.email = "rene@tpfinal.com";
+        this.pass = "tpfinalJF!";
+        break;
+      case "ProfesionalInhabilitado":
+        this.email = "nickriviera@tpfinal.com";
+        this.pass = "tpfinalJF!";
+        break;
+    }
+    if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
+
+    //console.log(document.getElementById("btnSubmit").attributes.getNamedItem("disabled"))
   }
 
 }
