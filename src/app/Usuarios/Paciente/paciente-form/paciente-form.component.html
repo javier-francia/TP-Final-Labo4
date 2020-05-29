@@ -6,6 +6,10 @@
         <input type="text" name="apellido" [(ngModel)]="usuario.apellido">
         <label for="email">Email</label>
         <input type="email" name="email" [(ngModel)]="usuario.email">
+        <label for="img1">Img1</label>
+        <input type="text" name="img1" [(ngModel)]="usuario.img1">
+        <label for="img2">Img2</label>
+        <input type="text" name="img2" [(ngModel)]="usuario.img2">
         <div *ngIf="modo == 'insert'">
             <label for="password">Contraseña</label>
             <input type="password" name="password" [(ngModel)]="password">
