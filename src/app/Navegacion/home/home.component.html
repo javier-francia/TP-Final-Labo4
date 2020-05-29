@@ -1,4 +1,4 @@
-<app-menu></app-menu>
+<app-menu (modalRaised)="OnModalRaised($event)"></app-menu>
 <!--div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -35,3 +35,54 @@
 </div>
 
 
+
+
+
+<!-- Modal validacion mail -->
+<div *ngIf="modal === 'Mail'" mdbModal #mailModal="mdbModal" class="modal fade top in show" style="display: block; background-color:rgba(0, 0, 0, 0.3);" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="false">
+  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-content">
+      <div class="modal-footer justify-content-center align-items-center">
+        <p>Todavía no validó su correo electrónico.</p>
+        <button type="button" mdbBtn color="primary" class="waves-light" (click)="ReSendVerificationMail()" mdbWavesEffect>Reenviar validación</button>
+        <button type="button" mdbBtn color="default" class="waves-light" outline="true" aria-label="Close" (click)="modal = undefined" mdbWavesEffect><i class="fas fa-undo"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal habilitacion -->
+<div *ngIf="modal === 'Habilitado'" mdbModal #mailModal="mdbModal" class="modal fade top in show" style="display: block; background-color:rgba(0, 0, 0, 0.3);" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="false">
+  <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-content">
+      <div class="modal-footer justify-content-center align-items-center">
+        <p>Su usuario no está habilitado. Solicite a su administrador la habilitación del mismo para poder utilizar todas las funciones.</p>
+        <button type="button" mdbBtn color="default" class="waves-light" outline="true" aria-label="Close" (click)="modal = undefined" mdbWavesEffect><i class="fas fa-undo"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Errores -->
+<button id="btnModalError" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" hidden></button>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center align-items-center">
+        <h5 class="modal-title" id="exampleModalLongTitle">Error</h5>
+      </div>
+      <div class="modal-body">
+      <p>{{error}}</p>
+      </div>
+      <div class="modal-footer justify-content-center align-items-center">
+        <button type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal"><i class="fas fa-undo"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

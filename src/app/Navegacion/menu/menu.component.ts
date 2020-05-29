@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AccessService } from '../../Access/access.service';
 import { Router } from '@angular/router';
 
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
+  @Output() modalRaised: EventEmitter<string> = new EventEmitter<string>();
 
   perfil: string;
   habilitado = false;
@@ -21,6 +23,24 @@ export class MenuComponent implements OnInit {
     {
       this.perfil = this.accessSvc.GetPerfil();
       this.habilitado = this.accessSvc.IsHabilitado();
+
+      if(!this.habilitado)
+      {
+        this.modalRaised.emit("Habilitado");
+      }
+      else
+      {
+        this.accessSvc.GetCurrentUser().then()
+        let miusuario = this.accessSvc.user.subscribe(res => {
+          res.reload().then(() => {
+            if(!res.emailVerified)
+            {
+              this.modalRaised.emit("Mail");
+            }
+            miusuario.unsubscribe();  
+          });
+        });
+      }
     }
   }
 

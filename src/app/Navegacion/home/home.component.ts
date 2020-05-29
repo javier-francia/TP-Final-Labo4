@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  modal:string;
+  error:string;
+
   constructor(public accessSvc: AccessService,
               private router: Router) { }
 
@@ -24,6 +27,33 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['']);
       })
       .catch();
+  }
+
+  OnModalRaised(id: string)
+  {
+    this.modal = id;
+  }
+
+  ReSendVerificationMail()
+  {
+    let usuario = this.accessSvc.user.subscribe(user => {
+      user.reload().then(() => {
+        user.sendEmailVerification()
+        .then(this.modal = undefined)
+        .catch(() => {
+          this.error = "Ocurrió un error al intentar enviar el correo de validación. Intente nuevamente más tarde.";
+          document.getElementById("btnModalError").click();
+        });
+      });
+    });
+    /*this.accessSvc.GetCurrentUser().then(user => {
+      user.sendEmailVerification()
+        .then(this.modal = undefined)
+        .catch(() => {
+          this.error = "Ocurrió un error al intentar enviar el correo de validación. Intente nuevamente más tarde.";
+          document.getElementById("btnModalError").click();
+        });
+    });*/
   }
 
 }
