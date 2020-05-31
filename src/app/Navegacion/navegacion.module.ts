@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 //            Components
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
-
-
-//            MD_Bootstrap
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ContactoComponent } from './contacto/contacto.component';
+
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 
