@@ -19,6 +19,10 @@ import { environment } from '../environments/environment.prod';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import * as firebase from 'firebase';
+
+firebase.initializeApp(environment.firebaseConfig);
+
 
 const routes: Routes = [];
 
