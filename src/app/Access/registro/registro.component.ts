@@ -12,6 +12,8 @@ import { PacientesService } from '../../Usuarios/Paciente/pacientes.service';
 import { ProfesionalesService } from '../../Usuarios/Profesional/profesionales.service';
 import { AccessService } from '../access.service';
 import { BrowserStorageService } from '../browser-storage.service';
+import { FileStorageService } from '../../Shared/file-storage.service';
+import { Upload } from 'src/app/Shared/upload';
 
 @Component({
   selector: 'app-registro',
@@ -22,6 +24,8 @@ export class RegistroComponent implements OnInit {
 
   entidad = "Paciente";
   newId: number;
+  img1: Upload;
+  img2: Upload;
 
   constructor(public accessSvc: AccessService,
               private usuariosSvc: UsuariosService,
@@ -29,12 +33,13 @@ export class RegistroComponent implements OnInit {
               private pacientesSvc: PacientesService,
               private profesionalesSvc: ProfesionalesService,
               private browserStorageSvc: BrowserStorageService,
+              private fileStorageSvc: FileStorageService,
               private router: Router) { }
 
   ngOnInit(): void {
     let idSetter = this.usuariosSvc.Get().subscribe(usuariosSnapshot => {
       this.newId = usuariosSnapshot.length + 1;
-      console.log(this.newId);
+      //console.log(this.newId);
       idSetter.unsubscribe();
     });
 
@@ -63,8 +68,21 @@ export class RegistroComponent implements OnInit {
                   case "Paciente":
                     {  
                       let paciente = new Paciente();
+                      this.img1 = input.img1 as Upload;
+                      this.img2 = input.img2 as Upload;
+                      this.img1.name = `${this.newId}-img1.${this.img1.extension}`;
+                      this.img2.name = `${this.newId}-img2.${this.img2.extension}`;
+
+                      this.fileStorageSvc.pushUpload(this.img1, this.img1.name);
+                      this.fileStorageSvc.pushUpload(this.img2, this.img2.name);
+
+                      /*let ae = this.waitForUpload(this.img1);
+                      let aeae = this.waitForUpload(this.img2);*/
+
+                      //falta validar que se hayan subido ok
+
                       paciente.id = this.newId; paciente.nombre = input.obj.nombre; paciente.apellido = input.obj.apellido; paciente.email = input.obj.email;
-                      paciente.perfil = this.entidad; paciente.img1 = input.obj.img1; paciente.img2 = input.obj.img2;
+                      paciente.perfil = this.entidad; paciente.img1 = this.img1.name; paciente.img2 = this.img2.name;
                       this.pacientesSvc.Insert(paciente);
                     }
                     break;
@@ -107,5 +125,19 @@ export class RegistroComponent implements OnInit {
         } 
         console.log(err);
       });
+  }
+
+  waitForUpload(uploadToWait: Upload): boolean
+  {
+    if (uploadToWait.url !== undefined)
+    {
+      console.log("entro");
+      return true;
+    }
+    else
+    {
+      console.log("timeout mas");
+      setTimeout(this.waitForUpload, 300); // try again in 300 milliseconds
+    }
   }
 }

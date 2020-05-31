@@ -7,9 +7,9 @@
         <label for="email">Email</label>
         <input type="email" name="email" [(ngModel)]="usuario.email">
         <label for="img1">Img1</label>
-        <input type="text" name="img1" [(ngModel)]="usuario.img1">
+        <input type="file" id="img1" name="img1" (change)="DetectFiles($event)" >
         <label for="img2">Img2</label>
-        <input type="text" name="img2" [(ngModel)]="usuario.img2">
+        <input type="file" id="img2" name="img2" (change)="DetectFiles($event)" >
         <div *ngIf="modo == 'insert'">
             <label for="password">Contraseña</label>
             <input type="password" name="password" [(ngModel)]="password">
