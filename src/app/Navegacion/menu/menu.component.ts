@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AccessService } from '../../Access/access.service';
 import { Router } from '@angular/router';
-
+import { AccessService } from '../../Access/access.service';
+import { BrowserStorageService } from '../../Access/browser-storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,13 +16,14 @@ export class MenuComponent implements OnInit {
   habilitado = false;
 
   constructor(private accessSvc: AccessService,
+              private browserStorageSvc: BrowserStorageService,
               private router: Router) { }
 
   ngOnInit(): void {
-    if(this.accessSvc.ValidateLocalStorage())
+    if(this.browserStorageSvc.ValidateLocalStorage())
     {
-      this.perfil = this.accessSvc.GetPerfil();
-      this.habilitado = this.accessSvc.IsHabilitado();
+      this.perfil = this.browserStorageSvc.GetPerfil();
+      this.habilitado = this.browserStorageSvc.IsHabilitado();
 
       if(!this.habilitado)
       {
@@ -30,9 +31,9 @@ export class MenuComponent implements OnInit {
       }
       else
       {
-        this.accessSvc.GetCurrentUser().then()
         let miusuario = this.accessSvc.user.subscribe(res => {
           res.reload().then(() => {
+            console.log(res);
             if(!res.emailVerified)
             {
               this.modalRaised.emit("Mail");
@@ -48,7 +49,7 @@ export class MenuComponent implements OnInit {
   {
     this.accessSvc.LogOut()
       .then(() => {
-        this.accessSvc.CleanLocalStorage();
+        this.browserStorageSvc.CleanLocalStorage();
         this.router.navigate(['']);
       })
       .catch();

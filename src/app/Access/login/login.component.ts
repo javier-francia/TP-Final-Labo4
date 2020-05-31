@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AccessService } from '../access.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AccessService } from '../access.service';
 import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
+import { BrowserStorageService } from '../browser-storage.service';
 
 
 @Component({
@@ -14,13 +15,15 @@ export class LoginComponent implements OnInit {
 
   email: string;
   pass: string;
+  remember = false;
 
   constructor(public accessSvc: AccessService,
               private usuariosSvc: UsuariosService,
+              private browserStorageSvc: BrowserStorageService,
               private router: Router) {}
 
   ngOnInit(): void {
-    this.accessSvc.CleanLocalStorage();
+    this.browserStorageSvc.CleanLocalStorage();
     document.onkeyup = function(e) {
       if (e.ctrlKey && e.altKey && e.which == 190) {
         document.getElementById("btnModalHardcodeo").click();
@@ -30,6 +33,8 @@ export class LoginComponent implements OnInit {
 
   tryLogin(input: NgForm)
   {
+    console.log(this.remember);
+
     return this.accessSvc
       .LoginWithEmail(this.email, this.pass)
       .then(res => {
@@ -42,7 +47,7 @@ export class LoginComponent implements OnInit {
             perfil = userSnapshot[0].payload.doc.data().perfil;
             let habilitado: boolean = userSnapshot[0].payload.doc.data().habilitado;
 
-            this.accessSvc.LoadLocalStorage(this.email, perfil, habilitado);
+            this.browserStorageSvc.LoadLocalStorage(this.email, perfil, habilitado, this.remember);
             this.router.navigate(['Home']);
             console.info(`Logged with email: ${this.email}`);
           }

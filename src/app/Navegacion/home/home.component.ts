@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AccessService } from '../../Access/access.service';
 import { Router } from '@angular/router';
+import { AccessService } from '../../Access/access.service';
+import { BrowserStorageService } from '../../Access/browser-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,16 @@ export class HomeComponent implements OnInit {
   error:string;
 
   constructor(public accessSvc: AccessService,
+              private browserStorageSvc: BrowserStorageService,
               private router: Router) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   LogOut()
   {
     this.accessSvc.LogOut()
       .then(() => {
-        this.accessSvc.CleanLocalStorage();
+        this.browserStorageSvc.CleanLocalStorage();
         this.router.navigate(['']);
       })
       .catch();
@@ -46,14 +46,5 @@ export class HomeComponent implements OnInit {
         });
       });
     });
-    /*this.accessSvc.GetCurrentUser().then(user => {
-      user.sendEmailVerification()
-        .then(this.modal = undefined)
-        .catch(() => {
-          this.error = "Ocurrió un error al intentar enviar el correo de validación. Intente nuevamente más tarde.";
-          document.getElementById("btnModalError").click();
-        });
-    });*/
   }
-
 }

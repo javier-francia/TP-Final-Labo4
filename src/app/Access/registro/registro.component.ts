@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccessService } from '../access.service';
+//      Entidades
+import { Admin } from '../../Usuarios/Admin/admin';
+import { Paciente } from '../../Usuarios/Paciente/paciente';
+import { Profesional } from '../../Usuarios/Profesional/profesional';
+//      Servicios
 import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 import { AdministradoresService } from '../../Usuarios/Admin/administradores.service';
 import { PacientesService } from '../../Usuarios/Paciente/pacientes.service';
 import { ProfesionalesService } from '../../Usuarios/Profesional/profesionales.service';
-import { Paciente } from '../../Usuarios/Paciente/paciente';
-import { Profesional } from '../../Usuarios/Profesional/profesional';
-import { Admin } from '../../Usuarios/Admin/admin';
+import { AccessService } from '../access.service';
+import { BrowserStorageService } from '../browser-storage.service';
 
 @Component({
   selector: 'app-registro',
@@ -25,6 +28,7 @@ export class RegistroComponent implements OnInit {
               private adminSvc: AdministradoresService,
               private pacientesSvc: PacientesService,
               private profesionalesSvc: ProfesionalesService,
+              private browserStorageSvc: BrowserStorageService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -82,7 +86,7 @@ export class RegistroComponent implements OnInit {
                     break;
                 }
 
-                this.accessSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado);
+                this.browserStorageSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado, false);
 
                 // Redirecciono al Home
                 this.router.navigate(['Home']);

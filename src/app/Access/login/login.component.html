@@ -49,7 +49,10 @@
             <div class="d-flex justify-content-around">
               <div>
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                  <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember"
+                  [(ngModel)]="remember"
+                  #rememberVar="ngModel"
+                  name="remember">
                   <label class="custom-control-label" for="defaultLoginFormRemember">Recordarme</label>
                 </div>
               </div>
