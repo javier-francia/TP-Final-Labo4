@@ -1,0 +1,11 @@
+.container, .row{
+    height: 100vh;
+}
+
+.row{
+    align-items: center;
+}
+
+#formControl{
+    background-color: rgba(3, 255, 79, 0.05);
+}

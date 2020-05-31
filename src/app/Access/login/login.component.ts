@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.accessSvc.CleanLocalStorage();
+    document.onkeyup = function(e) {
+      if (e.ctrlKey && e.altKey && e.which == 190) {
+        document.getElementById("btnModalHardcodeo").click();
+      }
+    };
   }
 
   tryLogin(input: NgForm)
@@ -81,8 +86,6 @@ export class LoginComponent implements OnInit {
         break;
     }
     if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
-
-    //console.log(document.getElementById("btnSubmit").attributes.getNamedItem("disabled"))
   }
 
 }
