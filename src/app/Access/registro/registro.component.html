@@ -1,15 +1,25 @@
-<button class="btn btn-primary" (click)="entidad = 'Paciente'">Paciente</button>
-<button class="btn btn-primary" (click)="entidad = 'Profesional'">Profesional</button>
-<!--button class="btn btn-primary" (click)="entidad = 'Admin'">Admin</button-->
+<div class="container">
+  <div class="row">
+    <div class="w-responsive text-center mx-auto p-4 mt-2 z-depth-5" id="formControl">
+      <p class="h3 mb-4">Registro</p>
+      <div class="btn-group mr-auto mb-3 mb-md-0" role="group" aria-label="First group">
+        <button id="btnSelectPaciente" type="button" mdbBtn color="default" class="waves-light" (click)="SelectRegistro('Paciente')" mdbWavesEffect>Paciente</button>
+        <button id="btnSelectProfesional" type="button" mdbBtn color="primary" class="waves-light" (click)="SelectRegistro('Profesional')" mdbWavesEffect>Profesional</button>
+      </div>
+      <br>
+      <br>
+      <br>
+      <!--button class="btn btn-primary" (click)="entidad = 'Admin'">Admin</button-->
+      
 
-
-<div>
-  <app-paciente-form  *ngIf="entidad == 'Paciente'"
-                      (registrarUsuario)="tryRegister($event)"></app-paciente-form>
-  <app-profesional-form *ngIf="entidad == 'Profesional'"
-                        (registrarUsuario)="tryRegister($event)"></app-profesional-form>
+      <app-paciente-form  *ngIf="entidad == 'Paciente'"
+                          (registrarUsuario)="tryRegister($event)"></app-paciente-form>
+      <app-profesional-form *ngIf="entidad == 'Profesional'"
+                            (registrarUsuario)="tryRegister($event)"></app-profesional-form>
   <!--app-admin-form *ngIf="entidad == 'Admin'"
                   (registrarUsuario)="tryRegister($event)"></app-admin-form-->
+    </div>
+  </div>
 </div>
 
 

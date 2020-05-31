@@ -1,19 +1,24 @@
-<div>
-    <form>
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre">
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido">
-        <label for="email">Email</label>
-        <input type="email" name="email" [(ngModel)]="usuario.email">
-        <label for="img1">Img1</label>
-        <input type="file" id="img1" name="img1" (change)="DetectFiles($event)" >
-        <label for="img2">Img2</label>
-        <input type="file" id="img2" name="img2" (change)="DetectFiles($event)" >
-        <div *ngIf="modo == 'insert'">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" [(ngModel)]="password">
-        </div>
-        <input class="btn btn-success" type="button" value="Registrarse" (click)="Registrar_OnClick()">        
-    </form>
-</div>
+<form>
+    <div class="form-group">
+        <input class="form-control" type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="email" name="email" [(ngModel)]="usuario.email" placeholder="Email">
+    </div>
+    <div *ngIf="modo == 'insert'" class="form-group">
+        <input class="form-control" type="password" name="password" [(ngModel)]="password" placeholder="Contraseña">
+    </div>
+    <div class="form-group">
+        <label for="img1">Imagen 1 </label>
+        <input class="form-control" type="file" id="img1" name="img1" (change)="DetectFiles($event)" >
+    </div>
+    <div class="form-group">
+        <label for="img2">Imagen 2 </label>
+        <input class="form-control" type="file" id="img2" name="img2" (change)="DetectFiles($event)" >
+    </div>
+    <br>
+    <input class="btn btn-success" type="button" value="Registrarse" (click)="Registrar_OnClick()">        
+</form>

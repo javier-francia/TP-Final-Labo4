@@ -1,0 +1,7 @@
+.container, .row{
+    height: 100vh;
+}
+
+.row{
+    align-items: center;
+}

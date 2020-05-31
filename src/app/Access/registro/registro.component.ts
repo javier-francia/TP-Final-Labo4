@@ -140,4 +140,21 @@ export class RegistroComponent implements OnInit {
       setTimeout(this.waitForUpload, 300); // try again in 300 milliseconds
     }
   }
+
+  SelectRegistro(entidad: string)
+  {
+    this.entidad = entidad;
+    let otraEntidad;
+
+    if(entidad == "Paciente")
+    {
+      otraEntidad = "Profesional";
+    }
+    else
+    {
+      otraEntidad = "Paciente";
+    }
+    document.getElementById("btnSelect" + entidad).classList.value = "btn btn-default";
+    document.getElementById("btnSelect" + otraEntidad).classList.value = "btn btn-primary";
+  }
 }
