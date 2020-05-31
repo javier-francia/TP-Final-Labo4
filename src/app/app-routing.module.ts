@@ -17,11 +17,7 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const redirectLoggedIn = () => redirectLoggedInTo(['Home']);
 
 const routes: Routes = [
-  {path: '', component: LoginComponent, ...canActivate(redirectLoggedIn)},
-  {path: 'SignIn', component: RegistroComponent, ...canActivate(redirectLoggedIn)},
-  {path: 'Home', component: HomeComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  {path: '**', component: ErrorComponent, ...canActivate(redirectUnauthorizedToLogin)}
-
+  
 ];
 
 @NgModule({
