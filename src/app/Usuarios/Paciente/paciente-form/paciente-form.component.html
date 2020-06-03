@@ -1,24 +1,162 @@
-<form>
+<form novalidate
+        (ngSubmit)="Registrar_OnClick()"
+        [formGroup]="pacienteForm">
     <div class="form-group">
-        <input class="form-control" type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre">
+        <input  class="form-control"
+                type="text"
+                placeholder="Nombre *"
+                formControlName="nombre"
+                [ngClass]="{'is-invalid': (pacienteForm.get('nombre').touched ||
+                                            pacienteForm.get('nombre').dirty) &&
+                                            !pacienteForm.get('nombre').valid }" />
+        <span class="invalid-feedback">
+            <span *ngIf="pacienteForm.get('nombre').errors?.required">
+                Ingrese su nombre
+            </span>
+            <span *ngIf="pacienteForm.get('nombre').errors?.minlength">
+                El nombre debe tener al menos 2 caracteres.
+            </span>
+        </span>
     </div>
     <div class="form-group">
-        <input class="form-control" type="text" name="apellido" [(ngModel)]="usuario.apellido" placeholder="Apellido">
+        <input  class="form-control"
+                type="text"
+                placeholder="Apellido *"
+                formControlName="apellido"
+                [ngClass]="{'is-invalid': (pacienteForm.get('apellido').touched ||
+                                            pacienteForm.get('apellido').dirty) &&
+                                            !pacienteForm.get('apellido').valid }" />
+        <span class="invalid-feedback">
+            <span *ngIf="pacienteForm.get('apellido').errors?.required">
+                Ingrese su apellido
+            </span>
+            <span *ngIf="pacienteForm.get('apellido').errors?.minlength">
+                El apellido debe tener al menos 2 caracteres.
+            </span>
+        </span>
     </div>
-    <div class="form-group">
-        <input class="form-control" type="email" name="email" [(ngModel)]="usuario.email" placeholder="Email">
+    <div formGroupName="emailGroup">
+        <div class="form-group">
+            <input  class="form-control"
+                    type="email"
+                    placeholder="Email *"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': pacienteForm.get('emailGroup').errors?.match ||
+                                                ((pacienteForm.get('emailGroup.email').touched ||
+                                                pacienteForm.get('emailGroup.email').dirty) &&
+                                                !pacienteForm.get('emailGroup.email').valid) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="pacienteForm.get('emailGroup.email').errors?.required">
+                    Ingrese su dirección de email.
+                </span>
+                <span *ngIf="pacienteForm.get('emailGroup.email').errors?.email">
+                    Ingrese una dirección de email válida.
+                </span>
+            </span>
+        </div>
+        <div class="form-group">
+            <input  class="form-control"
+                    type="email"
+                    placeholder="Confirme su email *"
+                    formControlName="confirmEmail"
+                    [ngClass]="{'is-invalid': pacienteForm.get('emailGroup').errors?.match ||
+                                                ((pacienteForm.get('emailGroup.confirmEmail').touched ||
+                                                pacienteForm.get('emailGroup.confirmEmail').dirty) &&
+                                                !pacienteForm.get('emailGroup.confirmEmail').valid) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="pacienteForm.get('emailGroup.confirmEmail').errors?.required">
+                    Repita su dirección de email.
+                </span>
+                <span *ngIf="pacienteForm.get('emailGroup').errors?.match">
+                    Las direcciones de email no coinciden.
+                </span>
+            </span>
+        </div>
     </div>
-    <div *ngIf="modo == 'insert'" class="form-group">
-        <input class="form-control" type="password" name="password" [(ngModel)]="password" placeholder="Contraseña">
+    <div *ngIf="modo == 'insert'">
+        <div formGroupName="passwordGroup">
+            <div class="form-group">
+                <input  class="form-control"
+                        type="password"
+                        placeholder="Contraseña *"
+                        formControlName="password"
+                        [ngClass]="{'is-invalid': pacienteForm.get('passwordGroup').errors?.match ||
+                                                    ((pacienteForm.get('passwordGroup.password').touched ||
+                                                    pacienteForm.get('passwordGroup.password').dirty) &&
+                                                    !pacienteForm.get('passwordGroup.password').valid) }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="pacienteForm.get('passwordGroup.password').errors?.required">
+                        Ingrese una contraseña.
+                    </span>
+                    <span *ngIf="pacienteForm.get('passwordGroup.password').errors?.minlength || pacienteForm.get('passwordGroup.password').errors?.maxlength">
+                        La contraseña debe contener entre 6 y 12 caracteres.
+                    </span>
+                </span>
+            </div>
+            <div class="form-group">
+                <input  class="form-control"
+                        type="password"
+                        placeholder="Confirme su contraseña *"
+                        formControlName="confirmPassword"
+                        [ngClass]="{'is-invalid': pacienteForm.get('passwordGroup').errors?.match ||
+                                                    ((pacienteForm.get('passwordGroup.confirmPassword').touched ||
+                                                    pacienteForm.get('passwordGroup.confirmPassword').dirty) &&
+                                                    !pacienteForm.get('passwordGroup.confirmPassword').valid) }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="pacienteForm.get('passwordGroup.confirmPassword').errors?.required">
+                        Repita la contraseña.
+                    </span>
+                    <span *ngIf="pacienteForm.get('passwordGroup').errors?.match">
+                        La contraseña no coincide.
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="img1">Imagen 1 </label>
+            <input class="form-control"
+                    type="file"
+                    id="img1"
+                    name="img1"
+                    formControlName="img1"
+                    (change)="onChange($event)"
+                    [ngClass]="{'is-invalid': (!pacienteForm.get('img1').valid && pacienteForm.get('img1').errors?.required && pacienteForm.get('img1').pristine && pacienteForm.get('img1').touched)
+                                                || 
+                                                (!pacienteForm.get('img1').pristine && pacienteForm.get('img1').errors?.required) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="!pacienteForm.get('img1').valid && pacienteForm.get('img1').errors?.required && pacienteForm.get('img1').pristine && pacienteForm.get('img1').touched">
+                    Debe cargar una imágen.
+                </span>
+                <span *ngIf="!pacienteForm.get('img1').pristine && pacienteForm.get('img1').errors?.required">
+                    Solamente se permiten extensiones jpg, jpeg y png
+                </span>
+            </span>
+        </div>
+        
+        <div class="form-group">
+            <label for="img1">Imagen 2 </label>
+            <input class="form-control"
+                    type="file"
+                    id="img2"
+                    name="img2"
+                    formControlName="img2"
+                    (change)="onChange($event)"
+                    [ngClass]="{'is-invalid': (!pacienteForm.get('img2').valid && pacienteForm.get('img2').errors?.required && pacienteForm.get('img2').pristine && pacienteForm.get('img2').touched)
+                                                || 
+                                                (!pacienteForm.get('img2').pristine && pacienteForm.get('img2').errors?.required) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="!pacienteForm.get('img2').valid && pacienteForm.get('img2').errors?.required && pacienteForm.get('img2').pristine && pacienteForm.get('img2').touched">
+                    Debe cargar una segunda imágen.
+                </span>
+                <span *ngIf="!pacienteForm.get('img2').pristine && pacienteForm.get('img2').errors?.required">
+                    Solamente se permiten extensiones jpg, jpeg y png
+                </span>
+            </span>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="img1">Imagen 1 </label>
-        <input class="form-control" type="file" id="img1" name="img1" (change)="DetectFiles($event)" >
-    </div>
-    <div class="form-group">
-        <label for="img2">Imagen 2 </label>
-        <input class="form-control" type="file" id="img2" name="img2" (change)="DetectFiles($event)" >
-    </div>
-    <br>
-    <input class="btn btn-success" type="button" value="Registrarse" (click)="Registrar_OnClick()">        
+    <input  class="btn btn-success"
+            [disabled]="!pacienteForm.valid"
+            type="button"
+            value="Registrarse"
+            (click)="Registrar_OnClick()"/>
 </form>

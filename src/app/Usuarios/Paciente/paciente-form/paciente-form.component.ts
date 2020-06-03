@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Paciente } from '../paciente';
 import { Upload } from '../../../Shared/upload';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from '../../../Shared/Library/custom-validators';
 
 @Component({
   selector: 'app-paciente-form',
@@ -10,7 +12,7 @@ import { Upload } from '../../../Shared/upload';
 export class PacienteFormComponent implements OnInit {
   modo = "insert";  // insert - edit
   usuario: Paciente;
-  password: string;
+  pacienteForm: FormGroup;
 
   validExtensions = [
     "jpg",
@@ -24,7 +26,7 @@ export class PacienteFormComponent implements OnInit {
   @Input() editarUsuario: Paciente;
   @Output() registrarUsuario: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     this.usuario = new Paciente();
    }
 
@@ -34,19 +36,43 @@ export class PacienteFormComponent implements OnInit {
       this.modo = "edit";
       this.usuario = this.editarUsuario;
     }
+
+    this.pacienteForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      apellido: ['', [Validators.required, Validators.minLength(2)]],
+      emailGroup: this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', Validators.required],
+      }, { validator: CustomValidators.valueMatcher("email", "confirmEmail")} ),
+      passwordGroup: this.fb.group({
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
+        confirmPassword: ['', Validators.required],
+      }, { validator: CustomValidators.valueMatcher("password", "confirmPassword")} ),
+      img1: [null, Validators.required],
+      img2: [null, Validators.required]
+    });
+
+
+
   }
 
   Registrar_OnClick()
   {
+    this.usuario.nombre = this.pacienteForm.get('nombre').value;
+    this.usuario.apellido = this.pacienteForm.get('apellido').value;
+    this.usuario.email = this.pacienteForm.get('emailGroup.email').value;
+    this.usuario.perfil = "Paciente";
+
+
     this.registrarUsuario.emit({
       obj: this.usuario,
-      password: this.password,
+      password:this.pacienteForm.get('passwordGroup.password').value,
       img1: this.img1,
       img2: this.img2
     });
   }
 
-  DetectFiles(event)
+  onChange(event)
   {
     let extension = this.ValidarExtension(event.target.files.item(0).name);
     if(extension !== null)
@@ -64,7 +90,18 @@ export class PacienteFormComponent implements OnInit {
     }
     else
     {
-      // Error de extension
+      if(event.target.id === "img1")
+      {
+        this.pacienteForm.patchValue({
+          img1: null
+        });
+      }
+      else if(event.target.id === "img2")
+      {
+        this.pacienteForm.patchValue({
+          img2: null
+        });
+      }
     }
   }
 
@@ -76,5 +113,4 @@ export class PacienteFormComponent implements OnInit {
       if(this.validExtensions.includes(extension)) return extension;
       else return null;
   }
-
 }
