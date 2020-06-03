@@ -39,7 +39,6 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     let idSetter = this.usuariosSvc.Get().subscribe(usuariosSnapshot => {
       this.newId = usuariosSnapshot.length + 1;
-      //console.log(this.newId);
       idSetter.unsubscribe();
     });
 
@@ -76,13 +75,9 @@ export class RegistroComponent implements OnInit {
                       this.fileStorageSvc.pushUpload(this.img1, this.img1.name);
                       this.fileStorageSvc.pushUpload(this.img2, this.img2.name);
 
-                      /*let ae = this.waitForUpload(this.img1);
-                      let aeae = this.waitForUpload(this.img2);*/
-
-                      //falta validar que se hayan subido ok
 
                       paciente.id = this.newId; paciente.nombre = input.obj.nombre; paciente.apellido = input.obj.apellido; paciente.email = input.obj.email;
-                      paciente.perfil = this.entidad; paciente.img1 = this.img1.name; paciente.img2 = this.img2.name;
+                      paciente.img1 = this.img1.name; paciente.img2 = this.img2.name;
                       this.pacientesSvc.Insert(paciente);
                     }
                     break;
@@ -90,7 +85,7 @@ export class RegistroComponent implements OnInit {
                     {
                       let profesional = new Profesional();
                       profesional.id = this.newId; profesional.nombre = input.obj.nombre; profesional.apellido = input.obj.apellido; profesional.email = input.obj.email;
-                      profesional.perfil = this.entidad; profesional.especialidades = input.obj.especialidades;
+                      profesional.especialidades = input.obj.especialidades;
                       this.profesionalesSvc.Insert(profesional);
                     }
                     break;
@@ -98,7 +93,7 @@ export class RegistroComponent implements OnInit {
                     {
                       let admin = new Admin();
                       admin.id = this.newId; admin.nombre = input.obj.nombre; admin.apellido = input.obj.apellido; admin.email = input.obj.email;
-                      admin.perfil = this.entidad; admin.superUser = false;
+                      admin.superUser = false;
                       this.adminSvc.Insert(admin);
                     }
                     break;
@@ -125,20 +120,6 @@ export class RegistroComponent implements OnInit {
         } 
         console.log(err);
       });
-  }
-
-  waitForUpload(uploadToWait: Upload): boolean
-  {
-    if (uploadToWait.url !== undefined)
-    {
-      console.log("entro");
-      return true;
-    }
-    else
-    {
-      console.log("timeout mas");
-      setTimeout(this.waitForUpload, 300); // try again in 300 milliseconds
-    }
   }
 
   SelectRegistro(entidad: string)

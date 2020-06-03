@@ -33,7 +33,6 @@ export class MenuComponent implements OnInit {
       {
         let miusuario = this.accessSvc.user.subscribe(res => {
           res.reload().then(() => {
-            console.log(res);
             if(!res.emailVerified)
             {
               this.modalRaised.emit("Mail");

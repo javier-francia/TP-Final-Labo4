@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
 
   tryLogin(input: NgForm)
   {
-    console.log(this.remember);
-
     return this.accessSvc
       .LoginWithEmail(this.email, this.pass)
       .then(res => {

@@ -37,10 +37,5 @@ export class FileStorageService {
              console.log(err);
       };
   }
-
-  saveFileData(upload: Upload)
-  {
-    localStorage.setItem("uploaded", JSON.stringify(upload));
-  }
 }
 
