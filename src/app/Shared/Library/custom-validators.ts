@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 
 export class CustomValidators {
 
@@ -20,6 +20,36 @@ export class CustomValidators {
             }
 
             return { 'match': true };
+        }
+    }
+
+    static repeatedValues(c: FormArray): { [key: string]: boolean } | null 
+    {
+        let output = false;
+        if(c.pristine)
+        {
+            return null;
+        }
+
+        let elementsFound = [];
+        c.controls.forEach(element => {
+            if(element.value !== null)
+            {
+                if(elementsFound.includes(element.value))
+                {
+                    output = true;
+                }
+                elementsFound.push(element.value);
+            }
+        });
+
+        if(output)
+        {
+            return {"repeated": true};
+        }
+        else
+        {
+            return null;
         }
     }
 }

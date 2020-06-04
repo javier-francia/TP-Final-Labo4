@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 
             this.browserStorageSvc.LoadLocalStorage(this.email, perfil, habilitado, this.remember);
             this.router.navigate(['Home']);
-            console.info(`Logged with email: ${this.email}`);
+            //console.info(`Logged with email: ${this.email}`);
           }
           usuarioObservable.unsubscribe();
         });

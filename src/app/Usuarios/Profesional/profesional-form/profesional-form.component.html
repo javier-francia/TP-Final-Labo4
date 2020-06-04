@@ -1,5 +1,5 @@
 <form novalidate
-        (ngSubmit)="Registrar_OnClick()"
+        (ngSubmit)="placebo()"
         [formGroup]="profesionalForm">
     <div class="form-group">
         <input  class="form-control"
@@ -113,9 +113,45 @@
             </div>
         </div>
     </div>
+    <h5>Especialidades</h5>
+        <div formArrayName="especialidades"
+                *ngFor="let especialidadControl of especialidades.controls; let i = index">
+            <div [formControlName]="i" ngDefaultControl>
+                <div class="form-group" >
+                    <select (change)="onChangeEspecialidad($event)"
+                            class="browser-default custom-select"
+                            id="{{ 'selectId' + i }}">
+                        <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+                        <option *ngFor="let especialidad of especialidadesCargadas" 
+                        [value]="especialidad">
+                        {{especialidad}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <span class="invalid-feedback d-block">
+            <span *ngIf="!profesionalForm.get('especialidades').pristine && profesionalForm.get('especialidades').value.includes(null)">
+                Seleccione la especialidad.
+            </span>
+            <br>
+            <span *ngIf="profesionalForm.get('especialidades').errors?.repeated">
+                No puede agregar más de una vez la misma especialidad.
+            </span>
+        </span>
+        <span><i class="fas fa-plus-square"
+                id="btnAddEspecialidad"
+                (click)="addEspecialidadControl()"> Agregar especialidad</i></span>
+        <br>
+        <br>
+        <br>
+        
     <input  class="btn btn-success"
-            [disabled]="!profesionalForm.valid"
+            [disabled]="!profesionalForm.valid || 
+                        profesionalForm.get('especialidades').value.includes(null) || 
+                        profesionalForm.get('especialidades').errors?.repeated"
             type="button"
             value="Registrarse"
             (click)="Registrar_OnClick()"/>
 </form>
+
