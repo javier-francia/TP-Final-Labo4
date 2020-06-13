@@ -13,23 +13,8 @@
       <li *ngIf="perfil == 'Paciente' && habilitado" class="nav-item">
         <a routerLink="/PedirTurno" class="nav-link waves-light" mdbWavesEffect>Pedir turno</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect></a>
-      </li>
-      <li *ngIf="perfil == 'Paciente' && habilitado" class="nav-item">
-        <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
-      </li>
       <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
         <a routerLink="/AtenderPaciente" class="nav-link waves-light" mdbWavesEffect>Atender paciente</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect></a>
-      </li>
-      <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
-        <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>Agenda</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect></a>
       </li>
       <li *ngIf="perfil == 'Admin' && habilitado" class="nav-item">
         <a routerLink="/AdminProfesionales" class="nav-link waves-light" mdbWavesEffect>Administrar profesionales</a>
@@ -37,9 +22,25 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect></a>
       </li>
+      <li *ngIf="perfil == 'Paciente' && habilitado" class="nav-item">
+        <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
+      </li>
+      <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
+        <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>Agenda</a>
+      </li>
       <li *ngIf="perfil == 'Admin' && habilitado" class="nav-item">
         <a routerLink="/AdministradoresABM" class="nav-link waves-light" mdbWavesEffect>ABM Administradores</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
+        <a routerLink="/JornadasLaborales" class="nav-link waves-light" mdbWavesEffect>Jornadas laborales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      
     </ul>
 
     

@@ -5,6 +5,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 //            Project Modules
 import { AccessModule } from './Access/access.module';
 import { UsuariosModule } from './Usuarios/usuarios.module';
@@ -42,7 +43,8 @@ const routes: Routes = [];
     NavegacionModule, 
     ErrorRoutingModule,// Ultimo feature module por contener '**'
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

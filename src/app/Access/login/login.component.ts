@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AccessService } from '../access.service';
 import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 import { BrowserStorageService } from '../browser-storage.service';
+import { CaptchaService } from '../../Shared/Servicios/captcha.service';
 
 
 @Component({
@@ -17,12 +18,15 @@ export class LoginComponent implements OnInit {
   pass: string;
   remember = false;
 
+  @ViewChild('recaptcha', {static: true }) recaptchaElement: ElementRef;
   constructor(public accessSvc: AccessService,
               private usuariosSvc: UsuariosService,
               private browserStorageSvc: BrowserStorageService,
-              private router: Router) {}
+              private router: Router,
+              private captchaSvc: CaptchaService) {}
 
   ngOnInit(): void {
+    this.addRecaptchaScript();
     this.browserStorageSvc.CleanLocalStorage();
     document.onkeyup = function(e) {
       if (e.ctrlKey && e.altKey && e.which == 190) {
@@ -37,15 +41,17 @@ export class LoginComponent implements OnInit {
       .LoginWithEmail(this.email, this.pass)
       .then(res => {
         let perfil;
+        let id: number;
         // Implementacion de login OK
 
         let usuarioObservable = this.usuariosSvc.GetUsuario(this.email).snapshotChanges().subscribe((userSnapshot: any) => {
           if(userSnapshot.length > 0)
           {
             perfil = userSnapshot[0].payload.doc.data().perfil;
+            id = userSnapshot[0].payload.doc.lE.key.path.segments[6];
             let habilitado: boolean = userSnapshot[0].payload.doc.data().habilitado;
 
-            this.browserStorageSvc.LoadLocalStorage(this.email, perfil, habilitado, this.remember);
+            this.browserStorageSvc.LoadLocalStorage(this.email, perfil, habilitado, id, this.remember);
             this.router.navigate(['Home']);
             //console.info(`Logged with email: ${this.email}`);
           }
@@ -91,4 +97,37 @@ export class LoginComponent implements OnInit {
     if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
   }
 
+  addRecaptchaScript() {
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptcha();
+    }
+   
+    (function(d, s, id, obj){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&amp;render=explicit";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
+  }
+
+  renderReCaptcha() {
+    window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+      'sitekey' : '6LcDjgAVAAAAAAUaVj-uJLzSJZTIBs2YVXDCSAFe',
+      'callback': (response) => {
+          this.validarResponseCaptcha(response);
+      }
+    });
+  }
+
+  validarResponseCaptcha(response: string)
+  {
+    this.captchaSvc.validarGoogleCaptcha(response).subscribe(res => {
+      console.log(JSON.stringify(res));
+    }, error => {
+      console.log(error);
+    });
+  }
 }
+
+

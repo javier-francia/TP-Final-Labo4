@@ -99,7 +99,7 @@ export class RegistroComponent implements OnInit {
                     break;
                 }
 
-                this.browserStorageSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado, false);
+                this.browserStorageSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado, this.newId, false);
 
                 // Redirecciono al Home
                 this.router.navigate(['Home']);

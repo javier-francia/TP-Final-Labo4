@@ -32,7 +32,8 @@ export class PerfilGuard implements CanActivate {
 
         case "Profesional":
           if( urlToLoad == "Agenda" ||
-              urlToLoad == "AtenderPaciente")
+              urlToLoad == "AtenderPaciente" ||
+              urlToLoad == "JornadasLaborales")
           {
             output = this.browserStorageSvc.IsHabilitado();
           }

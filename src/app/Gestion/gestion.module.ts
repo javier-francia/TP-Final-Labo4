@@ -16,12 +16,17 @@ import { EncuestaDetalleComponent } from './Encuesta/encuesta-detalle/encuesta-d
 import { AdmisionProfesionalesComponent } from './Administracion/admision-profesionales/admision-profesionales.component';
 import { GestionAdministradoresComponent } from './Administracion/gestion-administradores/gestion-administradores.component';
 import { AtenderPacienteComponent } from './Turno/atender-paciente/atender-paciente.component';
+import { JornadaFormComponent } from './Administracion/JornadaTrabajo/jornada-form/jornada-form.component';
+import { JornadaListComponent } from './Administracion/JornadaTrabajo/jornada-list/jornada-list.component';
+import { JornadaScreenComponent } from './Administracion/JornadaTrabajo/jornada-screen/jornada-screen.component';
 
 const routes: Routes = [
   {path: 'AtenderPaciente', component: AtenderPacienteComponent, canActivate: [PerfilGuard] },
   {path: 'PedirTurno', component: TurnoSolicitarComponent, canActivate: [PerfilGuard] },
   {path: 'AdminProfesionales', component: AdmisionProfesionalesComponent, canActivate: [PerfilGuard] },
   {path: 'AdministradoresABM', component: GestionAdministradoresComponent, canActivate: [PerfilGuard] },
+  {path: 'JornadasLaborales', component: JornadaScreenComponent, canActivate: [PerfilGuard] },
+
 ];
 
 @NgModule({
@@ -36,6 +41,9 @@ const routes: Routes = [
     AdmisionProfesionalesComponent,
     GestionAdministradoresComponent,
     AtenderPacienteComponent,
+    JornadaFormComponent,
+    JornadaListComponent,
+    JornadaScreenComponent,
 
   ],
   imports: [

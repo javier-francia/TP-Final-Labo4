@@ -13,14 +13,15 @@ export class BrowserStorageService {
 
   constructor(private accessSvc: AccessService) { }
 
-  LoadLocalStorage(email: string, perfil: string, habilitado: boolean, storageType: boolean)
+  LoadLocalStorage(email: string, perfil: string, habilitado: boolean, id:number, storageType: boolean)
   {
     this.localStorageSetted = storageType;
 
     let objeto = {
       email: email,
       perfil: perfil,
-      habilitado: habilitado
+      habilitado: habilitado,
+      id: id
     };
     let encrypted = CryptoJS.AES.encrypt(JSON.stringify(objeto), environment.encryptionKey);
 
@@ -86,6 +87,11 @@ export class BrowserStorageService {
   IsHabilitado() : boolean
   {
     return this.GetUsuarioStorage().habilitado;
+  }
+
+  GetId() : number
+  {
+    return this.GetUsuarioStorage().id;
   }
 
   CleanLocalStorage()
