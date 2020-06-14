@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -44,12 +45,12 @@ const routes: Routes = [
     JornadaFormComponent,
     JornadaListComponent,
     JornadaScreenComponent,
-
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     NavegacionModule,
+    MDBBootstrapModule.forRoot()
   ]
 })
 export class GestionModule { }

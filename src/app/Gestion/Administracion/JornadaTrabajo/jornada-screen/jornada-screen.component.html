@@ -1,3 +1,18 @@
 <app-menu></app-menu>
-<app-jornada-list   [listadoMostrar]="listadoProfesionalJornada"
-                    (verDetalle)="onVerDetalle($event)"></app-jornada-list>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-jornada-list   *ngIf="jornadasActuales"
+                                [listadoJornadas]="jornadasActuales"
+                                (modificarJornada)="onModificarJornada($event)"></app-jornada-list>
+
+            <h2 *ngIf="!jornadasActuales">Este profesional no tiene cargados sus horarios de trabajo.</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button *ngIf="!jornadasActuales" type="button" mdbBtn color="deep-orange" class="waves-light" mdbWavesEffect>Cargar esquema de horarios</button>
+            <button *ngIf="jornadasActuales && jornadasActuales.length < 6" type="button" mdbBtn color="deep-orange" class="waves-light" mdbWavesEffect>Cargar nuevo día</button>
+        </div>
+    </div>
+</div>

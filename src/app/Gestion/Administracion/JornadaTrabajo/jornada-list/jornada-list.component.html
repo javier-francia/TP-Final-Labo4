@@ -1,14 +1,18 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Vigente desde</th>
+            <th>Día</th>
+            <th>Horario</th>
+            <th>Especialidad</th>
             <th></th>
         </tr>   
     </thead>
     <tbody>
-        <tr *ngFor="let profesionalJornada of listadoMostrar">
-            <td>{{profesionalJornada.inicio | date: 'dd/MM/yyyy' }}</td>
-            <td><button class="btn btn-default btn-sm" (click)="onVerDetalles(profesionalJornada)">Ver detalles</button></td>
+        <tr *ngFor="let jornada of listadoJornadas">
+            <td>{{jornada.dia}}</td>
+            <td>{{jornada.horario}}</td>
+            <td>{{jornada.especialidad}}</td>
+            <td><button type="button" mdbBtn color="light-blue" class="waves-light btn-sm" (click)="onModificar(jornada)" mdbWavesEffect>Modificar</button></td>
         </tr>
     </tbody>
 </table>

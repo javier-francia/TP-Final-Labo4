@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ProfesionalJornada } from '../profesional-jornada';
+import { Jornada } from '../jornada';
 
 @Component({
   selector: 'app-jornada-list',
@@ -8,17 +8,30 @@ import { ProfesionalJornada } from '../profesional-jornada';
 })
 export class JornadaListComponent implements OnInit {
 
-  @Input() listadoMostrar: Array<ProfesionalJornada>;
-  @Output() verDetalle: EventEmitter<ProfesionalJornada> = new EventEmitter<ProfesionalJornada>();
+  @Input() listadoJornadas: Array<Jornada> = [];
+  @Output() modificarJornada: EventEmitter<Jornada> = new EventEmitter<Jornada>();
+  @Output() agregarJornada: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
+  
 
-  onVerDetalles(elemento: ProfesionalJornada)
+  onModificar(elemento: Jornada)
   {
-    this.verDetalle.emit(elemento);
+    this.modificarJornada.emit(elemento);
   }
 
+  onAgregar(idDia: number)
+  {
+    this.agregarJornada.emit(idDia);
+  }
+
+
+  removeFromArray(array, element) {
+    const index = array.indexOf(element);
+    array.splice(index, 1);
+  }
 }
