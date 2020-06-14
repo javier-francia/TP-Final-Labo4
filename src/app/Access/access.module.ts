@@ -16,8 +16,8 @@ import { RegistroComponent } from './registro/registro.component';
 const redirectLoggedIn = () => redirectLoggedInTo(['Home']);
 
 const routes: Routes = [
-  {path: '', component: LoginComponent, ...canActivate(redirectLoggedIn)},
-  {path: 'SignIn', component: RegistroComponent, ...canActivate(redirectLoggedIn)}
+  {path: '', component: LoginComponent, data: {animation: 'Login'}, ...canActivate(redirectLoggedIn)},
+  {path: 'SignIn', component: RegistroComponent, data: {animation: 'SignIn'}, ...canActivate(redirectLoggedIn)}
 ];
 
 @NgModule({
