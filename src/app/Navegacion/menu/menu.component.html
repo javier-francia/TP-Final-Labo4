@@ -50,7 +50,7 @@
     
     <button type="button" mdbBtn color="danger" class="waves-light"mdbWavesEffect hidden>Para activar mdBootstrap</button>
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <li class="nav-item">
+      <li *ngIf="perfil == 'Paciente'" class="nav-item">
         <button class="nav-link btn" id="btnNotificacion">
           <div class="btn-group" mdbDropdown>
             <mdb-icon *ngIf="listadoNotificaciones.length > 0" (click)="leerNotificaciones()" fas icon="envelope" mdbDropdownToggle></mdb-icon>

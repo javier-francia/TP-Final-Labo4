@@ -48,7 +48,10 @@ export class MenuComponent implements OnInit {
         });
       }
       this.idUsuario = this.browserStorageSvc.GetId();
-      this.obtenerNotificaciones();      
+      if(this.perfil == "Paciente")
+      {
+        this.obtenerNotificaciones();      
+      }
     }
   }
 
