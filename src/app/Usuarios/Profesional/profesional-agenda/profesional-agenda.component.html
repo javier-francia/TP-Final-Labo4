@@ -1,2 +1,83 @@
 <app-menu></app-menu>
-<p>profesional-agenda works!</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Dia y hora</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>   
+    </thead>
+    <tbody>
+        <tr *ngFor="let turno of listadoTurnos">
+            <td>{{turno.nombreCompletoPaciente}}</td>
+            <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            <td>{{turno.especialidad}}</td>
+            <td>{{turno.estado}}</td>
+            <td>
+                <button *ngIf="turno.estado == 'Pendiente'" type="button" mdbBtn color="success" class="waves-light btn-sm" (click)="onAceptar(turno)" mdbWavesEffect>Aceptar turno</button>
+                <button *ngIf="turno.estado == 'Pendiente'" type="button" mdbBtn color="danger" class="waves-light btn-sm" (click)="onRechazar(turno)" mdbWavesEffect>Rechazar turno</button>
+                <button *ngIf="turno.estado == 'Confirmado'" type="button" mdbBtn color="warning" class="waves-light btn-sm" (click)="onCancelar(turno)" mdbWavesEffect>Cancelar turno</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<button id="btnModalAceptar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAceptar" hidden></button>
+<div class="modal fade" id="modalAceptar" tabindex="-1" role="dialog" aria-labelledby="modalAceptarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aceptar turno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Paciente'"></app-turno-detalle>
+        <button type="button" mdbBtn color="success" class="waves-light" data-dismiss="modal" (click)="aceptarTurno()" mdbWavesEffect>Aceptar turno</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="btnModalRechazar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalRechazar" hidden></button>
+<div class="modal fade" id="modalRechazar" tabindex="-1" role="dialog" aria-labelledby="modalRechazarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rechazar turno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Paciente'"></app-turno-detalle>
+        <button type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" (click)="rechazarTurno()" mdbWavesEffect>Rechazar turno</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="btnModalCancelar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCancelar" hidden></button>
+<div class="modal fade" id="modalCancelar" tabindex="-1" role="dialog" aria-labelledby="modalCancelarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar turno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Paciente'"></app-turno-detalle>
+        <button type="button" mdbBtn color="warning" class="waves-light" data-dismiss="modal" (click)="cancelarTurno()" mdbWavesEffect>Cancelar turno</button>
+      </div>
+    </div>
+  </div>
+</div>

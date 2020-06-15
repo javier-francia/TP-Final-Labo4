@@ -9,6 +9,7 @@ import { Profesional } from '../../../Usuarios/Profesional/profesional';
 import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionales.service';
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Router } from '@angular/router';
+import { PacientesService } from '../../../Usuarios/Paciente/pacientes.service';
 
 @Component({
   selector: 'app-turno-solicitar',
@@ -25,6 +26,7 @@ export class TurnoSolicitarComponent implements OnInit {
   listadoProfesionales: Array<Profesional>;
   turnoElegido: Turno = null;
   newId: number;
+  nombrePaciente: string;
 
   patronBusqueda = "";
   
@@ -33,7 +35,8 @@ export class TurnoSolicitarComponent implements OnInit {
               private gestorDeTurnosSvc: GestorDeTurnosService,
               private profesionalSvc: ProfesionalesService,
               private browserStorageSvc: BrowserStorageService,
-              private router: Router) { }
+              private router: Router,
+              private pacientesSvc: PacientesService) { }
 
   ngOnInit(): void {
     this.listadoProfesionales = [];
@@ -45,6 +48,8 @@ export class TurnoSolicitarComponent implements OnInit {
     this.turnosSvc.Get().subscribe((turnoSnapshot: any) => {
       this.newId = turnoSnapshot.length + 1;
     });
+    let pacienteId = this.browserStorageSvc.GetId();
+    this.obtenerNombrePaciente(pacienteId);
   }
 
 
@@ -203,9 +208,23 @@ export class TurnoSolicitarComponent implements OnInit {
     this.turnoElegido.id = this.newId;
     this.turnoElegido.idPaciente = idPaciente;
     this.turnoElegido.estado = "Pendiente";
+    this.turnoElegido.nombreCompletoPaciente = this.nombrePaciente;
     this.turnosSvc.Insert(this.turnoElegido).then(() =>{
       this.router.navigate(['Home']);
     });
-    
+  }
+
+  obtenerNombrePaciente(idPaciente: number)
+  {
+    this.pacientesSvc.Get().subscribe((pacienteSnapshot: any) => {
+      for(let i = 0; i < pacienteSnapshot.length; i++)
+      {
+        if(pacienteSnapshot[i].payload.doc.id == idPaciente)
+        {
+          this.nombrePaciente = pacienteSnapshot[i].payload.doc.data().apellido + ", " + pacienteSnapshot[i].payload.doc.data().nombre;
+          break;
+        }
+      }
+    });
   }
 }

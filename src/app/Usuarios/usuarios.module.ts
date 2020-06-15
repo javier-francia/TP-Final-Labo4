@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GestionModule } from '../Gestion/gestion.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -51,6 +53,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     NavegacionModule,
     RouterModule.forChild(routes),
+    MDBBootstrapModule.forRoot(),
+    GestionModule
   ],
   exports: [
     AdminFormComponent,

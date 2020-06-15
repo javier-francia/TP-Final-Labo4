@@ -53,6 +53,9 @@ const routes: Routes = [
     NavegacionModule,
     MDBBootstrapModule.forRoot(),
     FormsModule
+  ],
+  exports: [
+    TurnoDetalleComponent
   ]
 })
 export class GestionModule { }

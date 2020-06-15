@@ -1,8 +1,11 @@
 <app-menu></app-menu>
-<input type="text"  [(ngModel)]="patronBusqueda"
-                    (ngModelChange)="buscarTurnos()"
-                    [disabled]="!obtenerTurnosTerminado || !obtenerJornadasTerminado">
-
+<div class="md-form">
+  <input  mdbInput type="text" id="buscar" class="form-control"
+          [(ngModel)]="patronBusqueda"
+          (ngModelChange)="buscarTurnos()"
+          [disabled]="!obtenerTurnosTerminado || !obtenerJornadasTerminado">
+  <label for="buscar" class="">Búsqueda</label>
+</div>
 
 <app-turno-listado  [listadoTurnos]="listadoTurnosParaSolicitar"
                     (verDetalleTurno)="onVerDetalle($event)"></app-turno-listado>
@@ -23,7 +26,7 @@
         </button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido"></app-turno-detalle>
+        <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Profesional'"></app-turno-detalle>
 
         <button type="button" mdbBtn color="default" class="waves-light" data-dismiss="modal" (click)="pedirTurno()" mdbWavesEffect>Pedir turno</button>
         

@@ -19,8 +19,9 @@ export class TurnosServiceService {
   Insert(item: Turno): Promise<void>
   {
     return this.fireStore.collection(this.collectionName).doc(item.id.toString()).set({
-      idPaciente: item.idPaciente,
-      idProfesional: item.idProfesional,
+      idPaciente: item.idPaciente as number,
+      idProfesional: item.idProfesional as number,
+      nombreCompletoPaciente: item.nombreCompletoPaciente,
       nombreCompletoProfesional: item.nombreCompletoProfesional,
       especialidad: item.especialidad,
       inicio: item.inicio,
@@ -32,10 +33,10 @@ export class TurnosServiceService {
     });
   }
 
-  UpdateEstado(id: string, newEstado: string) : Promise<void>
+  UpdateEstado(unTurno: Turno) : Promise<void>
   {
-    return this.fireStore.collection(this.collectionName).doc(id).set({
-      estado: newEstado
+    return this.fireStore.collection(this.collectionName).doc(unTurno.id.toString()).set({
+      estado: unTurno.estado
     },
     {
       merge: true

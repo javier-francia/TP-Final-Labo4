@@ -1,2 +1,19 @@
 <app-menu></app-menu>
-<p>paciente-historial works!</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Profesional</th>
+            <th>Dia y hora</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+        </tr>   
+    </thead>
+    <tbody>
+        <tr *ngFor="let turno of listadoTurnos">
+            <td>{{turno.nombreCompletoProfesional}}</td>
+            <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            <td>{{turno.especialidad}}</td>
+            <td>{{turno.estado}}</td>
+        </tr>
+    </tbody>
+</table>
