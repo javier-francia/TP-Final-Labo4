@@ -16,20 +16,20 @@
             <td>{{turno.especialidad}}</td>
             <td>{{turno.estado}}</td>
             <td>
-                <button type="button" mdbBtn color="default" class="waves-light btn-sm" (click)="onAtender(turno)" mdbWavesEffect>Atender paciente</button>
+                <button *ngIf="turno.datosProfesional !== undefined" type="button" mdbBtn color="light-blue" class="waves-light btn-sm" (click)="onVerEncuesta(turno)" mdbWavesEffect>Ver encuesta</button>
             </td>
         </tr>
     </tbody>
 </table>
 
 
-<button id="btnModalAtender" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAtender" hidden></button>
-<div class="modal fade" id="modalAtender" tabindex="-1" role="dialog" aria-labelledby="modalAtenderLabel"
+<button id="btnModalEncuesta" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta" hidden></button>
+<div class="modal fade" id="modalEncuesta" tabindex="-1" role="dialog" aria-labelledby="modalEncuestaLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Atender paciente</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Titulo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

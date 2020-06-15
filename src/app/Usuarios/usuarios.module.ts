@@ -23,11 +23,13 @@ import { MiPerfilComponent } from './Usuario/mi-perfil/mi-perfil.component';
 import { ProfesionalDetalleComponent } from './Profesional/profesional-detalle/profesional-detalle.component';
 import { ProfesionalAgendaComponent } from './Profesional/profesional-agenda/profesional-agenda.component';
 import { PacienteTurnosComponent } from './Paciente/paciente-turnos/paciente-turnos.component';
+import { ProfesionalHistorialComponent } from './Profesional/profesional-historial/profesional-historial.component';
 
 
 
 const routes: Routes = [
   {path: 'Historial', component: PacienteHistorialComponent, canActivate: [PerfilGuard] },
+  {path: 'HistorialProfesional', component: ProfesionalHistorialComponent, canActivate: [PerfilGuard] },
   {path: 'MiPerfil', component: MiPerfilComponent },
   {path: 'Agenda', component: ProfesionalAgendaComponent, canActivate: [PerfilGuard] },
   {path: 'MisTurnos', component: PacienteTurnosComponent, canActivate: [PerfilGuard] },
@@ -46,6 +48,7 @@ const routes: Routes = [
     ProfesionalDetalleComponent,
     ProfesionalAgendaComponent,
     PacienteTurnosComponent,
+    ProfesionalHistorialComponent,
   ],
   imports: [
     CommonModule,

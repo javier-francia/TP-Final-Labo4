@@ -5,11 +5,11 @@ import { Turno } from '../../../Gestion/Turno/turno';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profesional-agenda',
-  templateUrl: './profesional-agenda.component.html',
-  styleUrls: ['./profesional-agenda.component.css']
+  selector: 'app-profesional-historial',
+  templateUrl: './profesional-historial.component.html',
+  styleUrls: ['./profesional-historial.component.css']
 })
-export class ProfesionalAgendaComponent implements OnInit {
+export class ProfesionalHistorialComponent implements OnInit {
 
   listadoTurnos: Array<Turno>;
   turnoElegido: Turno;
@@ -29,8 +29,8 @@ export class ProfesionalAgendaComponent implements OnInit {
           continue;
         }
 
-        if(turnoSnapshot[i].payload.doc.data().estado != "Pendiente" &&
-        turnoSnapshot[i].payload.doc.data().estado != "Confirmado" )
+        if(turnoSnapshot[i].payload.doc.data().estado == "Pendiente" ||
+        turnoSnapshot[i].payload.doc.data().estado == "Confirmado" )
         {
           continue;
         }
@@ -38,57 +38,32 @@ export class ProfesionalAgendaComponent implements OnInit {
         let turnoActual = new Turno();
         turnoActual.id = turnoSnapshot[i].payload.doc.id;
         turnoActual.idProfesional = turnoSnapshot[i].payload.doc.data().idProfesional;
+        turnoActual.nombreCompletoProfesional = turnoSnapshot[i].payload.doc.data().nombreCompletoProfesional;
         turnoActual.nombreCompletoPaciente = turnoSnapshot[i].payload.doc.data().nombreCompletoPaciente;
         turnoActual.especialidad = turnoSnapshot[i].payload.doc.data().especialidad;
         turnoActual.inicio = new Date(turnoSnapshot[i].payload.doc.data().inicio.toDate());
         turnoActual.fin = new Date(turnoSnapshot[i].payload.doc.data().fin.toDate());
         turnoActual.estado = turnoSnapshot[i].payload.doc.data().estado;
+        turnoActual.resenia = turnoSnapshot[i].payload.doc.data().resenia;
+        if(turnoSnapshot[i].payload.doc.data().datosPaciente != "")
+        {
+          turnoActual.datosPaciente = JSON.parse(turnoSnapshot[i].payload.doc.data().datosPaciente);
+        }
+        if(turnoSnapshot[i].payload.doc.data().datosProfesional != "")
+        {
+          turnoActual.datosProfesional = JSON.parse(turnoSnapshot[i].payload.doc.data().datosProfesional);
+        }
         this.listadoTurnos.push(turnoActual);
+        console.log(turnoActual.datosProfesional);
       }
       this.listadoTurnos = this.listadoTurnos.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
       turnosObservable.unsubscribe();
     });
   }
 
-  onAceptar(unTurno: Turno)
+  onVerEncuesta(unTurno: Turno)
   {
-    this.turnoElegido = unTurno;
-    document.getElementById("btnModalAceptar").click();
-  }
-
-  onRechazar(unTurno: Turno)
-  {
-    this.turnoElegido = unTurno;
-    document.getElementById("btnModalRechazar").click();
-  }
-
-  onCancelar(unTurno: Turno)
-  {
-    this.turnoElegido = unTurno;
-    document.getElementById("btnModalCancelar").click();
-  }
-
-  aceptarTurno()
-  {
-    let idPaciente = this.browserStorageSvc.GetId();
-    this.turnoElegido.estado = "Confirmado";
-    this.turnosSvc.UpdateEstado(this.turnoElegido).then(() =>{
-    });
-  }
-
-  rechazarTurno()
-  {
-    let idPaciente = this.browserStorageSvc.GetId();
-    this.turnoElegido.estado = "Rechazado";
-    this.turnosSvc.UpdateEstado(this.turnoElegido).then(() =>{
-    });
-  }
-
-  cancelarTurno()
-  {
-    let idPaciente = this.browserStorageSvc.GetId();
-    this.turnoElegido.estado = "Cancelado";
-    this.turnosSvc.UpdateEstado(this.turnoElegido).then(() =>{
-    });
+    //this.turnoElegido = unTurno;
+    document.getElementById("btnModalEncuesta").click();
   }
 }

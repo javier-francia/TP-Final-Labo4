@@ -23,7 +23,7 @@
         <a class="nav-link waves-light" mdbWavesEffect></a>
       </li>
       <li *ngIf="perfil == 'Paciente' && habilitado" class="nav-item">
-        <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
+        <a routerLink="/MisTurnos" class="nav-link waves-light" mdbWavesEffect>Mis turnos</a>
       </li>
       <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
         <a routerLink="/Agenda" class="nav-link waves-light" mdbWavesEffect>Gestionar turnos</a>
@@ -33,6 +33,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect></a>
+      </li>
+      <li *ngIf="perfil == 'Paciente' && habilitado" class="nav-item">
+        <a routerLink="/Contacto" class="nav-link waves-light" mdbWavesEffect>Contacto</a>
       </li>
       <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
         <a routerLink="/JornadasLaborales" class="nav-link waves-light" mdbWavesEffect>Jornadas laborales</a>
@@ -54,8 +57,8 @@
             <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
             <div class="dropdown-menu dropdown-menu-right dropdown-primary">
               <a class="dropdown-item" routerLink="/MiPerfil">Mi perfil</a>
-              <a *ngIf="perfil == 'Paciente'" class="dropdown-item" routerLink="/MisTurnos">Mis turnos</a>
               <a *ngIf="perfil == 'Paciente'" class="dropdown-item" routerLink="/Historial">Historial</a>
+              <a *ngIf="perfil == 'Profesional'" class="dropdown-item" routerLink="/HistorialProfesional">Historial</a>
               <div class="divider dropdown-divider"></div>
               <a class="dropdown-item" (click)="LogOut()">Salir <i class="fas fa-sign-out-alt"></i></a>
             </div>
