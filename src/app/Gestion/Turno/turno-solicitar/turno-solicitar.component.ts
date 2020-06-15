@@ -7,6 +7,8 @@ import { Jornada } from '../../Administracion/JornadaTrabajo/jornada';
 import { GestorDeTurnosService } from '../gestor-de-turnos.service';
 import { Profesional } from '../../../Usuarios/Profesional/profesional';
 import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionales.service';
+import { BrowserStorageService } from '../../../Access/browser-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-turno-solicitar',
@@ -20,14 +22,18 @@ export class TurnoSolicitarComponent implements OnInit {
   obtenerJornadasTerminado = false;
   listadoJornadasTrabajo: Array<ProfesionalJornada>;
   listadoTurnosParaSolicitar: Array<Turno> = null;
-  listadoProfesionales: Array<Profesional>
+  listadoProfesionales: Array<Profesional>;
+  turnoElegido: Turno = null;
+  newId: number;
 
   patronBusqueda = "";
   
   constructor(private turnosSvc: TurnosServiceService,
               private jornadaSvc: JornadaService,
               private gestorDeTurnosSvc: GestorDeTurnosService,
-              private profesionalSvc: ProfesionalesService) { }
+              private profesionalSvc: ProfesionalesService,
+              private browserStorageSvc: BrowserStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.listadoProfesionales = [];
@@ -36,6 +42,9 @@ export class TurnoSolicitarComponent implements OnInit {
     this.obtenerTurnosVivos();
     this.obtenerJornadasTrabajo();
     this.obtenerProfesionales();
+    this.turnosSvc.Get().subscribe((turnoSnapshot: any) => {
+      this.newId = turnoSnapshot.length + 1;
+    });
   }
 
 
@@ -74,6 +83,19 @@ export class TurnoSolicitarComponent implements OnInit {
       {
         let profJornada = new ProfesionalJornada();
         profJornada.id_profesional = jornadaSnapshot[i].payload.doc.data().id_profesional;
+        
+        let profesionalesObservable = this.profesionalSvc.Get().subscribe((profesionalSnapshot: any) => {
+          for(let j = 0; j < profesionalSnapshot.length; j++)
+          {
+            if(profesionalSnapshot[j].payload.doc.id as unknown as number == profJornada.id_profesional)
+            {
+              profJornada.nombreCompleto = profesionalSnapshot[j].payload.doc.data().nombre + " " + profesionalSnapshot[j].payload.doc.data().apellido;
+              break;
+            }
+          }
+          profesionalesObservable.unsubscribe();
+        });
+
         let arrayJornadasString: Array<string> = jornadaSnapshot[i].payload.doc.data().jornadas;
         for(let j = 0; j < arrayJornadasString.length; j++)
         {
@@ -88,8 +110,6 @@ export class TurnoSolicitarComponent implements OnInit {
         this.listadoJornadasTrabajo.push(profJornada);
       }
       this.obtenerJornadasTerminado = true;
-      //console.log("Listado de jornadas: ");
-      //console.log(this.listadoJornadasTrabajo);
       jornadasObservable.unsubscribe();
     });
   }
@@ -168,6 +188,24 @@ export class TurnoSolicitarComponent implements OnInit {
 
       this.listadoTurnosParaSolicitar = arrayOrdenado;
     }
+    
+  }
+
+  onVerDetalle(unTurno: Turno)
+  {
+    this.turnoElegido = unTurno;
+    document.getElementById("btnModalDetalle").click();
+  }
+
+  pedirTurno()
+  {
+    let idPaciente = this.browserStorageSvc.GetId();
+    this.turnoElegido.id = this.newId;
+    this.turnoElegido.idPaciente = idPaciente;
+    this.turnoElegido.estado = "Pendiente";
+    this.turnosSvc.Insert(this.turnoElegido).then(() =>{
+      this.router.navigate(['Home']);
+    });
     
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Turno } from './turno';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +16,30 @@ export class TurnosServiceService {
     return this.fireStore.collection(this.collectionName).snapshotChanges();
   }
 
-  /*GetUsuario(email: string)
+  Insert(item: Turno): Promise<void>
   {
-    return this.fireStore.collection(this.collectionName, ref => ref.where('email', '==', email));
-  }
-
-  Insert(id: number, email: string, perfil: string, habilitado: boolean) : Promise<void>
-  {
-    return this.fireStore.collection(this.collectionName).doc(id.toString()).set({
-      email: email,
-      perfil: perfil,
-      habilitado: habilitado
+    return this.fireStore.collection(this.collectionName).doc(item.id.toString()).set({
+      idPaciente: item.idPaciente,
+      idProfesional: item.idProfesional,
+      nombreCompletoProfesional: item.nombreCompletoProfesional,
+      especialidad: item.especialidad,
+      inicio: item.inicio,
+      fin: item.fin,
+      estado: item.estado,
+      resenia: "",
+      datosPaciente: "",
+      datosProfesional: ""
     });
   }
 
-  Update(id: string, newEmail: string) : Promise<void>
+  UpdateEstado(id: string, newEstado: string) : Promise<void>
   {
     return this.fireStore.collection(this.collectionName).doc(id).set({
-      email: newEmail
+      estado: newEstado
     },
     {
       merge: true
     });
-  }*/
+  }
+  
 }

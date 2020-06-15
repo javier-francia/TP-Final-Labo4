@@ -34,7 +34,7 @@ export class GestorDeTurnosService {
                     }
 
                     // Genero turnos posibles
-                    let turnosPosibles = this.generarTurnosPosibles(jornadaActual, listadoJornadasTrabajo[j].id_profesional, diaActual);
+                    let turnosPosibles = this.generarTurnosPosibles(jornadaActual, listadoJornadasTrabajo[j].id_profesional, listadoJornadasTrabajo[j].nombreCompleto, diaActual);
 
                     
                     for(let l = 0; l < turnosPosibles.length; l++)
@@ -94,7 +94,7 @@ export class GestorDeTurnosService {
       }
     }
 
-    private generarTurnosPosibles(jornadaTrabajo: Jornada, idProfesional: number, diaActual: Date): Array<Turno>
+    private generarTurnosPosibles(jornadaTrabajo: Jornada, idProfesional: number, nombreCompletoProfesional: string, diaActual: Date): Array<Turno>
     {
         let output: Array<Turno> = [];
 
@@ -117,6 +117,7 @@ export class GestorDeTurnosService {
 
             let agregoTurno = new Turno();
             agregoTurno.idProfesional = idProfesional;
+            agregoTurno.nombreCompletoProfesional = nombreCompletoProfesional;
             agregoTurno.inicio = new Date(dateInicio.getTime());
             agregoTurno.fin = new Date(turnoTermina.getTime());
             agregoTurno.especialidad = jornadaTrabajo.especialidad;

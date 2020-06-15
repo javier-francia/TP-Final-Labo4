@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Turno } from '../turno';
 
 @Component({
   selector: 'app-turno-detalle',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TurnoDetalleComponent implements OnInit {
 
+  @Input() turnoMostrarDetalle: Turno;
   constructor() { }
 
   ngOnInit(): void {
