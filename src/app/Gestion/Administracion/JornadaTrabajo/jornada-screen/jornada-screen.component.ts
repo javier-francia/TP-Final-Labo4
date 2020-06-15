@@ -42,6 +42,7 @@ export class JornadaScreenComponent implements OnInit {
             jornada.dia = jotaSon.dia;
             jornada.especialidad = jotaSon.especialidad;
             jornada.horario = jotaSon.horario;
+            jornada.duracion = jotaSon.duracion;
             objeto.jornadas.push(jornada);
           }
           listadoProvisorio.push(objeto);

@@ -4,4 +4,5 @@ export class Jornada {
     // hh:mm-hh:mm
     horario: string;
     especialidad: string;
+    duracion: number;
 }
