@@ -17,7 +17,6 @@ export class GestorDeTurnosService {
         let output: Array<Turno> = [];        
 
         let hoy = new Date(Date.now());
-        let finBusqueda = new Date(hoy.getTime() + (1000 * 60 * 60 * 24 * diasParaBuscar));
 
         let diaActual = new Date(hoy.getTime());
 
@@ -41,6 +40,11 @@ export class GestorDeTurnosService {
                     {
                         let turnoPosibleActual = turnosPosibles[l];
                         let guardarTurnoPosibleActual = true;
+
+                        if(i == 0 && turnoPosibleActual.inicio < diaActual)
+                        {
+                            continue;
+                        }
 
                         for(let m = 0; m < listadoTurnosVivos.length; m++)
                         {
