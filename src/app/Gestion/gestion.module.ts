@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule } from '@angular/forms';
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -50,7 +51,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     NavegacionModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    FormsModule
   ]
 })
 export class GestionModule { }

@@ -47,10 +47,7 @@ export class JornadaScreenComponent implements OnInit {
           }
           listadoProvisorio.push(objeto);
         }
-      }
-      listadoProvisorio.reverse(); //cambiar por ordenar fecha descendiente
-      if(listadoProvisorio.length > 0)
-      {
+        //obtener id de jornadatrabajo para poder editar ese registro
         this.jornadasActuales = listadoProvisorio[0].jornadas;
       }
       else
