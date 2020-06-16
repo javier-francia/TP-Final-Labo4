@@ -92,7 +92,7 @@ export class TurnoSolicitarComponent implements OnInit {
         let profesionalesObservable = this.profesionalSvc.Get().subscribe((profesionalSnapshot: any) => {
           for(let j = 0; j < profesionalSnapshot.length; j++)
           {
-            if(profesionalSnapshot[j].payload.doc.id as unknown as number == profJornada.id_profesional)
+            if(+profesionalSnapshot[j].payload.doc.id == profJornada.id_profesional)
             {
               profJornada.nombreCompleto = profesionalSnapshot[j].payload.doc.data().nombre + " " + profesionalSnapshot[j].payload.doc.data().apellido;
               break;
@@ -124,7 +124,7 @@ export class TurnoSolicitarComponent implements OnInit {
     let profesionalesObservable = this.profesionalSvc.Get().subscribe((profesionalSnapshot) => {
       profesionalSnapshot.forEach((element: any) => {
         let profesional = new Profesional();
-        profesional.id = element.payload.doc.id as unknown as number;
+        profesional.id = +element.payload.doc.id;
         profesional.nombre = element.payload.doc.data().nombre;
         profesional.apellido = element.payload.doc.data().apellido;
         this.listadoProfesionales.push(profesional);

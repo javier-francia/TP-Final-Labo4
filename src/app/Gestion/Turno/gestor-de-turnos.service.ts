@@ -103,10 +103,10 @@ export class GestorDeTurnosService {
         let output: Array<Turno> = [];
 
         let arrayHorario = jornadaTrabajo.horario.split('-');
-        let horaInicio = arrayHorario[0].substring(0, 2) as unknown as number;
-        let minutosInicio = arrayHorario[0].substring(3, 5) as unknown as number;
-        let horaFin = arrayHorario[1].substring(0, 2) as unknown as number;
-        let minutosFin = arrayHorario[1].substring(3, 5) as unknown as number;
+        let horaInicio = +arrayHorario[0].substring(0, 2);
+        let minutosInicio = +arrayHorario[0].substring(3, 5);
+        let horaFin = +arrayHorario[1].substring(0, 2);
+        let minutosFin = +arrayHorario[1].substring(3, 5);
 
         let dateInicio = new Date(diaActual.getFullYear(), diaActual.getMonth(), diaActual.getDate(), horaInicio, minutosInicio);
         let dateFin = new Date(diaActual.getFullYear(), diaActual.getMonth(), diaActual.getDate(), horaFin, minutosFin);

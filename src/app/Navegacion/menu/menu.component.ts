@@ -84,7 +84,7 @@ export class MenuComponent implements OnInit {
         }
 
         let agregarNotificacion = new Notificacion();
-        agregarNotificacion.id = notificacionActual.payload.doc.id as unknown as number;
+        agregarNotificacion.id = +notificacionActual.payload.doc.id;
         agregarNotificacion.contenido = notificacionActual.payload.doc.data().contenido;
         agregarNotificacion.fecha = new Date(notificacionActual.payload.doc.data().fecha.toDate());
 

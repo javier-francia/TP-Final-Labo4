@@ -41,8 +41,8 @@ export class ProfesionalAgendaComponent implements OnInit {
 
         let turnoActual = new Turno();
         turnoActual.id = turnoSnapshot[i].payload.doc.id;
-        turnoActual.idPaciente = turnoSnapshot[i].payload.doc.data().idPaciente as unknown as number;
-        turnoActual.idProfesional = turnoSnapshot[i].payload.doc.data().idProfesional as unknown as number;
+        turnoActual.idPaciente = +turnoSnapshot[i].payload.doc.data().idPaciente;
+        turnoActual.idProfesional = +turnoSnapshot[i].payload.doc.data().idProfesional;
         turnoActual.nombreCompletoPaciente = turnoSnapshot[i].payload.doc.data().nombreCompletoPaciente;
         turnoActual.nombreCompletoProfesional = turnoSnapshot[i].payload.doc.data().nombreCompletoProfesional;
         turnoActual.especialidad = turnoSnapshot[i].payload.doc.data().especialidad;
