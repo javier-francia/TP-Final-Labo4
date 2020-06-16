@@ -1,1 +1,121 @@
-<p>jornada-form works!</p>
+<form novalidate
+        (ngSubmit)="placebo()"
+        [formGroup]="jornadaForm">
+    <div class="form-group">
+        <label [hidden]="accion == 'editar'">Día</label>
+        <select class="browser-default custom-select"
+                formControlName="dia"
+                [ngClass]="{'is-invalid':   jornadaForm.get('dia').touched && jornadaForm.get('dia').value == 'seleccionar' }"
+                [hidden]="accion == 'editar'">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let dia of diasDisponibles" 
+            [value]="dia">
+            {{dia}}
+            </option>
+        </select>
+        <span class="invalid-feedback">
+            <span *ngIf="jornadaForm.get('dia').touched && jornadaForm.get('dia').value == 'seleccionar'">
+                Elija un día de la semana
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Especialidad</label>
+        <select class="browser-default custom-select"
+                formControlName="especialidad"
+                [ngClass]="{'is-invalid':   jornadaForm.get('especialidad').touched && jornadaForm.get('especialidad').value == 'seleccionar' }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let especialidad of especialidadesCargadas" 
+            [value]="especialidad">
+            {{especialidad}}
+            </option>
+        </select>
+        <span class="invalid-feedback">
+            <span *ngIf="jornadaForm.get('especialidad').touched && jornadaForm.get('especialidad').value == 'seleccionar'">
+                Elija una especialidad
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Duración del turno</label>
+        <select class="browser-default custom-select"
+                formControlName="duracion"
+                [ngClass]="{'is-invalid':   jornadaForm.get('duracion').touched && jornadaForm.get('duracion').value == 'seleccionar' }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let duracion of duraciones" 
+            [value]="duracion">
+            {{duracion}} min.
+            </option>
+        </select>
+        <span class="invalid-feedback">
+            <span *ngIf="jornadaForm.get('duracion').touched && jornadaForm.get('duracion').value == 'seleccionar'">
+                Elija la duración de los turnos
+            </span>
+        </span>
+    </div>
+    <div class="form-group" *ngIf="jornadaForm.get('dia').value != 'seleccionar'">
+        <label>Horario inicio</label>
+        <select *ngIf="jornadaForm.get('dia').value == '6'"
+                class="browser-default custom-select"
+                formControlName="horaInicio"
+                [ngClass]="{'is-invalid':   jornadaForm.get('horaInicio').touched && (jornadaForm.get('horaInicio').value == 'seleccionar' || jornadaForm.get('horaInicio').value == '') }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let horario of horariosDisponiblesSabados" 
+            [value]="horario">
+            {{horario}}
+            </option>
+        </select>
+        <select *ngIf="jornadaForm.get('dia').value != '6'"
+                class="browser-default custom-select"
+                formControlName="horaInicio"
+                [ngClass]="{'is-invalid':   jornadaForm.get('horaInicio').touched && (jornadaForm.get('horaInicio').value == 'seleccionar' || jornadaForm.get('horaInicio').value == '') }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let horario of horariosDisponibles" 
+            [value]="horario">
+            {{horario}}
+            </option>
+        </select>
+        <span class="invalid-feedback">
+            <span *ngIf="jornadaForm.get('horaInicio').touched && (jornadaForm.get('horaInicio').value == 'seleccionar' || jornadaForm.get('horaInicio').value == '')">
+                Elija un horario de inicio de su jornada
+            </span>
+        </span>
+    </div>
+    <div class="form-group" *ngIf="jornadaForm.get('dia').value != 'seleccionar'">
+        <label>Horario fin</label>
+        <select *ngIf="jornadaForm.get('dia').value == '6'"
+                class="browser-default custom-select"
+                formControlName="horaFin"
+                [ngClass]="{'is-invalid':   jornadaForm.get('horaFin').touched && (jornadaForm.get('horaFin').value == 'seleccionar' || jornadaForm.get('horaFin').value == '') }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let horario of horariosDisponiblesSabados" 
+            [value]="horario">
+            {{horario}}
+            </option>
+        </select>
+        <select *ngIf="jornadaForm.get('dia').value != '6'"
+                class="browser-default custom-select"
+                formControlName="horaFin"
+                [ngClass]="{'is-invalid':   jornadaForm.get('horaFin').touched && (jornadaForm.get('horaFin').value == 'seleccionar' || jornadaForm.get('horaFin').value == '') }">
+            <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
+            <option *ngFor="let horario of horariosDisponibles" 
+            [value]="horario">
+            {{horario}}
+            </option>
+        </select>
+        <span class="invalid-feedback">
+            <span *ngIf="jornadaForm.get('horaFin').touched &&  (jornadaForm.get('horaFin').value == 'seleccionar' || jornadaForm.get('horaFin').value == '')">
+                Elija un horario de fin de su jornada
+            </span>
+        </span>
+    </div>
+
+    <br>
+        
+    <input  class="btn btn-secondary"
+            [disabled]="jornadaForm.get('dia').value == 'seleccionar' || jornadaForm.get('especialidad').value == 'seleccionar' || jornadaForm.get('duracion').value == 'seleccionar' ||
+            (jornadaForm.get('horaFin').value == 'seleccionar' || jornadaForm.get('horaFin').value == '') || (jornadaForm.get('horaInicio').value == 'seleccionar' || jornadaForm.get('horaInicio').value == '')"
+            type="button"
+            value="{{accion}}"
+            (click)="EnviarFormJornada()"/>
+</form>

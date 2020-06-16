@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -52,7 +53,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NavegacionModule,
     MDBBootstrapModule.forRoot(),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     TurnoDetalleComponent

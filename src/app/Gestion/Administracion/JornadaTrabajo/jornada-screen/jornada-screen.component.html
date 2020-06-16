@@ -2,17 +2,53 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <app-jornada-list   *ngIf="jornadasActuales"
-                                [listadoJornadas]="jornadasActuales"
-                                (modificarJornada)="onModificarJornada($event)"></app-jornada-list>
-
-            <h2 *ngIf="!jornadasActuales">Este profesional no tiene cargados sus horarios de trabajo.</h2>
+            <h2 *ngIf="jornadasActuales.length == 0">Cargue sus jornadas laborales para poder recibir turnos.</h2>
+            <app-jornada-list   [listadoJornadas]="jornadasActuales"
+                                (modificarJornada)="onModificarJornada($event)"
+                                (eliminarJornada)="onEliminarJornada($event)"></app-jornada-list>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <button *ngIf="!jornadasActuales" type="button" mdbBtn color="deep-orange" class="waves-light" mdbWavesEffect>Cargar esquema de horarios</button>
-            <button *ngIf="jornadasActuales && jornadasActuales.length < 6" type="button" mdbBtn color="deep-orange" class="waves-light" mdbWavesEffect>Cargar nuevo día</button>
+            <button *ngIf="jornadasActuales.length < 6" type="button" mdbBtn color="deep-orange" (click)="onAgregarJornada()" class="waves-light" mdbWavesEffect>Cargar nuevo día</button>
         </div>
     </div>
+</div>
+
+
+
+
+
+<button id="btnModalJornada" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalJornada" hidden></button>
+<div class="modal fade" id="modalJornada" tabindex="-1" role="dialog" aria-labelledby="modalJornadaLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalJornadaLabel">{{accionJornada}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div *ngIf="accionJornada == 'Agregar jornada'" >
+          <app-jornada-form   [jornada]="jornadaSeleccionada"
+                              (agregarJornada)="agregarJornada($event)"
+                              (modificarJornada)="modificarJornada($event)"></app-jornada-form>
+        </div>
+        <div *ngIf="accionJornada == 'Modificar jornada'" >
+          <app-jornada-form   [jornada]="jornadaSeleccionada"
+                              (agregarJornada)="agregarJornada($event)"
+                              (modificarJornada)="modificarJornada($event)"></app-jornada-form>
+          
+        </div>
+        <div *ngIf="accionJornada == 'Eliminar jornada'">
+            <p>Esta por eliminar la jornada correspondiente a los días {{jornadaSeleccionada.dia}}.</p>
+            <p>¿Desea continuar?</p>
+            <button type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" (click)="eliminarJornada()" mdbWavesEffect>Eliminar jornada</button>
+        </div>
+        <button id="btnDescartaModal" type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" mdbWavesEffect hidden>DescartarModal</button>
+      </div>
+    </div>
+  </div>
 </div>

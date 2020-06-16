@@ -10,12 +10,11 @@ export class JornadaListComponent implements OnInit {
 
   @Input() listadoJornadas: Array<Jornada> = [];
   @Output() modificarJornada: EventEmitter<Jornada> = new EventEmitter<Jornada>();
-  @Output() agregarJornada: EventEmitter<number> = new EventEmitter<number>();
+  @Output() eliminarJornada: EventEmitter<Jornada> = new EventEmitter<Jornada>();
 
   constructor() { }
 
   ngOnInit(): void {
-    
   }
   
 
@@ -24,9 +23,9 @@ export class JornadaListComponent implements OnInit {
     this.modificarJornada.emit(elemento);
   }
 
-  onAgregar(idDia: number)
+  onEliminar(elemento: Jornada)
   {
-    this.agregarJornada.emit(idDia);
+    this.eliminarJornada.emit(elemento);
   }
 
 

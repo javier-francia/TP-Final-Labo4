@@ -14,7 +14,8 @@
             <td>{{jornada.horario}}</td>
             <td>{{jornada.especialidad}}</td>
             <td>{{jornada.duracion}} min.</td>
-            <td><button type="button" mdbBtn color="light-blue" class="waves-light btn-sm" (click)="onModificar(jornada)" mdbWavesEffect>Modificar</button></td>
+            <td><button type="button" mdbBtn color="light-blue" class="waves-light btn-sm" (click)="onModificar(jornada)" mdbWavesEffect>Modificar</button>
+            <button type="button" mdbBtn color="danger" class="waves-light btn-sm" (click)="onEliminar(jornada)" mdbWavesEffect>Eliminar</button></td>
         </tr>
     </tbody>
 </table>

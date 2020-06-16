@@ -12,55 +12,135 @@ import { ProfesionalJornada } from '../profesional-jornada';
 export class JornadaScreenComponent implements OnInit {
 
   jornadasActuales: Array<Jornada> = null;
+  idJornadaTrabajo: number;
+  jornadaSeleccionada: Jornada;
+
+  accionJornada: string;
 
   constructor(private jornadaSvc: JornadaService,
               private browserStorageSvc: BrowserStorageService) { }
 
   ngOnInit(): void {
+    this.jornadasActuales = []
     this.obtenerJornadaActual();    
   }
   
   obtenerJornadaActual()
   {
     let idProfesional = this.browserStorageSvc.GetId();
-    let listadoProvisorio: Array<ProfesionalJornada> = [];
 
     let jornadasObservable = this.jornadaSvc.GetProfesionalJornada().subscribe((jornadaSnapshot: any) => {
-      if(jornadaSnapshot.length > 0)
+      let jornadaTrabajadorCreated = false;
+      this.idJornadaTrabajo = jornadaSnapshot.length + 1;
+
+      for(let i = 0; i < jornadaSnapshot.length; i++)
       {
-        for(let i = 0; i < jornadaSnapshot.length; i++)
+        if(jornadaSnapshot[i].payload.doc.data().id_profesional != idProfesional) continue;
+        jornadaTrabajadorCreated = true;
+
+        let objeto = new ProfesionalJornada();
+        objeto.id = +jornadaSnapshot[i].payload.doc.id;
+        this.idJornadaTrabajo = objeto.id;
+        objeto.id_profesional = idProfesional;
+        let arrayJornadasString: Array<string> = jornadaSnapshot[i].payload.doc.data().jornadas;
+        for(let j = 0; j < arrayJornadasString.length; j++)
         {
-          if(jornadaSnapshot[i].payload.doc.data().id_profesional != idProfesional) continue;
-
-          let objeto = new ProfesionalJornada();
-          objeto.id_profesional = idProfesional;
-          let arrayJornadasString: Array<string> = jornadaSnapshot[i].payload.doc.data().jornadas;
-          for(let j = 0; j < arrayJornadasString.length; j++)
-          {
-            let jornada = new Jornada();
-            let jotaSon = JSON.parse(arrayJornadasString[j]);
-            jornada.dia = jotaSon.dia;
-            jornada.especialidad = jotaSon.especialidad;
-            jornada.horario = jotaSon.horario;
-            jornada.duracion = jotaSon.duracion;
-            objeto.jornadas.push(jornada);
-          }
-          listadoProvisorio.push(objeto);
+          let jornada = new Jornada();
+          let jotaSon = JSON.parse(arrayJornadasString[j]);
+          jornada.dia = jotaSon.dia;
+          jornada.especialidad = jotaSon.especialidad;
+          jornada.horario = jotaSon.horario;
+          jornada.duracion = jotaSon.duracion;
+          objeto.jornadas.push(jornada);
         }
-        //obtener id de jornadatrabajo para poder editar ese registro
-        this.jornadasActuales = listadoProvisorio[0].jornadas;
-      }
-      else
-      {
-        this.jornadasActuales = null;
+        this.jornadasActuales = objeto.jornadas;
       }
 
-      jornadasObservable.unsubscribe();
+      if(!jornadaTrabajadorCreated)
+      {
+        let jornadasObservableConfirm = this.jornadaSvc.GetProfesionalJornada().subscribe((jornadaSnapshotConfirm: any) => {
+          let jornadaTrabajadorCreatedConfirm = false;
+          this.idJornadaTrabajo = jornadaSnapshotConfirm.length + 1;
+    
+          for(let i = 0; i < jornadaSnapshotConfirm.length; i++)
+          {
+            if(jornadaSnapshotConfirm[i].payload.doc.data().id_profesional != idProfesional) continue;
+            jornadaTrabajadorCreatedConfirm = true;
+          }
+          
+          this.jornadaSvc.Insert(this.idJornadaTrabajo, idProfesional);
+          jornadasObservableConfirm.unsubscribe();
+          jornadasObservable.unsubscribe();
+        });
+      }
     });
   }
 
   onModificarJornada(unaJornada: Jornada)
   {
-    // Modificacion
+    this.accionJornada = "Modificar jornada";
+    document.getElementById("btnModalJornada").click();
+    this.jornadaSeleccionada = unaJornada;
+  }
+
+  modificarJornada(unaJornada: Jornada)
+  {
+    document.getElementById("btnDescartaModal").click();
+    for(let i = 0; i < this.jornadasActuales.length; i++)
+    {
+      let jornadaActual = this.jornadasActuales[i];
+      if(jornadaActual.dia == unaJornada.dia)
+      {
+        this.jornadasActuales[i] = unaJornada;
+        break;
+      }
+    }
+
+    this.jornadaSvc.UpdateJornadas(this.jornadasActuales, this.idJornadaTrabajo).then().catch();
+    this.accionJornada = "";
+    this.jornadaSeleccionada = null;
+  }
+
+  onAgregarJornada()
+  {
+    this.accionJornada = "Agregar jornada";
+    document.getElementById("btnModalJornada").click();
+    this.jornadaSeleccionada = null;
+  }
+
+  agregarJornada(unaJornada: Jornada)
+  {
+    document.getElementById("btnDescartaModal").click();
+    
+    this.jornadasActuales.push(unaJornada);
+    this.jornadasActuales.sort((a, b) => a.dia - b.dia);
+
+    this.jornadaSvc.UpdateJornadas(this.jornadasActuales, this.idJornadaTrabajo).then().catch();
+    this.accionJornada = "";
+  }
+
+  onEliminarJornada(unaJornada: Jornada)
+  {
+    this.accionJornada = "Eliminar jornada";
+    document.getElementById("btnModalJornada").click();
+    this.jornadaSeleccionada = unaJornada;
+  }
+
+  eliminarJornada()
+  {
+    for(let i = 0; i < this.jornadasActuales.length; i++)
+    {
+      let jornadaActual = this.jornadasActuales[i];
+      if(jornadaActual.dia == this.jornadaSeleccionada.dia)
+      {
+        this.jornadasActuales.splice(i, 1);
+        break;
+      }
+    }
+
+    this.jornadaSvc.UpdateJornadas(this.jornadasActuales, this.idJornadaTrabajo).then().catch();
+    this.accionJornada = "";
+    this.jornadaSeleccionada = null;
+    document.getElementById("btnDescartaModal").click();
   }
 }
