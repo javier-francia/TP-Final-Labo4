@@ -8,6 +8,9 @@ import { Turno } from '../turno';
 })
 export class TurnoListadoComponent implements OnInit {
 
+  readonly pageSize = 7;
+  page: number = 1;
+
   @Input() listadoTurnos: Array<Turno> = null;
   @Output() verDetalleTurno: EventEmitter<Turno> = new EventEmitter<Turno>();
   constructor() { }

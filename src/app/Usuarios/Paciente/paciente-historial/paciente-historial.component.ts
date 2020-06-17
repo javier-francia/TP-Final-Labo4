@@ -11,7 +11,11 @@ import { EncuestaDatosProfesional } from '../../../Gestion/Encuesta/encuesta-dat
 })
 export class PacienteHistorialComponent implements OnInit {
 
-  listadoTurnos: Array<Turno>;
+  // Paginado
+  readonly pageSize = 7;
+  page: number = 1;
+
+  listadoTurnos: Array<Turno> = [];
   turnoElegido: Turno;
 
   constructor(private turnosSvc: TurnosServiceService,

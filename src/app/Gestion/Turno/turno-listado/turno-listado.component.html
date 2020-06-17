@@ -8,7 +8,7 @@
         </tr>   
     </thead>
     <tbody>
-        <tr *ngFor="let turno of listadoTurnos">
+        <tr *ngFor="let turno of listadoTurnos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <td>{{turno.nombreCompletoProfesional}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
@@ -16,3 +16,5 @@
         </tr>
     </tbody>
 </table>
+
+<ngb-pagination *ngIf="listadoTurnos.length > 0" [collectionSize]="listadoTurnos.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>

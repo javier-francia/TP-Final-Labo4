@@ -13,6 +13,10 @@ import { NotificacionService } from '../../../Navegacion/notificacion.service';
 })
 export class ProfesionalAgendaComponent implements OnInit {
 
+
+  readonly pageSize = 7;
+  page: number = 1;
+
   listadoTurnos: Array<Turno>;
   turnoElegido: Turno;
   notificacionNewId: number;

@@ -10,7 +10,7 @@
         </tr>   
     </thead>
     <tbody>
-        <tr *ngFor="let turno of listadoTurnos">
+        <tr *ngFor="let turno of listadoTurnos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <td>{{turno.nombreCompletoProfesional}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
@@ -19,6 +19,11 @@
         </tr>
     </tbody>
 </table>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="listadoTurnos.length"></ngb-pagination>
 
 
 <button id="btnModalCancelar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetalle" hidden></button>

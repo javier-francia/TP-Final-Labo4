@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 })
 export class PacienteTurnosComponent implements OnInit {
 
-  listadoTurnos: Array<Turno>;
+  readonly pageSize = 7;
+  page: number = 1;
+
+  listadoTurnos: Array<Turno> = [];
   turnoElegido: Turno;
 
   constructor(private turnosSvc: TurnosServiceService,

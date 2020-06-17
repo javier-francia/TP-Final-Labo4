@@ -22,7 +22,7 @@ export class TurnoSolicitarComponent implements OnInit {
   listadoTurnosVivos: Array<Turno>;
   obtenerJornadasTerminado = false;
   listadoJornadasTrabajo: Array<ProfesionalJornada>;
-  listadoTurnosParaSolicitar: Array<Turno> = null;
+  listadoTurnosParaSolicitar: Array<Turno> = [];
   listadoProfesionales: Array<Profesional>;
   turnoElegido: Turno = null;
   newId: number;

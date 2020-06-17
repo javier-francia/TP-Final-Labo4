@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ProfesionalHistorialComponent implements OnInit {
 
+  readonly pageSize = 7;
+  page: number = 1;
+
   listadoTurnos: Array<Turno>;
   turnoElegido: Turno;
 

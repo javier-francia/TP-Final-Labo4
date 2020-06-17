@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GestionModule } from '../Gestion/gestion.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -57,7 +58,8 @@ const routes: Routes = [
     NavegacionModule,
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
-    GestionModule
+    GestionModule,
+    NgbModule
   ],
   exports: [
     AdminFormComponent,
