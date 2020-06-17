@@ -17,7 +17,7 @@
             <td>{{turno.especialidad}}</td>
             <td>{{turno.estado}}</td>
             <td>
-                <button type="button" mdbBtn color="default" class="waves-light btn-sm" (click)="onAtender(turno)" mdbWavesEffect>Atender paciente</button>
+                <button [disabled]="turno.estado != 'Confirmado'" type="button" mdbBtn color="default" class="waves-light btn-sm" (click)="onAtender(turno)" mdbWavesEffect>Atender paciente</button>
             </td>
         </tr>
     </tbody>
@@ -30,14 +30,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Atender paciente</h5>
+        <h5 *ngIf="turnoElegido" class="modal-title" id="exampleModalLabel">Atendiendo a: {{turnoElegido.nombreCompletoPaciente}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <!--app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Paciente'"></app-turno-detalle>
-        <button type="button" mdbBtn color="success" class="waves-light" data-dismiss="modal" (click)="aceptarTurno()" mdbWavesEffect>Aceptar turno</button-->
+        <app-informe-alta *ngIf="turnoElegido"
+                          [turnoActual]="turnoElegido"
+                          (salida)="AtenderPaciente($event)"></app-informe-alta>
+        <button id="btnDescartaModal" type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" mdbWavesEffect hidden>DescartarModal</button>
       </div>
     </div>
   </div>

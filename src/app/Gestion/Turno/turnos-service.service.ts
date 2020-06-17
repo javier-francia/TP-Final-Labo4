@@ -42,5 +42,17 @@ export class TurnosServiceService {
       merge: true
     });
   }
+
+  UpdateAtencion(unTurno: Turno) : Promise<void>
+  {
+    return this.fireStore.collection(this.collectionName).doc(unTurno.id.toString()).set({
+      estado: unTurno.estado,
+      resenia: unTurno.resenia,
+      datosPaciente: JSON.stringify(unTurno.datosPaciente)
+    },
+    {
+      merge: true
+    });
+  }
   
 }

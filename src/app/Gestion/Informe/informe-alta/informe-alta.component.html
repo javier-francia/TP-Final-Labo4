@@ -1,1 +1,201 @@
-<p>informe-alta works!</p>
+<p style="font-weight: bold;">Turno: {{turnoActual.inicio | date: 'dd/MM/yyyy hh:mm a'}} ({{turnoActual.especialidad}})</p>
+
+<form novalidate
+        (ngSubmit)="placebo()"
+        [formGroup]="informePacienteForm">
+    <div class="form-group">
+        <div class="md-form">
+            <input  mdbInput
+                    class="form-control"
+                    id="edad"
+                    type="number"
+                    formControlName="edad"
+                    [ngClass]="{'is-invalid': (informePacienteForm.get('edad').touched ||
+                                                informePacienteForm.get('edad').dirty) &&
+                                                !informePacienteForm.get('edad').valid }" />
+            <label for="edad" class="">Edad (años)</label>
+            <span class="invalid-feedback">
+                <span *ngIf="informePacienteForm.get('edad').errors?.required">
+                    Ingrese la edad del paciente.
+                </span>
+                <span *ngIf="informePacienteForm.get('edad').errors?.min || informePacienteForm.get('edad').errors?.max">
+                    El valor debe ser un número entre 1 y 122.
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <div class="md-form">
+                    <input  mdbInput class="form-control"
+                            id="altura"
+                            type="number"
+                            formControlName="altura"
+                            [ngClass]="{'is-invalid': (informePacienteForm.get('altura').touched ||
+                                                        informePacienteForm.get('altura').dirty) &&
+                                                        !informePacienteForm.get('altura').valid }" />
+                    <label for="altura" class="">Altura (metros)</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="informePacienteForm.get('altura').errors?.required">
+                            Ingrese la altura del paciente.
+                        </span>
+                        <span *ngIf="informePacienteForm.get('altura').errors?.min || informePacienteForm.get('altura').errors?.max">
+                            El valor debe ser un número entre 0,30 y 2,46.
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <div class="md-form">
+                    <input  mdbInput class="form-control"
+                            id="peso"
+                            type="number"
+                            formControlName="peso"
+                            [ngClass]="{'is-invalid': (informePacienteForm.get('peso').touched ||
+                                                        informePacienteForm.get('peso').dirty) &&
+                                                        !informePacienteForm.get('peso').valid }" />
+                    <label for="peso" class="">Peso (kilogramos)</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="informePacienteForm.get('peso').errors?.required">
+                            Ingrese la altura del paciente.
+                        </span>
+                        <span *ngIf="informePacienteForm.get('peso').errors?.min || informePacienteForm.get('peso').errors?.max">
+                            El valor debe ser un número entre 2 y 635.
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div formGroupName="presionGroup">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="md-form">
+                        <input  mdbInput class="form-control"
+                                id="presionAlta"
+                                type="number"
+                                formControlName="presionAlta"
+                                [ngClass]="{'is-invalid': (informePacienteForm.get('presionGroup.presionAlta').touched ||
+                                                            informePacienteForm.get('presionGroup.presionAlta').dirty) &&
+                                                            !informePacienteForm.get('presionGroup.presionAlta').valid }" />
+                        <label for="presionAlta" class="">Presión arterial sistólica (mmHg)</label>
+                        <span class="invalid-feedback">
+                            <span *ngIf="informePacienteForm.get('presionGroup.presionAlta').errors?.required">
+                                Ingrese la presión sistólica del paciente.
+                            </span>
+                            <span *ngIf="informePacienteForm.get('presionGroup.presionAlta').errors?.min || informePacienteForm.get('presionGroup.presionAlta').errors?.max">
+                                El valor debe ser un número entre 115 y 165.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="md-form">
+                        <input  mdbInput class="form-control"
+                                id="presionBaja"
+                                type="number"
+                                formControlName="presionBaja"
+                                [ngClass]="{'is-invalid': (informePacienteForm.get('presionGroup.presionBaja').touched ||
+                                                            informePacienteForm.get('presionGroup.presionBaja').dirty) &&
+                                                            !informePacienteForm.get('presionGroup.presionBaja').valid }" />
+                        <label for="presionBaja" class="">Presión arterial diastólica (mmHg)</label>
+                        <span class="invalid-feedback">
+                            <span *ngIf="informePacienteForm.get('presionGroup.presionBaja').errors?.required">
+                                Ingrese la presión diastólica del paciente.
+                            </span>
+                            <span *ngIf="informePacienteForm.get('presionGroup.presionBaja').errors?.min || informePacienteForm.get('presionGroup.presionBaja').errors?.max">
+                                El valor debe ser un número entre 60 y 115.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h6 [hidden]="datosPersonalizadosArray.length == 0">Datos personalizados</h6>
+    <div *ngIf="datosPersonalizadosArray.length > 0">
+        <div formArrayName="datosPersonalizados">
+            
+            <div [formGroupName]="i" *ngFor="let dato of datosPersonalizadosArray.controls; let i = index">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input  mdbInput class="form-control"
+                                        id="{{ 'clave' + i }}"
+                                        type="text"
+                                        formControlName="clave"
+                                        [ngClass]="{'is-invalid': ( dato.controls.clave.touched ||
+                                                                    dato.controls.clave.dirty) &&
+                                                                    !dato.controls.clave.valid }" />
+                                <label for="{{ 'clave' + i }}" class="">Nombre del campo</label>
+                                <span class="invalid-feedback">
+                                    <span *ngIf="dato.controls.clave.errors?.required">
+                                        Ingrese un nombre para el campo personalizable.
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <div class="md-form">
+                                <input  mdbInput class="form-control"
+                                        id="{{ 'valor' + i }}"
+                                        type="text"
+                                        formControlName="valor"
+                                        [ngClass]="{'is-invalid': ( dato.controls.valor.touched ||
+                                                                    dato.controls.valor.dirty) &&
+                                                                    !dato.controls.valor.valid }" />
+                                <label for="{{ 'valor' + i }}" class="">Valor</label>
+                                <span class="invalid-feedback">
+                                    <span *ngIf="dato.controls.valor.errors?.required">
+                                        Ingrese un valor para el campo {{dato.controls.clave.value}}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span><i class="fas fa-plus-square"
+            id="btnAddDatosEspecializados"
+            (click)="addDatosPersonalizadosControl()"> Agregar dato personalizado</i></span>
+
+    <br>
+    <div class="form-group">
+        <label for="resenia">Reseña</label>
+        <textarea  class="form-control"
+                id="resenia"
+                type="text"
+                formControlName="resenia"
+                [ngClass]="{'is-invalid': (informePacienteForm.get('resenia').touched ||
+                                            informePacienteForm.get('resenia').dirty) &&
+                                            !informePacienteForm.get('resenia').valid }">
+        </textarea>
+        <span class="invalid-feedback">
+            <span *ngIf="informePacienteForm.get('resenia').errors?.required">
+                Ingrese la reseña de la consulta realizada.
+            </span>
+            <span *ngIf="informePacienteForm.get('resenia').errors?.minlength || informePacienteForm.get('resenia').errors?.maxlength">
+                La reseña debe contener entre 30 y 300 caracteres.
+            </span>
+        </span>
+    </div>
+        
+    <input  class="btn btn-primary"
+            [disabled]="!informePacienteForm.valid"
+            type="button"
+            value="Confirmar"
+            (click)="Atender_OnClick()"/>
+</form>

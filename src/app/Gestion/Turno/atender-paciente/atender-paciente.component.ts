@@ -19,13 +19,33 @@ export class AtenderPacienteComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.ObtenerTurnos();
+  }
+
+  onAtender(unTurno: Turno)
+  {
+    this.turnoElegido = unTurno;
+    document.getElementById("btnModalAtender").click();
+  }
+
+  AtenderPaciente(elTurno: Turno)
+  {
+    document.getElementById("btnDescartaModal").click();
+    this.turnoElegido = null;
+    this.turnosSvc.UpdateAtencion(elTurno).then(() => {
+      //this.ObtenerTurnos();
+    }).catch();
+  }
+
+  ObtenerTurnos(): void
+  {
     this.listadoTurnos = [];
-    let idPaciente = this.browserStorageSvc.GetId();
+    let idProfesional = this.browserStorageSvc.GetId();
 
     let turnosObservable = this.turnosSvc.Get().subscribe((turnoSnapshot: any) => {
       for(let i = 0; i < turnoSnapshot.length; i++)
       {
-        if(turnoSnapshot[i].payload.doc.data().idProfesional != idPaciente)
+        if(turnoSnapshot[i].payload.doc.data().idProfesional != idProfesional)
         {
           continue;
         }
@@ -50,12 +70,6 @@ export class AtenderPacienteComponent implements OnInit {
       this.listadoTurnos = this.listadoTurnos.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
       turnosObservable.unsubscribe();
     });
-  }
-
-  onAtender(unTurno: Turno)
-  {
-    this.turnoElegido = unTurno;
-    document.getElementById("btnModalAtender").click();
   }
 
 }
