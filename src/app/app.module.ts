@@ -21,6 +21,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import * as firebase from 'firebase';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -44,7 +45,8 @@ const routes: Routes = [];
     ErrorRoutingModule,// Ultimo feature module por contener '**'
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
