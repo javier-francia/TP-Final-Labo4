@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TurnosServiceService } from '../../../Gestion/Turno/turnos-service.service';
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Turno } from '../../../Gestion/Turno/turno';
+import { EncuestaDatosPaciente } from '../../../Gestion/Informe/encuesta-datos-paciente';
 
 @Component({
   selector: 'app-paciente-historial',
@@ -11,6 +12,7 @@ import { Turno } from '../../../Gestion/Turno/turno';
 export class PacienteHistorialComponent implements OnInit {
 
   listadoTurnos: Array<Turno>;
+  turnoElegido: Turno;
 
   constructor(private turnosSvc: TurnosServiceService,
               private browserStorageSvc: BrowserStorageService) { }
@@ -39,10 +41,17 @@ export class PacienteHistorialComponent implements OnInit {
         turnoActual.inicio = new Date(turnoSnapshot[i].payload.doc.data().inicio.toDate());
         turnoActual.fin = new Date(turnoSnapshot[i].payload.doc.data().fin.toDate());
         turnoActual.estado = turnoSnapshot[i].payload.doc.data().estado;
+        turnoActual.resenia = turnoSnapshot[i].payload.doc.data().resenia;
         this.listadoTurnos.push(turnoActual);
       }
       this.listadoTurnos = this.listadoTurnos.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
       turnosObservable.unsubscribe();
     });
+  }
+
+  VerResenia(unTurno: Turno)
+  {
+    this.turnoElegido = unTurno;
+    document.getElementById("btnModalResenia").click();
   }
 }

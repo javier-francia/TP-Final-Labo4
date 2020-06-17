@@ -6,6 +6,7 @@
             <th>Dia y hora</th>
             <th>Especialidad</th>
             <th>Estado</th>
+            <th></th>
         </tr>   
     </thead>
     <tbody>
@@ -14,6 +15,34 @@
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
             <td>{{turno.estado}}</td>
+            <td>
+                <button *ngIf="turno.estado == 'Finalizado'" type="button" mdbBtn color="default" class="waves-light btn-sm" data-dismiss="modal" (click)="VerResenia(turno)" mdbWavesEffect>Ver reseña</button>
+            </td>
         </tr>
     </tbody>
 </table>
+
+<button id="btnModalResenia" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalResenia" hidden></button>
+<div class="modal fade" id="modalResenia" tabindex="-1" role="dialog" aria-labelledby="modalReseniaLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reseña del turno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div *ngIf="turnoElegido">
+            <h4>Profesional: {{turnoElegido.nombreCompletoProfesional}} ({{turnoElegido.especialidad}})</h4>
+            <h5>Fecha: {{turnoElegido.inicio | date: 'dd/MM/yyyy hh:mm a'}}</h5>
+            <br>
+            <br>
+            <p style="font-weight: bold; text-decoration: underline;">Reseña</p>
+            <p>{{turnoElegido.resenia}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
