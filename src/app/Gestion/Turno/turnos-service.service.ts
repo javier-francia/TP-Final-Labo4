@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Turno } from './turno';
-
+import { EncuestaDatosProfesional } from '../Encuesta/encuesta-datos-profesional';
 @Injectable({
   providedIn: 'root'
 })
@@ -49,6 +49,16 @@ export class TurnosServiceService {
       estado: unTurno.estado,
       resenia: unTurno.resenia,
       datosPaciente: JSON.stringify(unTurno.datosPaciente)
+    },
+    {
+      merge: true
+    });
+  }
+  
+  UpdateEncuesta(unTurno: Turno) : Promise<void>
+  {
+    return this.fireStore.collection(this.collectionName).doc(unTurno.id.toString()).set({
+      datosProfesional: JSON.stringify(unTurno.datosProfesional)
     },
     {
       merge: true

@@ -1,1 +1,82 @@
-<p>encuesta-alta works!</p>
+<p style="font-weight: bold;">Profesional: {{turno.nombreCompletoProfesional}} ({{turno.especialidad}})</p>
+
+<form novalidate
+        (ngSubmit)="placebo()"
+        [formGroup]="encuestaProfesionalForm">
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <label>Atención</label>
+            <div class="form-group">
+                <ngb-rating [formControl]="encuestaProfesionalForm.get('atencion')"
+                            formControlName="atencion"></ngb-rating>
+                <div class="form-text">
+                    <div *ngIf="encuestaProfesionalForm.get('atencion').invalid && mensajesError" class="text-danger">Ingrese puntaje</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Higiene</label>
+            <div class="form-group">
+                <ngb-rating [formControl]="encuestaProfesionalForm.get('higiene')"
+                            formControlName="higiene"></ngb-rating>
+                <div class="form-text">
+                    <div *ngIf="encuestaProfesionalForm.get('higiene').invalid && mensajesError" class="text-danger">Ingrese puntaje</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label>Amabilidad</label>
+            <div class="form-group">
+                <ngb-rating [formControl]="encuestaProfesionalForm.get('amabilidad')"
+                            formControlName="amabilidad"></ngb-rating>
+                <div class="form-text">
+                    <div *ngIf="encuestaProfesionalForm.get('amabilidad').invalid && mensajesError" class="text-danger">Ingrese puntaje</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Tiempo de espera</label>
+            <div class="form-group">
+                <ngb-rating [formControl]="encuestaProfesionalForm.get('tiempoEspera')"
+                            formControlName="tiempoEspera"></ngb-rating>
+                <div class="form-text">
+                    <div *ngIf="encuestaProfesionalForm.get('tiempoEspera').invalid && mensajesError" class="text-danger">Ingrese puntaje</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <label>¿Fue su primera consulta? </label>
+    <button class="btn btn-primary" id="btnPrimeraConsulta" (click)="toggleSiNo('btnPrimeraConsulta')">Si</button>
+    <br>
+
+    <label>¿Recomendaría al profesional? </label>
+    <button class="btn btn-primary" id="btnRecomendaria" (click)="toggleSiNo('btnRecomendaria')">Si</button>
+    <br>
+
+    <div class="form-group">
+        <label for="comentarios">Otros comentarios</label>
+        <textarea  class="form-control"
+                id="comentarios"
+                type="text"
+                formControlName="comentarios"
+                [ngClass]="{'is-invalid': !encuestaProfesionalForm.get('comentarios').valid }">
+        </textarea>
+        <span class="invalid-feedback">
+            <span *ngIf="encuestaProfesionalForm.get('comentarios').errors?.maxlength">
+                El texto puede contener hasta 200 caracteres.
+            </span>
+        </span>
+    </div>
+    
+    <input  class="btn btn-success"
+            type="button"
+            value="Enviar encuesta"
+            (click)="Enviar_OnClick()"/>
+</form>
+
+
+

@@ -1,8 +1,9 @@
 export class EncuestaDatosProfesional {
     atencion: number;
     higiene: number;
-    profesionalismo: number;
-    puntualidad: number;
+    amabilidad: number;
+    tiempoEspera: number;
+    primeraConsulta: boolean;
     recomendaria: boolean;
     comentarios: string;
 }

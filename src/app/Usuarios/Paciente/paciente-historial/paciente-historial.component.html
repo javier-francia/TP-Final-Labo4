@@ -16,7 +16,10 @@
             <td>{{turno.especialidad}}</td>
             <td>{{turno.estado}}</td>
             <td>
-                <button *ngIf="turno.estado == 'Finalizado'" type="button" mdbBtn color="default" class="waves-light btn-sm" data-dismiss="modal" (click)="VerResenia(turno)" mdbWavesEffect>Ver reseña</button>
+              <div *ngIf="turno.estado == 'Finalizado'">
+                <button type="button" mdbBtn color="dark-green" class="waves-light btn-sm" data-dismiss="modal" (click)="VerResenia(turno)" mdbWavesEffect>Ver reseña</button>
+                <button [disabled]="turno.datosProfesional === undefined" type="button" mdbBtn color="unique" class="waves-light btn-sm" data-dismiss="modal" (click)="LlenarEncuesta(turno)" mdbWavesEffect>Llenar encuesta</button>
+              </div>
             </td>
         </tr>
     </tbody>
@@ -35,13 +38,30 @@
       </div>
       <div class="modal-body" style="text-align: center;">
         <div *ngIf="turnoElegido">
-            <h4>Profesional: {{turnoElegido.nombreCompletoProfesional}} ({{turnoElegido.especialidad}})</h4>
-            <h5>Fecha: {{turnoElegido.inicio | date: 'dd/MM/yyyy hh:mm a'}}</h5>
-            <br>
-            <br>
-            <p style="font-weight: bold; text-decoration: underline;">Reseña</p>
-            <p>{{turnoElegido.resenia}}</p>
+            <app-informe-detalle [turno]="turnoElegido"></app-informe-detalle>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="btnModalEncuesta" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEncuesta" hidden></button>
+<div class="modal fade" id="modalEncuesta" tabindex="-1" role="dialog" aria-labelledby="modalEncuestaLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Completar encuesta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div *ngIf="turnoElegido">
+          <app-encuesta-alta  [turno]="turnoElegido"
+                              (enviarEncuesta)="OnEnviarEncuesta($event)"></app-encuesta-alta>
+        </div>
+        <button id="btnDescartaModal" type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" mdbWavesEffect hidden>DescartarModal</button>
       </div>
     </div>
   </div>
