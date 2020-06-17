@@ -57,7 +57,9 @@ const routes: Routes = [
     ReactiveFormsModule
   ],
   exports: [
-    TurnoDetalleComponent
+    TurnoDetalleComponent,
+    EncuestaAltaComponent,
+    InformeDetalleComponent
   ]
 })
 export class GestionModule { }
