@@ -15,9 +15,10 @@
             <td>{{turno.nombreCompletoPaciente}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
             <td>{{turno.estado}}</td>
             <td>
-                <button [disabled]="turno.estado != 'Confirmado'" type="button" mdbBtn color="default" class="waves-light btn-sm" (click)="onAtender(turno)" mdbWavesEffect>Atender paciente</button>
+                <button [disabled]="turno.estado != 'Confirmado'" type="button" mdbBtn color="indigo" class="waves-light btn-sm" (click)="onAtender(turno)" mdbWavesEffect>Atender paciente</button>
             </td>
         </tr>
     </tbody>

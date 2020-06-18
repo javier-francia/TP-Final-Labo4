@@ -14,6 +14,7 @@
             <td>{{turno.nombreCompletoProfesional}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
             <td>{{turno.estado}}</td>
             <td>
               <div *ngIf="turno.estado == 'Finalizado'">

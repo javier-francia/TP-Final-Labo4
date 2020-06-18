@@ -15,6 +15,7 @@
             <td>{{turno.nombreCompletoProfesional}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
             <td>{{turno.estado}}</td>
             <td>{{turno.fechaSacado | fechaSacado}}</td>
             <td><button type="button" mdbBtn color="deep-orange" class="waves-light btn-sm" (click)="onCancelar(turno)" mdbWavesEffect>Cancelar turno</button></td>

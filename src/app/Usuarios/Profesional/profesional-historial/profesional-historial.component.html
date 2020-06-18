@@ -14,9 +14,10 @@
             <td>{{turno.nombreCompletoPaciente}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
             <td>{{turno.estado}}</td>
             <td>
-                <button *ngIf="turno.datosProfesional !== undefined" type="button" mdbBtn color="light-blue" class="waves-light btn-sm" (click)="onVerEncuesta(turno)" mdbWavesEffect>Ver encuesta</button>
+                <button *ngIf="turno.datosProfesional !== undefined" type="button" mdbBtn color="elegant" class="waves-light btn-sm" (click)="onVerEncuesta(turno)" mdbWavesEffect>Ver encuesta</button>
             </td>
         </tr>
     </tbody>

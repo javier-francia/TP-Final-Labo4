@@ -23,7 +23,7 @@ import { AtenderPacienteComponent } from './Turno/atender-paciente/atender-pacie
 import { JornadaFormComponent } from './Administracion/JornadaTrabajo/jornada-form/jornada-form.component';
 import { JornadaListComponent } from './Administracion/JornadaTrabajo/jornada-list/jornada-list.component';
 import { JornadaScreenComponent } from './Administracion/JornadaTrabajo/jornada-screen/jornada-screen.component';
-
+import { EstadoTurnoDirective } from '../Shared/estado-turno-directive';
 import { DayNamePipe } from '../Shared/day-name-pipe';
 
 const routes: Routes = [
@@ -50,7 +50,8 @@ const routes: Routes = [
     JornadaFormComponent,
     JornadaListComponent,
     JornadaScreenComponent,
-    DayNamePipe
+    DayNamePipe,
+    EstadoTurnoDirective
   ],
   imports: [
     CommonModule,
@@ -65,7 +66,8 @@ const routes: Routes = [
     TurnoDetalleComponent,
     EncuestaAltaComponent,
     InformeDetalleComponent,
-    EncuestaDetalleComponent
+    EncuestaDetalleComponent,
+    EstadoTurnoDirective
   ]
 })
 export class GestionModule { }

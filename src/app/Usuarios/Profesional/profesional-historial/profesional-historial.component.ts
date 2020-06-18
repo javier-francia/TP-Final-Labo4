@@ -57,7 +57,6 @@ export class ProfesionalHistorialComponent implements OnInit {
           turnoActual.datosProfesional = JSON.parse(turnoSnapshot[i].payload.doc.data().datosProfesional);
         }
         this.listadoTurnos.push(turnoActual);
-        console.log(turnoActual.datosProfesional);
       }
       this.listadoTurnos = this.listadoTurnos.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
       turnosObservable.unsubscribe();

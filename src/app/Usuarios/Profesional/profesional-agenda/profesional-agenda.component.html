@@ -15,11 +15,12 @@
             <td>{{turno.nombreCompletoPaciente}}</td>
             <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
             <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
             <td>{{turno.estado}}</td>
             <td>
                 <button *ngIf="turno.estado == 'Pendiente'" type="button" mdbBtn color="success" class="waves-light btn-sm" (click)="onAceptar(turno)" mdbWavesEffect>Aceptar turno</button>
                 <button *ngIf="turno.estado == 'Pendiente'" type="button" mdbBtn color="danger" class="waves-light btn-sm" (click)="onRechazar(turno)" mdbWavesEffect>Rechazar turno</button>
-                <button *ngIf="turno.estado == 'Confirmado'" type="button" mdbBtn color="warning" class="waves-light btn-sm" (click)="onCancelar(turno)" mdbWavesEffect>Cancelar turno</button>
+                <button *ngIf="turno.estado == 'Confirmado'" type="button" mdbBtn color="amber" class="waves-light btn-sm" (click)="onCancelar(turno)" mdbWavesEffect>Cancelar turno</button>
             </td>
         </tr>
     </tbody>
@@ -82,7 +83,7 @@
       </div>
       <div class="modal-body" style="text-align: center;">
         <app-turno-detalle *ngIf="turnoElegido" [turnoMostrarDetalle]="turnoElegido" [sujetoDetalle]="'Paciente'"></app-turno-detalle>
-        <button type="button" mdbBtn color="warning" class="waves-light" data-dismiss="modal" (click)="cancelarTurno()" mdbWavesEffect>Cancelar turno</button>
+        <button type="button" mdbBtn color="amber" class="waves-light" data-dismiss="modal" (click)="cancelarTurno()" mdbWavesEffect>Cancelar turno</button>
       </div>
     </div>
   </div>
