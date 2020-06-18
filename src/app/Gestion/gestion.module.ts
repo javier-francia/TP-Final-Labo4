@@ -25,6 +25,7 @@ import { JornadaListComponent } from './Administracion/JornadaTrabajo/jornada-li
 import { JornadaScreenComponent } from './Administracion/JornadaTrabajo/jornada-screen/jornada-screen.component';
 import { EstadoTurnoDirective } from '../Shared/estado-turno-directive';
 import { DayNamePipe } from '../Shared/day-name-pipe';
+import { TurnoBusquedaComponent } from './Turno/turno-busqueda/turno-busqueda.component';
 
 const routes: Routes = [
   {path: 'AtenderPaciente', component: AtenderPacienteComponent, canActivate: [PerfilGuard] },
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'AdminProfesionales', component: AdmisionProfesionalesComponent, canActivate: [PerfilGuard] },
   {path: 'AdministradoresABM', component: GestionAdministradoresComponent, canActivate: [PerfilGuard] },
   {path: 'JornadasLaborales', component: JornadaScreenComponent, canActivate: [PerfilGuard] },
+  {path: 'BusquedaInformacion', component: TurnoBusquedaComponent, canActivate: [PerfilGuard] },
 
 ];
 
@@ -51,7 +53,8 @@ const routes: Routes = [
     JornadaListComponent,
     JornadaScreenComponent,
     DayNamePipe,
-    EstadoTurnoDirective
+    EstadoTurnoDirective,
+    TurnoBusquedaComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angu
 import { EncuestaDatosPaciente } from '../encuesta-datos-paciente';
 import { Turno } from '../../Turno/turno';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { DatoPersonalizado } from '../dato-personalizado';
 
 
 @Component({
@@ -74,7 +75,10 @@ export class InformeAltaComponent implements OnInit, OnChanges {
     for(let i = 0; i < this.datosPersonalizadosArray.controls.length; i++)
     {
       let esteDato = this.datosPersonalizadosArray.controls[i];
-      this.turnoActual.datosPaciente.datosPersonalizados.push(JSON.stringify(esteDato.value));
+      let datoPersonalizado = new DatoPersonalizado();
+      datoPersonalizado.clave = esteDato.value.clave;
+      datoPersonalizado.valor = esteDato.value.valor;
+      this.turnoActual.datosPaciente.datosPersonalizados.push(datoPersonalizado);
     }
 
     this.salida.emit(this.turnoActual);

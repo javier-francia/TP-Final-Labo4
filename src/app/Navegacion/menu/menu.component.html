@@ -43,6 +43,9 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect></a>
       </li>
+      <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
+        <a routerLink="/BusquedaInformacion" class="nav-link waves-light" mdbWavesEffect>Búsqueda de información</a>
+      </li>
     </ul>
 
     

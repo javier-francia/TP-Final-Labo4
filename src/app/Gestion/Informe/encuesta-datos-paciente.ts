@@ -1,3 +1,5 @@
+import { DatoPersonalizado } from './dato-personalizado';
+
 export class EncuestaDatosPaciente {
     edad: number;
     // en metros
@@ -7,5 +9,5 @@ export class EncuestaDatosPaciente {
     // 13/7
     presionArterial: string;
     // ["clave":"caries", "valor":"4" ]
-    datosPersonalizados: Array<string>;
+    datosPersonalizados: Array<DatoPersonalizado>;
 }

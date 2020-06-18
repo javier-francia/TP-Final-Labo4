@@ -1,0 +1,83 @@
+<app-menu></app-menu>
+<div class="md-form">
+  <input  mdbInput type="text" id="buscar" class="form-control"
+          [(ngModel)]="patronBusqueda"
+          (ngModelChange)="buscarTurnos()">
+  <label for="buscar" class="">Búsqueda</label>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Profesional</th>
+            <th>Dia y hora</th>
+            <th>Especialidad</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>   
+    </thead>
+    <tbody>
+        <tr *ngFor="let turno of listadoTurnos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <td>{{turno.nombreCompletoPaciente}}</td>
+            <td>{{turno.nombreCompletoProfesional}}</td>
+            <td>{{turno.inicio | date: 'dd/MM/yyyy hh:mm a'}}</td>
+            <td>{{turno.especialidad}}</td>
+            <td *appEstadoTurno="turno.estado"></td>
+            <td>{{turno.estado}}</td>
+            <td>
+                <button type="button" mdbBtn color="default" class="waves-light btn-sm" (click)="VerDetalle(turno)" mdbWavesEffect>Detalle</button>
+                <button [disabled]="turno.resenia == ''" type="button" mdbBtn color="dark-green" class="waves-light btn-sm" data-dismiss="modal" (click)="VerResenia(turno)" mdbWavesEffect>Reseña</button>
+                <button [disabled]="turno.datosPaciente === undefined" type="button" mdbBtn color="dark-green" class="waves-light btn-sm" data-dismiss="modal" (click)="VerDatosPaciente(turno)" mdbWavesEffect>Datos paciente</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ngb-pagination *ngIf="listadoTurnos.length > 0" [collectionSize]="listadoTurnos.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+
+
+
+
+
+<button id="btnModalDetalle" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDetalle" hidden></button>
+<div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{tituloModal}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        
+        <div *ngIf="turnoElegido && tipoDatos == 'VerDetalle'">
+            <h4>Profesional: {{turnoElegido.nombreCompletoProfesional}} ({{turnoElegido.especialidad}})</h4>
+            <h5>Paciente: {{turnoElegido.nombreCompletoPaciente}}</h5>
+            <h5>Fecha: {{turnoElegido.inicio | date: 'dd/MM/yyyy hh:mm a'}}</h5>
+            <br>
+            <br>
+        </div>
+        
+
+        <div *ngIf="turnoElegido && tipoDatos == 'VerResenia'">
+            <app-informe-detalle [turno]="turnoElegido"></app-informe-detalle>
+        </div>
+        <div *ngIf="turnoElegido && tipoDatos == 'VerDatosPaciente'">
+            <h5>Datos paciente</h5>
+            <p style="font-weight: bold;">Nombre: </p><p>{{turnoElegido.nombreCompletoPaciente}}</p>
+            <p style="font-weight: bold;">Edad: </p><p>{{turnoElegido.datosPaciente.edad}}</p>
+            <p style="font-weight: bold;">Peso: </p><p>{{turnoElegido.datosPaciente.peso}} kg</p>
+            <p style="font-weight: bold;">Altura: </p><p>{{turnoElegido.datosPaciente.altura}} mts</p>
+            <p style="font-weight: bold;">Presión arterial: </p><p>{{turnoElegido.datosPaciente.presionArterial}}</p>
+            <div *ngFor="let datoPersonalizado of turnoElegido.datosPaciente.datosPersonalizados">
+                <p style="font-weight: bold;">{{datoPersonalizado.clave}}: </p><p>{{datoPersonalizado.valor}}</p>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
