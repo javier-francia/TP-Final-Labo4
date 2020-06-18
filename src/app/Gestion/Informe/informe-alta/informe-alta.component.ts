@@ -37,6 +37,7 @@ export class InformeAltaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void{
+    document.getElementById("btnAddDatosEspecializados").hidden = false;
     this.informePacienteForm = this.fb.group({
       edad: [null, [Validators.required, Validators.min(1), Validators.max(122)]],
       altura: [null, [Validators.required, Validators.min(0.30), Validators.max(2.46)]],
