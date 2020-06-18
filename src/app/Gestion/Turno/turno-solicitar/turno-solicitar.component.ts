@@ -137,6 +137,7 @@ export class TurnoSolicitarComponent implements OnInit {
   {
     let patron = this.patronBusqueda.toLowerCase();
     let listadoProvisorioTurnos = this.gestorDeTurnosSvc.listarTurnosDisponibles(this.listadoTurnosVivos, this.listadoJornadasTrabajo);
+
     if(this.patronBusqueda === "")
     {
       this.listadoTurnosParaSolicitar = listadoProvisorioTurnos;
@@ -146,6 +147,7 @@ export class TurnoSolicitarComponent implements OnInit {
       let filtroPorEspecialidad = listadoProvisorioTurnos.filter(function (turnoProvisorio) {
         return turnoProvisorio.especialidad.toLowerCase().includes(patron);
       });
+
 
       let filtroPorDia = listadoProvisorioTurnos.filter(function (turnoProvisorio) {
         let dia = "";
@@ -190,10 +192,10 @@ export class TurnoSolicitarComponent implements OnInit {
 
 
       let arrayOrdenado = filtroPorEspecialidad.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
+      let arraySinDuplicados = this.uniq_fast(arrayOrdenado);
 
-      this.listadoTurnosParaSolicitar = arrayOrdenado;
+      this.listadoTurnosParaSolicitar = arraySinDuplicados;
     }
-    
   }
 
   onVerDetalle(unTurno: Turno)
@@ -227,5 +229,21 @@ export class TurnoSolicitarComponent implements OnInit {
         }
       }
     });
+  }
+
+
+  uniq_fast(a: Array<Turno>) {
+    var seen = {};
+    var out = [];
+    var len = a.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = a[i];
+         if(seen[item.id] !== 1) {
+               seen[item.id] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
   }
 }

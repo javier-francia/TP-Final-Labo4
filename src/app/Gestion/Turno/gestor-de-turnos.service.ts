@@ -14,7 +14,8 @@ export class GestorDeTurnosService {
     {
         const diasParaBuscar = 15;
 
-        let output: Array<Turno> = [];        
+        let output: Array<Turno> = [];  
+        let idProvisorio = 0;      
 
         let hoy = new Date(Date.now());
 
@@ -63,7 +64,9 @@ export class GestorDeTurnosService {
 
                         if(guardarTurnoPosibleActual)
                         {
+                            turnoPosibleActual.id = idProvisorio;
                             output.push(turnoPosibleActual);
+                            idProvisorio++;
                         }
                     }
                 }
