@@ -35,6 +35,8 @@ const routes: Routes = [
   {path: 'MiPerfil', component: MiPerfilComponent },
   {path: 'Agenda', component: ProfesionalAgendaComponent, canActivate: [PerfilGuard] },
   {path: 'MisTurnos', component: PacienteTurnosComponent, canActivate: [PerfilGuard] },
+  {path: 'HabilitarProfesional', component: ProfesionalListadoComponent, canActivate: [PerfilGuard] },
+  
 ];
 
 @NgModule({

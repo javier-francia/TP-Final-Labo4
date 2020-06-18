@@ -31,10 +31,20 @@ export class UsuariosService {
     });
   }
 
-  Update(id: string, newEmail: string) : Promise<void>
+  UpdateEmail(id: string, newEmail: string) : Promise<void>
   {
     return this.fireStore.collection(this.collectionName).doc(id).set({
       email: newEmail
+    },
+    {
+      merge: true
+    });
+  }
+
+  UpdateHabilitado(id: number, habilitado: boolean) : Promise<void>
+  {
+    return this.fireStore.collection(this.collectionName).doc(id.toString()).set({
+      habilitado: habilitado
     },
     {
       merge: true

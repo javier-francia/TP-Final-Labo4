@@ -1,1 +1,53 @@
-<p>profesional-listado works!</p>
+<app-menu></app-menu>
+<h2 *ngIf="listadoFinal.length == 0">No hay cuentas para habilitar.</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th></th>
+        </tr>   
+    </thead>
+    <tbody>
+        <tr *ngFor="let profesional of listadoFinal | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <td>{{profesional.nombre}}</td>
+            <td>{{profesional.apellido}}</td>
+            <td>{{profesional.email}}</td>
+            <td>
+                <button type="button" mdbBtn color="primary" class="waves-light btn-sm" (click)="OnHabilitar(profesional)" mdbWavesEffect>Habilitar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="listadoFinal.length"></ngb-pagination>
+
+
+<button id="btnModalHabilitar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHabilitar" hidden></button>
+<div class="modal fade" id="modalHabilitar" tabindex="-1" role="dialog" aria-labelledby="modalHabilitarLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Habilitar cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div *ngIf="profesionalActual === undefined">
+            <h5>Cuenta habilitada con éxito.</h5>
+        </div>
+        <div *ngIf="profesionalActual !== undefined">
+            <p>Esta por habilitar la cuenta de {{profesionalActual.nombre}} {{profesionalActual.apellido}} con mail {{profesionalActual.email}}</p>
+            <p>¿Desea continuar?</p>
+            <button type="button" mdbBtn color="success" class="waves-light" (click)="HabilitarCuenta()" mdbWavesEffect>Habilitar cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
