@@ -42,6 +42,7 @@ export class MenuComponent implements OnInit {
             if(!res.emailVerified)
             {
               this.modalRaised.emit("Mail");
+              this.habilitado = false;
             }
             miusuario.unsubscribe();  
           });
