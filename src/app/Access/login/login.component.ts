@@ -14,6 +14,8 @@ import { CaptchaService } from '../../Shared/Servicios/captcha.service';
 })
 export class LoginComponent implements OnInit {
 
+  errorLogin ="";
+
   email: string;
   pass: string;
   remember = false;
@@ -64,13 +66,17 @@ export class LoginComponent implements OnInit {
       .catch(err => {
         if (err.code == "auth/user-not-found")
         {
-          // Implementacion no encontro usuario
+          this.errorLogin = "El usuario ingresado no se encuentra registrado en el sistema."
         }
         else if (err.code == "auth/wrong-password")
         {
-          // Implementacion contraseña incorrecta
+          this.errorLogin = "La contraseña es incorrecta."
         }
-        console.error(err);
+        else
+        {
+          this.errorLogin = "Inténtelo nuevamente."
+        }
+        document.getElementById("btnModalLogin").click();
       });
   }
 
