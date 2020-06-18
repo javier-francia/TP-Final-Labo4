@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let jornada of listadoJornadas">
-            <td>{{jornada.dia}}</td>
+            <td>{{jornada.dia | dayName}}</td>
             <td>{{jornada.horario}}</td>
             <td>{{jornada.especialidad}}</td>
             <td>{{jornada.duracion}} min.</td>

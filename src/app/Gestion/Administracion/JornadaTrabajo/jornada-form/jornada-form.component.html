@@ -10,7 +10,7 @@
             <option [value]="'seleccionar'" selected disabled>Seleccionar...</option>
             <option *ngFor="let dia of diasDisponibles" 
             [value]="dia">
-            {{dia}}
+            {{dia.toString() | dayName}}
             </option>
         </select>
         <span class="invalid-feedback">

@@ -43,7 +43,7 @@
           
         </div>
         <div *ngIf="accionJornada == 'Eliminar jornada'">
-            <p>Esta por eliminar la jornada correspondiente a los días {{jornadaSeleccionada.dia}}.</p>
+            <p>Esta por eliminar la jornada correspondiente a los días {{jornadaSeleccionada.dia.toString() | dayName}}.</p>
             <p>¿Desea continuar?</p>
             <button type="button" mdbBtn color="danger" class="waves-light" data-dismiss="modal" (click)="eliminarJornada()" mdbWavesEffect>Eliminar jornada</button>
         </div>

@@ -24,6 +24,8 @@ import { JornadaFormComponent } from './Administracion/JornadaTrabajo/jornada-fo
 import { JornadaListComponent } from './Administracion/JornadaTrabajo/jornada-list/jornada-list.component';
 import { JornadaScreenComponent } from './Administracion/JornadaTrabajo/jornada-screen/jornada-screen.component';
 
+import { DayNamePipe } from '../Shared/day-name-pipe';
+
 const routes: Routes = [
   {path: 'AtenderPaciente', component: AtenderPacienteComponent, canActivate: [PerfilGuard] },
   {path: 'PedirTurno', component: TurnoSolicitarComponent, canActivate: [PerfilGuard] },
@@ -48,6 +50,7 @@ const routes: Routes = [
     JornadaFormComponent,
     JornadaListComponent,
     JornadaScreenComponent,
+    DayNamePipe
   ],
   imports: [
     CommonModule,
