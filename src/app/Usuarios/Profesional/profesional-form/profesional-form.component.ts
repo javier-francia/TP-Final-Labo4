@@ -16,7 +16,6 @@ export class ProfesionalFormComponent implements OnInit {
   password: string;
   profesionalForm: FormGroup;
   especialidadesCargadas: Array<string>;
-  especialidadNewId: number;
 
   get especialidades(): FormArray {
     return <FormArray> this.profesionalForm.get("especialidades");
@@ -57,7 +56,7 @@ export class ProfesionalFormComponent implements OnInit {
 
       /*      Cargo dropdown de especialidades a elegir     */
       let getEspecialidad = this.especialidadSvc.Get().subscribe(snapshot => {
-        this.especialidadNewId = snapshot.length + 1;
+        
         snapshot.forEach((especialidadData: any) => {
           this.especialidadesCargadas.push(especialidadData.payload.doc.data().nombre);
         });

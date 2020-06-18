@@ -42,7 +42,7 @@ export class PerfilGuard implements CanActivate {
         break;
 
         case "Admin":
-          if( urlToLoad == "AdministradoresABM" ||
+          if( urlToLoad == "Especialidades" ||
               urlToLoad == "HabilitarProfesional")
           {
             output = true;

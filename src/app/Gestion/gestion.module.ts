@@ -26,12 +26,13 @@ import { JornadaScreenComponent } from './Administracion/JornadaTrabajo/jornada-
 import { EstadoTurnoDirective } from '../Shared/estado-turno-directive';
 import { DayNamePipe } from '../Shared/day-name-pipe';
 import { TurnoBusquedaComponent } from './Turno/turno-busqueda/turno-busqueda.component';
+import { AgregarEspecialidadComponent } from './Administracion/agregar-especialidad/agregar-especialidad.component';
 
 const routes: Routes = [
   {path: 'AtenderPaciente', component: AtenderPacienteComponent, canActivate: [PerfilGuard] },
   {path: 'PedirTurno', component: TurnoSolicitarComponent, canActivate: [PerfilGuard] },
   {path: 'AdminProfesionales', component: AdmisionProfesionalesComponent, canActivate: [PerfilGuard] },
-  {path: 'AdministradoresABM', component: GestionAdministradoresComponent, canActivate: [PerfilGuard] },
+  {path: 'Especialidades', component: AgregarEspecialidadComponent, canActivate: [PerfilGuard] },
   {path: 'JornadasLaborales', component: JornadaScreenComponent, canActivate: [PerfilGuard] },
   {path: 'BusquedaInformacion', component: TurnoBusquedaComponent, canActivate: [PerfilGuard] },
 
@@ -54,7 +55,8 @@ const routes: Routes = [
     JornadaScreenComponent,
     DayNamePipe,
     EstadoTurnoDirective,
-    TurnoBusquedaComponent
+    TurnoBusquedaComponent,
+    AgregarEspecialidadComponent
   ],
   imports: [
     CommonModule,
