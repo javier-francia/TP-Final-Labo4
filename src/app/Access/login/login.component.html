@@ -68,7 +68,7 @@
             <br>
             <button id="btnSubmit" type="submit"
                         class="btn btn-primary"
-                        [disabled]="!loginForm.valid || !loginForm.dirty">Entrar</button>
+                        [disabled]="!loginForm.valid || !loginForm.dirty || !captchaOk">Entrar</button>
             <p>¿No tiene usuario?
               <a routerLink="/SignIn">Registrarse</a>
             </p>

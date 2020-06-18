@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   email: string;
   pass: string;
   remember = false;
+  captchaOk = false;
 
   @ViewChild('recaptcha', {static: true }) recaptchaElement: ElementRef;
   constructor(public accessSvc: AccessService,
@@ -122,11 +123,12 @@ export class LoginComponent implements OnInit {
 
   validarResponseCaptcha(response: string)
   {
-    this.captchaSvc.validarGoogleCaptcha(response).subscribe(res => {
+    this.captchaOk = true;
+    /*this.captchaSvc.validarGoogleCaptcha(response).subscribe(res => {
       console.log(JSON.stringify(res));
     }, error => {
       console.log(error);
-    });
+    });*/
   }
 }
 
