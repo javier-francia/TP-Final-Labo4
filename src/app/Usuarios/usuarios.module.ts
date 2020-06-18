@@ -25,6 +25,7 @@ import { ProfesionalDetalleComponent } from './Profesional/profesional-detalle/p
 import { ProfesionalAgendaComponent } from './Profesional/profesional-agenda/profesional-agenda.component';
 import { PacienteTurnosComponent } from './Paciente/paciente-turnos/paciente-turnos.component';
 import { ProfesionalHistorialComponent } from './Profesional/profesional-historial/profesional-historial.component';
+import { FechaSacadoPipe } from '../Shared/fecha-sacado-pipe';
 
 
 
@@ -50,6 +51,7 @@ const routes: Routes = [
     ProfesionalAgendaComponent,
     PacienteTurnosComponent,
     ProfesionalHistorialComponent,
+    FechaSacadoPipe
   ],
   imports: [
     CommonModule,

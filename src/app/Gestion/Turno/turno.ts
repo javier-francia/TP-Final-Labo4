@@ -11,6 +11,7 @@ export class Turno {
     especialidad: string;
     inicio: Date;
     fin: Date;
+    fechaSacado: Date;
     estado: string;
     resenia: string;
     datosPaciente: EncuestaDatosPaciente;

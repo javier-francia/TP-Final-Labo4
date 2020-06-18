@@ -26,6 +26,7 @@ export class TurnosServiceService {
       especialidad: item.especialidad,
       inicio: item.inicio,
       fin: item.fin,
+      fechaSacado: item.fechaSacado,
       estado: item.estado,
       resenia: "",
       datosPaciente: "",

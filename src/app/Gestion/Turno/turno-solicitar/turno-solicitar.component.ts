@@ -209,6 +209,7 @@ export class TurnoSolicitarComponent implements OnInit {
     this.turnoElegido.idPaciente = idPaciente;
     this.turnoElegido.estado = "Pendiente";
     this.turnoElegido.nombreCompletoPaciente = this.nombrePaciente;
+    this.turnoElegido.fechaSacado = new Date(Date.now());
     this.turnosSvc.Insert(this.turnoElegido).then(() =>{
       this.router.navigate(['MisTurnos']);
     });

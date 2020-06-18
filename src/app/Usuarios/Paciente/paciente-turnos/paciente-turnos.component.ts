@@ -46,6 +46,7 @@ export class PacienteTurnosComponent implements OnInit {
         turnoActual.especialidad = turnoSnapshot[i].payload.doc.data().especialidad;
         turnoActual.inicio = new Date(turnoSnapshot[i].payload.doc.data().inicio.toDate());
         turnoActual.fin = new Date(turnoSnapshot[i].payload.doc.data().fin.toDate());
+        turnoActual.fechaSacado = new Date(turnoSnapshot[i].payload.doc.data().fechaSacado.toDate());
         turnoActual.estado = turnoSnapshot[i].payload.doc.data().estado;
         this.listadoTurnos.push(turnoActual);
       }
