@@ -210,7 +210,7 @@ export class TurnoSolicitarComponent implements OnInit {
     this.turnoElegido.estado = "Pendiente";
     this.turnoElegido.nombreCompletoPaciente = this.nombrePaciente;
     this.turnosSvc.Insert(this.turnoElegido).then(() =>{
-      this.router.navigate(['Home']);
+      this.router.navigate(['MisTurnos']);
     });
   }
 
