@@ -88,15 +88,19 @@ export class LoginComponent implements OnInit {
         this.email = "administrador@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
-      case "Paciente":
+      case "Paciente John Doe":
         this.email = "johndoe@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
-      case "ProfesionalHabilitado":
+      case "Paciente Javier Francia":
+        this.email = "javifrancia@gmail.com";
+        this.pass = "tpfinalJF!";
+        break;
+      case "Prof Rene Favaloro":
         this.email = "rene@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
-      case "ProfesionalInhabilitado":
+      case "Prof Nick Riviera":
         this.email = "nickriviera@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
@@ -135,6 +139,11 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log(error);
     });*/
+  }
+
+  SaltearCaptcha()
+  {
+    this.captchaOk = true;
   }
 }
 

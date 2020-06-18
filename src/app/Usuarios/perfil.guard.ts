@@ -43,7 +43,12 @@ export class PerfilGuard implements CanActivate {
 
         case "Admin":
           if( urlToLoad == "Especialidades" ||
-              urlToLoad == "HabilitarProfesional")
+              urlToLoad == "HabilitarProfesional" ||
+              urlToLoad == "Estadistica1a" ||
+              urlToLoad == "Estadistica1b" ||
+              urlToLoad == "Estadistica2a" ||
+              urlToLoad == "Estadistica2b" ||
+              urlToLoad == "Estadistica2c")
           {
             output = true;
           }

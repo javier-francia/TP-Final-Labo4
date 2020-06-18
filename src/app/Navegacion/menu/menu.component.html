@@ -43,8 +43,23 @@
       <li *ngIf="perfil == 'Profesional' && habilitado" class="nav-item">
         <a routerLink="/BusquedaInformacion" class="nav-link waves-light" mdbWavesEffect>Búsqueda de información</a>
       </li>
+      <li *ngIf="perfil == 'Admin' && habilitado" class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <a mdbDropdownToggle>Estadísticas</a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" routerLink="/Estadistica1a">Ingresos al sistema</a>
+              <a class="dropdown-item" routerLink="/Estadistica1b">Operaciones por especialidad</a>
+              <a class="dropdown-item" routerLink="/Estadistica2a">Turnos por dia</a>
+              <a class="dropdown-item" routerLink="/Estadistica2b">Turnos por profesional</a>
+              <a class="dropdown-item" routerLink="/Estadistica2c">Profesionales por día</a>
+            </div>
+          </div>
+        </a>
+      </li>
     </ul>
 
+      
     
 
     

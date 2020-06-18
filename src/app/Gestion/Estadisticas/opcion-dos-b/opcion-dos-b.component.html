@@ -1,0 +1,19 @@
+<app-menu></app-menu>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <div *ngIf="listo">
+                <fusioncharts 
+                width="700"
+                height="400"
+                type="Column2d"
+                [dataSource]="dataSource">
+                </fusioncharts>
+            </div>
+        </div>
+    </div>
+    
+</div>

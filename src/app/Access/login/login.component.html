@@ -64,6 +64,7 @@
             <div class="d-flex justify-content-center">
               <div #recaptcha ></div>
 
+              <button class="btn btn-primary" (click)="SaltearCaptcha()">Saltear captcha</button>
             </div>
             <br>
             <button id="btnSubmit" type="submit"
@@ -109,13 +110,16 @@
         <button type="button" mdbBtn color="default" class="waves-light" data-dismiss="modal" (click)="HardcodeoUsuarios('Admin')" mdbWavesEffect>Administrador</button>
         <br>
         <br>
-        <button class="btn btn-primary" (click)="HardcodeoUsuarios('Paciente')" data-dismiss="modal">Paciente</button>
+        <button class="btn btn-primary" (click)="HardcodeoUsuarios('Paciente John Doe')" data-dismiss="modal">Paciente John Doe</button>
         <br>
         <br>
-        <button class="btn btn-secondary" (click)="HardcodeoUsuarios('ProfesionalHabilitado')" data-dismiss="modal">Prof. habilitado</button>
+        <button class="btn btn-primary" (click)="HardcodeoUsuarios('Paciente Javier Francia')" data-dismiss="modal">Paciente Javier Francia</button>
         <br>
         <br>
-        <button class="btn btn-secondary" (click)="HardcodeoUsuarios('ProfesionalInhabilitado')" data-dismiss="modal">Prof. no habilitado</button>
+        <button class="btn btn-secondary" (click)="HardcodeoUsuarios('Prof Rene Favaloro')" data-dismiss="modal">Prof. Rene Favaloro</button>
+        <br>
+        <br>
+        <button class="btn btn-secondary" (click)="HardcodeoUsuarios('Prof Nick Riviera')" data-dismiss="modal">Prof. Nick Riviera</button>
       </div>
     </div>
   </div>

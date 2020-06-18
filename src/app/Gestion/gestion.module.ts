@@ -5,6 +5,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FusionChartsModule } from "angular-fusioncharts";
 
 import { NavegacionModule } from '../Navegacion/navegacion.module';
 
@@ -27,6 +28,22 @@ import { EstadoTurnoDirective } from '../Shared/estado-turno-directive';
 import { DayNamePipe } from '../Shared/day-name-pipe';
 import { TurnoBusquedaComponent } from './Turno/turno-busqueda/turno-busqueda.component';
 import { AgregarEspecialidadComponent } from './Administracion/agregar-especialidad/agregar-especialidad.component';
+import { OpcionUnoAComponent } from './Estadisticas/opcion-uno-a/opcion-uno-a.component';
+import { OpcionUnoBComponent } from './Estadisticas/opcion-uno-b/opcion-uno-b.component';
+import { OpcionDosAComponent } from './Estadisticas/opcion-dos-a/opcion-dos-a.component';
+import { OpcionDosBComponent } from './Estadisticas/opcion-dos-b/opcion-dos-b.component';
+import { OpcionDosCComponent } from './Estadisticas/opcion-dos-c/opcion-dos-c.component';
+
+
+
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as charts from "fusioncharts/fusioncharts.charts";
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+
+
+
 
 const routes: Routes = [
   {path: 'AtenderPaciente', component: AtenderPacienteComponent, canActivate: [PerfilGuard] },
@@ -35,8 +52,15 @@ const routes: Routes = [
   {path: 'Especialidades', component: AgregarEspecialidadComponent, canActivate: [PerfilGuard] },
   {path: 'JornadasLaborales', component: JornadaScreenComponent, canActivate: [PerfilGuard] },
   {path: 'BusquedaInformacion', component: TurnoBusquedaComponent, canActivate: [PerfilGuard] },
+  {path: 'Estadistica1a', component: OpcionUnoAComponent, canActivate: [PerfilGuard] },
+  {path: 'Estadistica1b', component: OpcionUnoBComponent, canActivate: [PerfilGuard] },
+  {path: 'Estadistica2a', component: OpcionDosAComponent, canActivate: [PerfilGuard] },
+  {path: 'Estadistica2b', component: OpcionDosBComponent, canActivate: [PerfilGuard] },
+  {path: 'Estadistica2c', component: OpcionDosCComponent, canActivate: [PerfilGuard] },
 
 ];
+
+FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 
 @NgModule({
   declarations: [
@@ -56,7 +80,12 @@ const routes: Routes = [
     DayNamePipe,
     EstadoTurnoDirective,
     TurnoBusquedaComponent,
-    AgregarEspecialidadComponent
+    AgregarEspecialidadComponent,
+    OpcionUnoAComponent,
+    OpcionUnoBComponent,
+    OpcionDosAComponent,
+    OpcionDosBComponent,
+    OpcionDosCComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +94,8 @@ const routes: Routes = [
     MDBBootstrapModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    FusionChartsModule
   ],
   exports: [
     TurnoDetalleComponent,
