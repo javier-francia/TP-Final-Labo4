@@ -32,6 +32,12 @@ export class TurnoBusquedaComponent implements OnInit {
     let turnosObservable = this.turnosSvc.Get().subscribe((turnoSnapshot: any) => {
       for(let i = 0; i < turnoSnapshot.length; i++)
       {
+
+        if (turnoSnapshot[i].payload.doc.data().estado != "Finalizado")
+        {
+          continue;
+        }
+
         let turnoActual = new Turno();
         turnoActual.id = +turnoSnapshot[i].payload.doc.id;
         turnoActual.idPaciente = +turnoSnapshot[i].payload.doc.data().idPaciente;
@@ -125,7 +131,8 @@ export class TurnoBusquedaComponent implements OnInit {
             break;
         }
         
-        return dia.includes(patron);
+        let diaMes = turnoProvisorio.inicio.getDate() + "/" + (turnoProvisorio.inicio.getMonth()+1);
+        return dia.includes(patron) || diaMes.includes(patron);
       });
 
       // Filtro por nombre profesional

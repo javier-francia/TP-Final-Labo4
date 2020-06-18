@@ -58,7 +58,7 @@ export class ProfesionalHistorialComponent implements OnInit {
         }
         this.listadoTurnos.push(turnoActual);
       }
-      this.listadoTurnos = this.listadoTurnos.sort((a, b) => a.inicio.getTime() - b.inicio.getTime());
+      this.listadoTurnos = this.listadoTurnos.sort((a, b) => b.inicio.getTime() - a.inicio.getTime());
       turnosObservable.unsubscribe();
     });
   }

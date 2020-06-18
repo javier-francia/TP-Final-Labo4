@@ -90,7 +90,7 @@ export class ProfesionalAgendaComponent implements OnInit {
       notificacion.fecha = new Date(Date.now());
       notificacion.idUsuario = this.turnoElegido.idPaciente;
       notificacion.leido = false;
-      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth()} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
+      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth() + 1} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
       console.log(notificacion);
       this.notificacionSvc.Insert(notificacion).then().catch();
     });
@@ -106,7 +106,7 @@ export class ProfesionalAgendaComponent implements OnInit {
       notificacion.fecha = new Date(Date.now());
       notificacion.idUsuario = this.turnoElegido.idPaciente;
       notificacion.leido = false;
-      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth()} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
+      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth() + 1} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
       console.log(notificacion);
       this.notificacionSvc.Insert(notificacion).then().catch();
     });
@@ -122,7 +122,7 @@ export class ProfesionalAgendaComponent implements OnInit {
       notificacion.fecha = new Date(Date.now());
       notificacion.idUsuario = this.turnoElegido.idPaciente;
       notificacion.leido = false;
-      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth()} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
+      notificacion.contenido = `Su turno del día ${this.turnoElegido.inicio.getDate()}/${this.turnoElegido.inicio.getMonth() + 1} con ${this.turnoElegido.nombreCompletoProfesional} fue ${this.turnoElegido.estado.toLowerCase()}.`;
       console.log(notificacion);
       this.notificacionSvc.Insert(notificacion).then().catch();
     });
