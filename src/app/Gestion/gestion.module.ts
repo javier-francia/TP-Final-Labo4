@@ -61,7 +61,8 @@ const routes: Routes = [
   exports: [
     TurnoDetalleComponent,
     EncuestaAltaComponent,
-    InformeDetalleComponent
+    InformeDetalleComponent,
+    EncuestaDetalleComponent
   ]
 })
 export class GestionModule { }

@@ -66,7 +66,7 @@ export class ProfesionalHistorialComponent implements OnInit {
 
   onVerEncuesta(unTurno: Turno)
   {
-    //this.turnoElegido = unTurno;
+    this.turnoElegido = unTurno;
     document.getElementById("btnModalEncuesta").click();
   }
 }

@@ -1,1 +1,43 @@
-<p>encuesta-detalle works!</p>
+<h5>Paciente</h5>
+<p>{{turno.nombreCompletoPaciente}}</p>
+<h5>Turno</h5>
+<p>{{turno.inicio | date: 'dd/MM/yyyy hh:mm'}} ({{turno.especialidad}})</p>
+<br>
+<div class="row">
+    <div class="col-6">
+        <label>Atención</label>
+        <div class="form-group">
+            <ngb-rating [rate]="+turno.datosProfesional.atencion" [readonly]="true"></ngb-rating>
+        </div>
+    </div>
+    <div class="col-6">
+        <label>Higiene</label>
+        <div class="form-group">
+            <ngb-rating [rate]="+turno.datosProfesional.higiene" [readonly]="true"></ngb-rating>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <label>Amabilidad</label>
+        <div class="form-group">
+            <ngb-rating [rate]="+turno.datosProfesional.amabilidad" [readonly]="true"></ngb-rating>
+        </div>
+    </div>
+    <div class="col-6">
+        <label>Tiempo de espera</label>
+        <div class="form-group">
+            <ngb-rating [rate]="+turno.datosProfesional.tiempoEspera" [readonly]="true"></ngb-rating>
+        </div>
+    </div>
+</div>
+<br>
+<p *ngIf="turno.datosProfesional.primeraConsulta">Fue su primera consulta.</p>
+<p *ngIf="!turno.datosProfesional.primeraConsulta">No fue su primera consulta.</p>
+<p *ngIf="turno.datosProfesional.recomendaria">El paciente recomendaría a {{turno.nombreCompletoProfesional}}</p>
+<p *ngIf="!turno.datosProfesional.recomendaria">El paciente no recomendaría a {{turno.nombreCompletoProfesional}}</p>
+<br>
+<div *ngIf="turno.datosProfesional.comentarios != ''">
+    <h4>Otros comentarios</h4>
+    <p>{{turno.datosProfesional.comentarios}}</p>
+</div>
