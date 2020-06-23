@@ -5,6 +5,11 @@ A continuación se detallan las funcionalidades y una breve guía de cómo acced
 
 ---
 
+## Testeo
+Para facilitar el testeo de la WebApp se proveen perfiles ya cargados y con operaciones tanto finalizadas como en curso. Para acceder a estos perfiles se debe presionar Ctrl + Alt + . (punto), en ese momento aparece una pantalla con un listado de botones que, al presionarlos, setean los usuarios y contraseñas para ingresar al sistema, y también deshabilitan el captcha, para poder ingresar con más facilidad.
+
+---
+
 ## Todos los perfiles
 
 #### Inicio de sesión
