@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //            Project Modules
 import { UsuariosModule } from '../Usuarios/usuarios.module';
 
 //            Components
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { MiCaptchaComponent } from './mi-captcha/mi-captcha.component';
 
 
 const redirectLoggedIn = () => redirectLoggedInTo(['Home']);
@@ -23,14 +25,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    MiCaptchaComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     UsuariosModule,
     RouterModule.forChild(routes),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    //BrowserAnimationsModule
   ],
   exports: [RouterModule]
 })

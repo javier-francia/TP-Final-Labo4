@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
               private captchaSvc: CaptchaService) {}
 
   ngOnInit(): void {
-    this.addRecaptchaScript();
+    //this.addRecaptchaScript();
     this.browserStorageSvc.CleanLocalStorage();
     document.onkeyup = function(e) {
       if (e.ctrlKey && e.altKey && e.which == 190) {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  tryLogin(input: NgForm)
+  tryLogin()
   {
     return this.accessSvc
       .LoginWithEmail(this.email, this.pass)
@@ -145,6 +145,8 @@ export class LoginComponent implements OnInit {
   {
     this.captchaOk = true;
   }
+
+  placebo(){}
 }
 
 

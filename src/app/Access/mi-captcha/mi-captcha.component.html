@@ -1,0 +1,18 @@
+
+<div style="border: 2px solid; width: min-content; flex-direction: column;" class="container">
+    <div class="container">
+        <h5>Rote la imágen hasta verla derecha</h5>
+    </div>
+    <div class="container">
+        <button id="btnIzq" class="btn btn-lg" (click)="rotar('Left')"><i class="far fa-arrow-alt-circle-left"></i></button>
+        <img [@rotatedState]='state' [src]="picUrl">
+        <button id="btnDer" class="btn btn-lg" (click)="rotar('Right')"><i class="far fa-arrow-alt-circle-right"></i></button>
+    </div>
+    
+</div>
+<button *ngIf="enFuncionamiento" id="btnValidar" style="width: 50%;" class="btn btn-default" (click)="responder()">Validar</button>
+<button *ngIf="!enFuncionamiento" style="width: 50%;" class="btn btn-warning" (click)="reset()"><i class="fas fa-redo"></i></button>
+
+
+<div>
+</div>
