@@ -3,12 +3,15 @@ import { Turno } from '../turno';
 import { TurnosServiceService } from '../turnos-service.service';
 import { EncuestaDatosPaciente } from '../../Informe/encuesta-datos-paciente';
 import { DatoPersonalizado } from '../../Informe/dato-personalizado';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 
 @Component({
   selector: 'app-turno-busqueda',
   templateUrl: './turno-busqueda.component.html',
-  styleUrls: ['./turno-busqueda.component.css']
+  styleUrls: ['./turno-busqueda.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class TurnoBusquedaComponent implements OnInit {
 

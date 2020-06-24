@@ -5,11 +5,14 @@ import { Turno } from '../../../Gestion/Turno/turno';
 import { Router } from '@angular/router';
 import { Notificacion } from '../../../Navegacion/notificacion';
 import { NotificacionService } from '../../../Navegacion/notificacion.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-profesional-agenda',
   templateUrl: './profesional-agenda.component.html',
-  styleUrls: ['./profesional-agenda.component.css']
+  styleUrls: ['./profesional-agenda.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class ProfesionalAgendaComponent implements OnInit {
 

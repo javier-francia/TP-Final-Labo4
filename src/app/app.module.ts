@@ -12,6 +12,7 @@ import { UsuariosModule } from './Usuarios/usuarios.module';
 import { NavegacionModule } from './Navegacion/navegacion.module';
 import { GestionModule } from './Gestion/gestion.module';
 import { ErrorRoutingModule } from './Navegacion/error-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 //            Components
 import { AppComponent } from './app.component';
@@ -36,6 +37,8 @@ const routes: Routes = [];
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -46,7 +49,6 @@ const routes: Routes = [];
     NavegacionModule, 
     ErrorRoutingModule,// Ultimo feature module por contener '**'
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
     HttpClientModule,
     NgbModule
   ],

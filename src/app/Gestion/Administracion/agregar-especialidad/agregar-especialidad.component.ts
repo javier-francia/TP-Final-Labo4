@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { EspecialidadService } from '../../../Shared/Servicios/especialidad.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-agregar-especialidad',
   templateUrl: './agregar-especialidad.component.html',
-  styleUrls: ['./agregar-especialidad.component.css']
+  styleUrls: ['./agregar-especialidad.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class AgregarEspecialidadComponent implements OnInit {
 

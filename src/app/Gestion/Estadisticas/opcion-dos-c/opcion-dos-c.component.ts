@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { JornadaService } from '../../Administracion/JornadaTrabajo/jornada.service';
 import { ElementoEstadistica } from '../elemento-estadistica';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-opcion-dos-c',
   templateUrl: './opcion-dos-c.component.html',
-  styleUrls: ['./opcion-dos-c.component.css']
+  styleUrls: ['./opcion-dos-c.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class OpcionDosCComponent implements OnInit {
 

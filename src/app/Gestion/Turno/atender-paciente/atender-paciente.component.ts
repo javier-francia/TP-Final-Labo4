@@ -3,11 +3,14 @@ import { TurnosServiceService } from '../../../Gestion/Turno/turnos-service.serv
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Turno } from '../../../Gestion/Turno/turno';
 import { Router } from '@angular/router';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-atender-paciente',
   templateUrl: './atender-paciente.component.html',
-  styleUrls: ['./atender-paciente.component.css']
+  styleUrls: ['./atender-paciente.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class AtenderPacienteComponent implements OnInit {
 

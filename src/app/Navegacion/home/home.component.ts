@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccessService } from '../../Access/access.service';
 import { BrowserStorageService } from '../../Access/browser-storage.service';
+import { fadeInFastAnimation } from '../../animationsRoot';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class HomeComponent implements OnInit {
 

@@ -5,12 +5,14 @@ import { AccessService } from '../access.service';
 import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 import { BrowserStorageService } from '../browser-storage.service';
 import { CaptchaService } from '../../Shared/Servicios/captcha.service';
-
+import { fadeInAnimation } from '../../animationsRoot';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [ fadeInAnimation ],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
 
@@ -107,6 +109,7 @@ export class LoginComponent implements OnInit {
         break;
     }
     if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
+    this.saltearCaptcha();
   }
 
   aceptarCaptcha()

@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Profesional } from '../profesional';
 import { ProfesionalesService } from '../profesionales.service';
 import { UsuariosService } from '../../Usuario/usuarios.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-profesional-listado',
   templateUrl: './profesional-listado.component.html',
-  styleUrls: ['./profesional-listado.component.css']
+  styleUrls: ['./profesional-listado.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class ProfesionalListadoComponent implements OnInit {
 

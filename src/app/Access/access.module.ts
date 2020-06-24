@@ -18,8 +18,9 @@ import { MiCaptchaComponent } from './mi-captcha/mi-captcha.component';
 const redirectLoggedIn = () => redirectLoggedInTo(['Home']);
 
 const routes: Routes = [
-  {path: '', component: LoginComponent, data: {animation: 'Login'}, ...canActivate(redirectLoggedIn)},
-  {path: 'SignIn', component: RegistroComponent, data: {animation: 'SignIn'}, ...canActivate(redirectLoggedIn)}
+  {path: 'Login', component: LoginComponent, data: {animation: 'Login'}, ...canActivate(redirectLoggedIn)},
+  {path: 'SignIn', component: RegistroComponent, data: {animation: 'SignIn'}, ...canActivate(redirectLoggedIn)},
+  {path: '', redirectTo: 'Login', pathMatch: 'full' }
 ];
 
 @NgModule({

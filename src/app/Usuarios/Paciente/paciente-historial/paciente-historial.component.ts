@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { TurnosServiceService } from '../../../Gestion/Turno/turnos-service.service';
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Turno } from '../../../Gestion/Turno/turno';
-import { EncuestaDatosProfesional } from '../../../Gestion/Encuesta/encuesta-datos-profesional';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-paciente-historial',
   templateUrl: './paciente-historial.component.html',
-  styleUrls: ['./paciente-historial.component.css']
+  styleUrls: ['./paciente-historial.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class PacienteHistorialComponent implements OnInit {
 

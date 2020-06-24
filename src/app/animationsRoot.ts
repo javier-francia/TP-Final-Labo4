@@ -1,31 +1,82 @@
-import { trigger, transition, style, query, group, animateChild, animate } from '@angular/animations';
-import { Optional } from '@angular/core';
+import { trigger, transition, style, query, group, animateChild, state, animate } from '@angular/animations';
 
-export const slideInAnimation =
-  trigger('routeAnimations', [
-    transition('* <=> *', [
-      // Set a default  style for enter and leave
-      style({ position: 'relative' }),
-      query(':enter, :leave', [
+export const fadeInAnimation =
+    // trigger name for attaching this animation to an element using the [@triggerName] syntax
+    trigger('fadeInAnimation', [
+
+        // route 'enter' transition
+        transition(':enter', [
+
+            // css styles at start of transition
+            style({ opacity: 0 }),
+
+            // animation and styles at end of transition
+            animate('.7s', style({ opacity: 1 }))
+        ]),
+    ]);
+
+export const fadeInFastAnimation =
+// trigger name for attaching this animation to an element using the [@triggerName] syntax
+trigger('fadeInFastAnimation', [
+
+    // route 'enter' transition
+    transition(':enter', [
+
+        // css styles at start of transition
+        style({ opacity: 0 }),
+
+        // animation and styles at end of transition
+        animate('.3s', style({ opacity: 1 }))
+    ]),
+]);
+
+export const slideInOutAnimation =
+// trigger name for attaching this animation to an element using the [@triggerName] syntax
+trigger('slideInOutAnimation', [
+
+    // end state styles for route container (host)
+    state('*', style({
+        // the view covers the whole screen with a semi tranparent background
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.8)'
+    })),
+
+    // route 'enter' transition
+    transition(':enter', [
+
+        // styles at start of transition
         style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%'
-        })
-      ],  {optional: true}),
-      query(':enter', [
-        style({ left: '-100%'})
-      ],  {optional: true}),
-      query(':leave', animateChild(), {optional: true}),
-      group([
-        query(':leave', [
-          animate('20000ms ease-out', style({ left: '100%'}))
-        ],  {optional: true}),
-        query(':enter', [
-          animate('30000ms ease-out', style({ left: '0%'}))
-        ],  {optional: true})
-      ]),
-      query(':enter', animateChild(),  {optional: true}),
+            // start with the content positioned off the right of the screen, 
+            // -400% is required instead of -100% because the negative position adds to the width of the element
+            right: '-400%',
+
+            // start with background opacity set to 0 (invisible)
+            backgroundColor: 'rgba(0, 0, 0, 0)'
+        }),
+
+        // animation and styles at end of transition
+        animate('.5s ease-in-out', style({
+            // transition the right position to 0 which slides the content into view
+            right: 0,
+
+            // transition the background opacity to 0.8 to fade it in
+            backgroundColor: 'rgba(0, 0, 0, 0.8)'
+        }))
+    ]),
+
+    // route 'leave' transition
+    transition(':leave', [
+        // animation and styles at end of transition
+        animate('.5s ease-in-out', style({
+            // transition the right position to -400% which slides the content out of view
+            right: '-400%',
+
+            // transition the background opacity to 0 to fade it out
+            backgroundColor: 'rgba(0, 0, 0, 0)'
+        }))
     ])
 ]);

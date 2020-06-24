@@ -3,11 +3,14 @@ import { TurnosServiceService } from '../../../Gestion/Turno/turnos-service.serv
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Turno } from '../../../Gestion/Turno/turno';
 import { Router } from '@angular/router';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-profesional-historial',
   templateUrl: './profesional-historial.component.html',
-  styleUrls: ['./profesional-historial.component.css']
+  styleUrls: ['./profesional-historial.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class ProfesionalHistorialComponent implements OnInit {
 

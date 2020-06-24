@@ -14,11 +14,15 @@ import { AccessService } from '../access.service';
 import { BrowserStorageService } from '../browser-storage.service';
 import { FileStorageService } from '../../Shared/file-storage.service';
 import { Upload } from 'src/app/Shared/upload';
+import { slideInOutAnimation } from '../../animationsRoot';
+
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  styleUrls: ['./registro.component.css'],
+  animations: [ slideInOutAnimation ],
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class RegistroComponent implements OnInit {
 

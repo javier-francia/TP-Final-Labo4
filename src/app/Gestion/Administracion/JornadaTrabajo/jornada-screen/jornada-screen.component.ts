@@ -3,11 +3,14 @@ import { JornadaService } from '../jornada.service';
 import { BrowserStorageService } from '../../../../Access/browser-storage.service';
 import { Jornada } from '../jornada';
 import { ProfesionalJornada } from '../profesional-jornada';
+import { fadeInFastAnimation } from '../../../../animationsRoot';
 
 @Component({
   selector: 'app-jornada-screen',
   templateUrl: './jornada-screen.component.html',
-  styleUrls: ['./jornada-screen.component.css']
+  styleUrls: ['./jornada-screen.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class JornadaScreenComponent implements OnInit {
 

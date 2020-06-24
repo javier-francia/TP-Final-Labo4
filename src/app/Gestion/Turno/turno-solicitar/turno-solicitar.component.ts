@@ -10,11 +10,14 @@ import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionale
 import { BrowserStorageService } from '../../../Access/browser-storage.service';
 import { Router } from '@angular/router';
 import { PacientesService } from '../../../Usuarios/Paciente/pacientes.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-turno-solicitar',
   templateUrl: './turno-solicitar.component.html',
-  styleUrls: ['./turno-solicitar.component.css']
+  styleUrls: ['./turno-solicitar.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class TurnoSolicitarComponent implements OnInit {
 

@@ -3,11 +3,14 @@ import { ElementoEstadistica } from '../elemento-estadistica';
 import { TurnosServiceService } from '../../Turno/turnos-service.service';
 import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionales.service';
 import { EspecialidadService } from '../../../Shared/Servicios/especialidad.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-opcion-uno-b',
   templateUrl: './opcion-uno-b.component.html',
-  styleUrls: ['./opcion-uno-b.component.css']
+  styleUrls: ['./opcion-uno-b.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class OpcionUnoBComponent implements OnInit {
 

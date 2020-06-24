@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ElementoEstadistica } from '../elemento-estadistica';
 import { TurnosServiceService } from '../../Turno/turnos-service.service';
+import { fadeInFastAnimation } from '../../../animationsRoot';
 
 @Component({
   selector: 'app-opcion-dos-a',
   templateUrl: './opcion-dos-a.component.html',
-  styleUrls: ['./opcion-dos-a.component.css']
+  styleUrls: ['./opcion-dos-a.component.css'],
+  animations: [ fadeInFastAnimation ],
+  host: { '[@fadeInFastAnimation]': '' }
 })
 export class OpcionDosAComponent implements OnInit {
 
