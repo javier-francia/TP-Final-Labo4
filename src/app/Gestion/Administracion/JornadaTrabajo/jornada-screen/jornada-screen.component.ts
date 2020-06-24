@@ -47,7 +47,7 @@ export class JornadaScreenComponent implements OnInit {
         {
           let jornada = new Jornada();
           let jotaSon = JSON.parse(arrayJornadasString[j]);
-          jornada.dia = jotaSon.dia;
+          jornada.dia = +jotaSon.dia;
           jornada.especialidad = jotaSon.especialidad;
           jornada.horario = jotaSon.horario;
           jornada.duracion = jotaSon.duracion;

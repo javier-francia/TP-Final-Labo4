@@ -78,7 +78,7 @@ export class JornadaFormComponent implements OnInit {
         for(let j = 0; j < unProfesionalJornada.payload.doc.data().jornadas.length; j++)
         {
           let objetoJornada = JSON.parse(unProfesionalJornada.payload.doc.data().jornadas[j]);
-          console.log(objetoJornada.dia);
+          //console.log(objetoJornada.dia);
           this.diasDisponibles.splice(this.diasDisponibles.indexOf(+objetoJornada.dia), 1);
         }
         break;
@@ -129,6 +129,7 @@ export class JornadaFormComponent implements OnInit {
     jornadaNueva.especialidad = this.jornadaForm.get("especialidad").value;
     jornadaNueva.horario = this.jornadaForm.get("horaInicio").value + "-" + this.jornadaForm.get("horaFin").value;
 
+    //console.log(jornadaNueva);
     if(this.accion == "agregar")
     {
       this.agregarJornada.emit(jornadaNueva);
