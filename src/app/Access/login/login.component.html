@@ -61,11 +61,11 @@
               </div>
             </div>
             <br>
-            <div>
-              <app-mi-captcha (validarCaptcha)="SaltearCaptcha()"></app-mi-captcha>
+            <div *ngIf="!captchaSalteado">
+              <app-mi-captcha (validarCaptcha)="aceptarCaptcha()"></app-mi-captcha>
             </div>
             <div *ngIf="!captchaOk" class="d-flex justify-content-center">
-              <button class="btn btn-danger" (click)="SaltearCaptcha()">Saltear captcha</button>
+              <button class="btn btn-danger" (click)="saltearCaptcha()">Saltear captcha</button>
             </div>
             <br>
             <button id="btnSubmit" type="submit"

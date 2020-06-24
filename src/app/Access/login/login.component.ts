@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   pass: string;
   remember = false;
   captchaOk = false;
+  captchaSalteado = false;
 
   @ViewChild('recaptcha', {static: true }) recaptchaElement: ElementRef;
   constructor(public accessSvc: AccessService,
@@ -108,42 +109,15 @@ export class LoginComponent implements OnInit {
     if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
   }
 
-  addRecaptchaScript() {
-    window['grecaptchaCallback'] = () => {
-      this.renderReCaptcha();
-    }
-   
-    (function(d, s, id, obj){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&amp;render=explicit";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'recaptcha-jssdk', this));
-  }
-
-  renderReCaptcha() {
-    window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
-      'sitekey' : '6LcDjgAVAAAAAAUaVj-uJLzSJZTIBs2YVXDCSAFe',
-      'callback': (response) => {
-          this.validarResponseCaptcha(response);
-      }
-    });
-  }
-
-  validarResponseCaptcha(response: string)
+  aceptarCaptcha()
   {
     this.captchaOk = true;
-    /*this.captchaSvc.validarGoogleCaptcha(response).subscribe(res => {
-      console.log(JSON.stringify(res));
-    }, error => {
-      console.log(error);
-    });*/
   }
 
-  SaltearCaptcha()
+  saltearCaptcha()
   {
     this.captchaOk = true;
+    this.captchaSalteado = true;
   }
 
   placebo(){}
