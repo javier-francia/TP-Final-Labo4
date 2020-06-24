@@ -42,7 +42,6 @@ export class OpcionDosBComponent implements OnInit {
           let unTurno = turnosSnapshot[i];
 
           let indiceId = profesionalesId.indexOf(+unTurno.payload.doc.data().idProfesional);
-          console.log(indiceId);
           profesionalesCount[indiceId]++;
         }
         

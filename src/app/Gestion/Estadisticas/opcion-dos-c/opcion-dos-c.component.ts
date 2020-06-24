@@ -30,7 +30,6 @@ export class OpcionDosCComponent implements OnInit {
         
         if(unaJornadaTrabajador.payload.doc.data().jornadas.length == 0)
         {
-          console.log("entro" + i);
           continue;
         }
 
@@ -38,7 +37,6 @@ export class OpcionDosCComponent implements OnInit {
         for(let j = 0; j < unaListaJornadas.length; j++)
         {
           let unaJornada = JSON.parse((unaListaJornadas)[j]);
-          console.log(+unaJornada.dia);
 
           profesionalesCount[+unaJornada.dia - 1]++;
         }

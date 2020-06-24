@@ -41,7 +41,6 @@ export class OpcionUnoBComponent implements OnInit {
           let unTurno = turnosSnapshot[i];
 
           let indiceId = especialidades.indexOf(unTurno.payload.doc.data().especialidad);
-          console.log(indiceId);
           especialidadesCount[indiceId]++;
         }
         
