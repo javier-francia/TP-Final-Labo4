@@ -68,8 +68,10 @@
         <div *ngIf="turnoElegido && tipoDatos == 'VerResenia'">
             <app-informe-detalle [turno]="turnoElegido"></app-informe-detalle>
         </div>
-        <div *ngIf="turnoElegido && tipoDatos == 'VerDatosPaciente'">
+        <div *ngIf="turnoElegido && pacienteElegido && tipoDatos == 'VerDatosPaciente'">
             <h5>Datos paciente</h5>
+            <img [src]="pacienteElegido.img1" class="imgPaciente">      
+            <img [src]="pacienteElegido.img2" class="imgPaciente">
             <p style="font-weight: bold;">Nombre: </p><p>{{turnoElegido.nombreCompletoPaciente}}</p>
             <p style="font-weight: bold;">Edad: </p><p>{{turnoElegido.datosPaciente.edad}}</p>
             <p style="font-weight: bold;">Peso: </p><p>{{turnoElegido.datosPaciente.peso}} kg</p>

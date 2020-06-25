@@ -28,6 +28,7 @@ export class FileStorageService {
             {
               logged = true;
               fileToUpload.url = `${this.basePath}/${fileName}`;
+              return
             }
           })
           .catch();
@@ -37,5 +38,12 @@ export class FileStorageService {
              console.log(err);
       };
   }
+
+  getUpload(url: string)
+  {
+    let storageRef = firebase.storage().ref();
+    return storageRef.child(url).getDownloadURL();
+  }
+  
 }
 

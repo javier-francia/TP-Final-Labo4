@@ -4,6 +4,9 @@ import { TurnosServiceService } from '../turnos-service.service';
 import { EncuestaDatosPaciente } from '../../Informe/encuesta-datos-paciente';
 import { DatoPersonalizado } from '../../Informe/dato-personalizado';
 import { fadeInFastAnimation } from '../../../animationsRoot';
+import { Paciente } from '../../../Usuarios/Paciente/paciente';
+import { PacientesService } from '../../../Usuarios/Paciente/pacientes.service';
+import { FileStorageService } from '../../../Shared/file-storage.service';
 
 
 @Component({
@@ -27,8 +30,11 @@ export class TurnoBusquedaComponent implements OnInit {
   totalTurnos: Array<Turno> = [];
   
   turnoElegido: Turno;
+  pacienteElegido: Paciente;
 
-  constructor(private turnosSvc: TurnosServiceService) { }
+  constructor(private turnosSvc: TurnosServiceService,
+              private pacientesSvc: PacientesService,
+              private fileStorageSvc: FileStorageService) { }
 
   ngOnInit(): void {
 
@@ -63,6 +69,7 @@ export class TurnoBusquedaComponent implements OnInit {
       }
       this.totalTurnos = this.totalTurnos.sort((a, b) => b.inicio.getTime() - a.inicio.getTime());
       this.listadoTurnos = this.totalTurnos;
+
       turnosObservable.unsubscribe();
     });
     
@@ -89,7 +96,33 @@ export class TurnoBusquedaComponent implements OnInit {
     this.tipoDatos = "VerDatosPaciente";
     this.tituloModal = "Datos paciente";
     this.turnoElegido = unTurno;
-    document.getElementById("btnModalDetalle").click();
+    let pacienteObservable = this.pacientesSvc.Get().subscribe((pacienteSnapshot: any) => {
+      for(let i = 0; i < pacienteSnapshot.length; i++)
+      {
+        if(+pacienteSnapshot[i].payload.doc.id != unTurno.idPaciente)
+        {
+          continue;
+        }
+
+        let unPaciente = new Paciente();
+        unPaciente.nombre = pacienteSnapshot[i].payload.doc.data().nombre;
+        unPaciente.apellido = pacienteSnapshot[i].payload.doc.data().apellido;
+        unPaciente.email = pacienteSnapshot[i].payload.doc.data().email;
+        unPaciente.img1 = pacienteSnapshot[i].payload.doc.data().img1;
+        unPaciente.img2 = pacienteSnapshot[i].payload.doc.data().img2;
+        this.pacienteElegido = unPaciente;
+        break;
+      }
+
+      this.fileStorageSvc.getUpload("uploads/" + this.pacienteElegido.img1).then(res => {
+        this.pacienteElegido.img1 = res;
+        this.fileStorageSvc.getUpload("uploads/" + this.pacienteElegido.img2).then(res => {
+          this.pacienteElegido.img2 = res;
+          document.getElementById("btnModalDetalle").click();
+        });
+      });
+      pacienteObservable.unsubscribe();
+    });
   }
 
 
