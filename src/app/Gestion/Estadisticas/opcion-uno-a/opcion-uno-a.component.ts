@@ -46,6 +46,7 @@ export class OpcionUnoAComponent implements OnInit {
       this.conjuntoElementosHoras.push(new ElementoEstadistica("18:00 a 23:59", "0"));
 
       // Armo array datos por dia
+      this.conjuntoElementosDias.push(new ElementoEstadistica("Domingo", "0"));
       this.conjuntoElementosDias.push(new ElementoEstadistica("Lunes", "0"));
       this.conjuntoElementosDias.push(new ElementoEstadistica("Martes", "0"));
       this.conjuntoElementosDias.push(new ElementoEstadistica("Miércoles", "0"));
@@ -87,45 +88,10 @@ export class OpcionUnoAComponent implements OnInit {
         }
 
         // Conteo de registro por día
-        switch(log.datetime.getDay())
-        {
-          case 1:
-          {
-            let cantidad = +this.conjuntoElementosDias[0].value + 1;
-            this.conjuntoElementosDias[0].value = cantidad.toString();
-          }
-          break;
-          case 2:
-          {
-            let cantidad = +this.conjuntoElementosDias[1].value + 1;
-            this.conjuntoElementosDias[1].value = cantidad.toString();
-          }
-          break;
-          case 3:
-          {
-            let cantidad = +this.conjuntoElementosDias[2].value + 1;
-            this.conjuntoElementosDias[2].value = cantidad.toString();
-          }
-          break;
-          case 4:
-          {
-            let cantidad = +this.conjuntoElementosDias[3].value + 1;
-            this.conjuntoElementosDias[3].value = cantidad.toString();
-          }
-          break;
-          case 5:
-          {
-            let cantidad = +this.conjuntoElementosDias[4].value + 1;
-            this.conjuntoElementosDias[4].value = cantidad.toString();
-          }
-          break;
-          case 6:
-          {
-            let cantidad = +this.conjuntoElementosDias[5].value + 1;
-            this.conjuntoElementosDias[5].value = cantidad.toString();
-          }
-          break;
-        }
+        let dia = log.datetime.getDay();
+
+        let cantidad = +this.conjuntoElementosDias[dia].value + 1;
+        this.conjuntoElementosDias[dia].value = cantidad.toString();
       }
 
       this.conjuntoTodosLosPerfiles = this.conjuntoTodosLosPerfiles.sort((a, b) => a.datetime.getTime() - b.datetime.getTime());
