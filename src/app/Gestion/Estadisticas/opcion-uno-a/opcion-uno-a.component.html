@@ -1,2 +1,40 @@
 <app-menu></app-menu>
-<p>opcion-uno-a works!</p>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <button *ngIf="listo" type="button" mdbBtn color="dark-green" class="waves-light btn-lg" (click)="exportToExcel()" mdbWavesEffect>Descargar Excel completo</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <div *ngIf="listo">
+                <fusioncharts 
+                width="700"
+                height="400"
+                type="Column2d"
+                [dataSource]="dataSourceDias">
+                </fusioncharts>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-12" style="text-align: center;">
+            <div *ngIf="listo">
+                <fusioncharts 
+                width="700"
+                height="400"
+                type="Column2d"
+                [dataSource]="dataSourceHoras">
+                </fusioncharts>
+            </div>
+        </div>
+    </div>
+
+</div>

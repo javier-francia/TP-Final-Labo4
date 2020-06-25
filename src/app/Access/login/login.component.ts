@@ -6,6 +6,8 @@ import { UsuariosService } from '../../Usuarios/Usuario/usuarios.service';
 import { BrowserStorageService } from '../browser-storage.service';
 import { CaptchaService } from '../../Shared/Servicios/captcha.service';
 import { fadeInAnimation } from '../../animationsRoot';
+import { AccessLoggingService } from '../access-logging.service';
+import { AccessLog } from '../access-log';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
               private usuariosSvc: UsuariosService,
               private browserStorageSvc: BrowserStorageService,
               private router: Router,
-              private captchaSvc: CaptchaService) {}
+              private captchaSvc: CaptchaService,
+              private accessLoggingSvc: AccessLoggingService) {}
 
   ngOnInit(): void {
     //this.addRecaptchaScript();
@@ -54,12 +57,21 @@ export class LoginComponent implements OnInit {
           if(userSnapshot.length > 0)
           {
             perfil = userSnapshot[0].payload.doc.data().perfil;
-            id = userSnapshot[0].payload.doc.lE.key.path.segments[6];
+            id = +userSnapshot[0].payload.doc.id;
             let habilitado: boolean = userSnapshot[0].payload.doc.data().habilitado;
 
+            //Agregar log
+            let log = new AccessLog();
+            log.idUsuario = id;
+            log.email = this.email;
+            log.datetime = new Date(Date.now());
+            log.perfil = perfil;
+
+            this.accessLoggingSvc.Insert(log).then().catch();
+
             this.browserStorageSvc.LoadLocalStorage(this.email, perfil, habilitado, id, this.remember);
+            
             this.router.navigate(['Home']);
-            //console.info(`Logged with email: ${this.email}`);
           }
           usuarioObservable.unsubscribe();
         });

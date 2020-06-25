@@ -15,6 +15,8 @@ import { BrowserStorageService } from '../browser-storage.service';
 import { FileStorageService } from '../../Shared/file-storage.service';
 import { Upload } from 'src/app/Shared/upload';
 import { slideInOutAnimation } from '../../animationsRoot';
+import { AccessLog } from '../access-log';
+import { AccessLoggingService } from '../access-logging.service';
 
 
 @Component({
@@ -38,7 +40,8 @@ export class RegistroComponent implements OnInit {
               private profesionalesSvc: ProfesionalesService,
               private browserStorageSvc: BrowserStorageService,
               private fileStorageSvc: FileStorageService,
-              private router: Router) { }
+              private router: Router,
+              private accessLoggingSvc: AccessLoggingService) { }
 
   ngOnInit(): void {
     let idSetter = this.usuariosSvc.Get().subscribe(usuariosSnapshot => {
@@ -103,6 +106,14 @@ export class RegistroComponent implements OnInit {
                     break;
                 }
 
+                  //Agregar log
+                let log = new AccessLog();
+                log.idUsuario = this.newId;
+                log.email = input.obj.email;
+                log.datetime = new Date(Date.now());
+                log.perfil = this.entidad;
+
+                this.accessLoggingSvc.Insert(log).then().catch();
                 this.browserStorageSvc.LoadLocalStorage(input.obj.email, this.entidad, habilitado, this.newId, false);
 
                 // Redirecciono al Home
