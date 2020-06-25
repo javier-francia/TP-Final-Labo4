@@ -34,7 +34,10 @@
     </tbody>
 </table>
 
-<ngb-pagination *ngIf="listadoTurnos.length > 0" [collectionSize]="listadoTurnos.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+<ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="listadoTurnos.length"></ngb-pagination>
 
 
 
