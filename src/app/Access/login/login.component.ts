@@ -20,11 +20,16 @@ export class LoginComponent implements OnInit {
 
   errorLogin ="";
 
+  resetPassEmail = "";
+
   email: string;
   pass: string;
   remember = false;
   captchaOk = false;
   captchaSalteado = false;
+
+  resetPassSent = false;
+  errorPassSent = "";
 
   @ViewChild('recaptcha', {static: true }) recaptchaElement: ElementRef;
   constructor(public accessSvc: AccessService,
@@ -133,6 +138,31 @@ export class LoginComponent implements OnInit {
   {
     this.captchaOk = true;
     this.captchaSalteado = true;
+  }
+
+  Reseteo()
+  {
+    this.errorPassSent = "";
+    
+    this.accessSvc.ResetPassword(this.resetPassEmail).then(res => {
+      this.resetPassSent = true;
+    }).catch(err => {
+      if(err.code == "auth/user-not-found")
+      {
+        this.errorPassSent = `No existe un usuario con el mail ${this.resetPassEmail}.`;
+      }
+      else
+      {
+        this.errorPassSent = `Error no controlado: ${err.code}.`;
+      }
+    });
+  }
+
+  OnForgotPass()
+  {
+    this.errorPassSent = "";
+    this.resetPassEmail = "";
+    document.getElementById("btnModalForgotPass").click();
   }
 
   placebo(){}

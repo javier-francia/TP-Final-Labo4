@@ -57,7 +57,7 @@
                 </div>
               </div>
               <div>
-                <a href="">¿Olvidó su contraseña?</a>
+                <a (click)="OnForgotPass()" style="color: blue; text-decoration: underline;">¿Olvidó su contraseña?</a>
               </div>
             </div>
             <br>
@@ -143,6 +143,66 @@
         <h4 style="font-weight: bold;">Ocurrió un error al iniciar sesión</h4>
         <br>
         <p>{{errorLogin}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="btnModalForgotPass" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForgotPass" hidden></button>
+<div class="modal fade" id="modalForgotPass" tabindex="-1" role="dialog" aria-labelledby="modalForgotPassLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Olvidé mi contraseña</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <div *ngIf="!resetPassSent">
+          <br>
+          <h5 style="font-weight: bold;">Ingrese su dirección de correo electrónico</h5>
+          <br>
+          <form novalidate
+              (ngSubmit)="placebo()"
+              #resetPassForm="ngForm">
+            <div class="form-group">
+              <input  class="form-control"
+                      id="inputEmail"
+                      type="email" 
+                      required
+                      email
+                      [(ngModel)]="resetPassEmail"
+                      name="email"
+                      #emailVar="ngModel"
+                      [ngClass]="{'is-invalid': ((emailVar.touched || emailVar.dirty) && !emailVar.valid) || errorPassSent != ''}">
+              <span class="invalid-feedback">
+                <span *ngIf="emailVar.errors?.required">
+                  Por favor ingrese su correo.
+                  <br>
+                </span>
+                <span *ngIf="emailVar.errors?.email">
+                  Por favor ingrese una dirección de correo válida.
+                  <br>
+                </span>
+                <span *ngIf="errorPassSent != ''">
+                  {{errorPassSent}}
+                </span>
+              </span>
+            </div>
+            <button type="button" mdbBtn color="indigo" class="waves-light" (click)="Reseteo()" mdbWavesEffect
+            [disabled]="emailVar.errors?.required || emailVar.errors?.email">Resetear contraseña</button>
+          </form>
+          
+        </div>
+
+        <div *ngIf="resetPassSent">
+          <br>
+          <button type="button" mdbBtn color="success" class="waves-light" mdbWavesEffect><i class="fas fa-check"></i></button>
+          <br>
+          <h4 style="font-weight: bold;">Se envió un correo a {{resetPassEmail}} para restablecer su contraseña.</h4>
+        </div>
       </div>
     </div>
   </div>
