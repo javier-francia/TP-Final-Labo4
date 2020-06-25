@@ -112,8 +112,12 @@ export class LoginComponent implements OnInit {
         this.email = "johndoe@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
-      case "Paciente Javier Francia":
-        this.email = "javifrancia@gmail.com";
+      case "Paciente Michael Jordan":
+        this.email = "mjordan@tpfinal.com";
+        this.pass = "tpfinalJF!";
+        break;
+      case "Paciente Juan Carr":
+        this.email = "jcarr@tpfinal.com";
         this.pass = "tpfinalJF!";
         break;
       case "Prof Rene Favaloro":
@@ -123,6 +127,10 @@ export class LoginComponent implements OnInit {
       case "Prof Nick Riviera":
         this.email = "nickriviera@tpfinal.com";
         this.pass = "tpfinalJF!";
+        break;
+      case "Prof Juan Carlos Andreis":
+        this.email = "jcandreis@tpfinal.com";
+        this.pass = "adminJF!";
         break;
     }
     if(document.getElementById("btnSubmit").attributes.getNamedItem("disabled") !== null) document.getElementById("btnSubmit").attributes.removeNamedItem("disabled");
