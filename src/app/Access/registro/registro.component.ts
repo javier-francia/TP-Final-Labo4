@@ -28,6 +28,7 @@ import { AccessLoggingService } from '../access-logging.service';
 })
 export class RegistroComponent implements OnInit {
 
+  error = "";
   entidad = "Paciente";
   newId: number;
   img1: Upload;
@@ -53,6 +54,7 @@ export class RegistroComponent implements OnInit {
 
   tryRegister(input: any)
   {
+    this.error = "";
     return this.accessSvc
       .RegisterWithEmail(input.obj.email, input.password)
       .then(res => {
@@ -131,7 +133,11 @@ export class RegistroComponent implements OnInit {
       .catch(err => {
         if(err.code === "auth/email-already-in-use")
         {
-          // Implementacion usuario con ese mail ya existe (en realidad lo estaria validando en el forms)
+          this.error = "Ya existe un usuario con el email " + input.obj.email;
+
+          var x = document.getElementById("snackbar");
+          x.className = "show";
+          setTimeout(function(){x.className = x.className.replace("show", "");}, 4000);
         } 
         console.log(err);
       });
