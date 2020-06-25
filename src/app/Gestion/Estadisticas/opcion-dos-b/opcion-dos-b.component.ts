@@ -3,6 +3,8 @@ import { ElementoEstadistica } from '../elemento-estadistica';
 import { TurnosServiceService } from '../../Turno/turnos-service.service';
 import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionales.service';
 import { fadeInFastAnimation } from '../../../animationsRoot';
+import { ExcelService } from '../excel.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-opcion-dos-b',
@@ -20,7 +22,8 @@ export class OpcionDosBComponent implements OnInit {
   conjuntoElementos: Array<ElementoEstadistica> = [];
 
   constructor(private turnosSvc: TurnosServiceService,
-              private profesionalesSvc: ProfesionalesService) { }
+              private profesionalesSvc: ProfesionalesService,
+              private excelSvc: ExcelService) { }
 
   ngOnInit(): void {
 
@@ -72,4 +75,10 @@ export class OpcionDosBComponent implements OnInit {
         });
     });
   }
+
+  export() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoElementos);
+    
+    this.excelSvc.exportToExcel([ws], ["Datos"], "Cantidad de turnos por profesional");
+  }  
 }

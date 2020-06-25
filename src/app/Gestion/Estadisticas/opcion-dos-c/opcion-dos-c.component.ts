@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { JornadaService } from '../../Administracion/JornadaTrabajo/jornada.service';
 import { ElementoEstadistica } from '../elemento-estadistica';
 import { fadeInFastAnimation } from '../../../animationsRoot';
+import { ExcelService } from '../excel.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-opcion-dos-c',
@@ -18,7 +20,8 @@ export class OpcionDosCComponent implements OnInit {
 
   conjuntoElementos: Array<ElementoEstadistica> = [];
 
-  constructor(private jornadaSvc: JornadaService) { }
+  constructor(private jornadaSvc: JornadaService,
+              private excelSvc: ExcelService) { }
 
   ngOnInit(): void {
 
@@ -90,5 +93,11 @@ export class OpcionDosCComponent implements OnInit {
       
     });
   }
+
+  export() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoElementos);
+    
+    this.excelSvc.exportToExcel([ws], ["Datos"], "Cantidad de profesionales por dia");
+  }  
 
 }

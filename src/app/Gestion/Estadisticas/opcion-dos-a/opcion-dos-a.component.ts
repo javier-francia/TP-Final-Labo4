@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ElementoEstadistica } from '../elemento-estadistica';
 import { TurnosServiceService } from '../../Turno/turnos-service.service';
 import { fadeInFastAnimation } from '../../../animationsRoot';
+import { ExcelService } from '../excel.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-opcion-dos-a',
@@ -18,7 +20,8 @@ export class OpcionDosAComponent implements OnInit {
 
   conjuntoElementos: Array<ElementoEstadistica> = [];
 
-  constructor(private turnoSvc: TurnosServiceService) { }
+  constructor(private turnoSvc: TurnosServiceService,
+              private excelSvc: ExcelService) { }
 
   ngOnInit(): void {
 
@@ -78,4 +81,10 @@ export class OpcionDosAComponent implements OnInit {
       turnosObservable.unsubscribe();
     });
   }
+
+  export() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoElementos);
+    
+    this.excelSvc.exportToExcel([ws], ["Datos"], "Cantidad de turnos por dia");
+  }  
 }
