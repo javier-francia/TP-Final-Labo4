@@ -26,6 +26,7 @@ import { ProfesionalAgendaComponent } from './Profesional/profesional-agenda/pro
 import { PacienteTurnosComponent } from './Paciente/paciente-turnos/paciente-turnos.component';
 import { ProfesionalHistorialComponent } from './Profesional/profesional-historial/profesional-historial.component';
 import { FechaSacadoPipe } from '../Shared/fecha-sacado-pipe';
+import { GestionAdministradoresComponent } from '../Gestion/Administracion/gestion-administradores/gestion-administradores.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'Agenda', component: ProfesionalAgendaComponent, canActivate: [PerfilGuard] },
   {path: 'MisTurnos', component: PacienteTurnosComponent, canActivate: [PerfilGuard] },
   {path: 'HabilitarProfesional', component: ProfesionalListadoComponent, canActivate: [PerfilGuard] },
+  {path: 'GestionAdministradores', component: GestionAdministradoresComponent, canActivate: [PerfilGuard] }
   
 ];
 
@@ -53,7 +55,8 @@ const routes: Routes = [
     ProfesionalAgendaComponent,
     PacienteTurnosComponent,
     ProfesionalHistorialComponent,
-    FechaSacadoPipe
+    FechaSacadoPipe,
+    GestionAdministradoresComponent
   ],
   imports: [
     CommonModule,

@@ -1,15 +1,125 @@
-<div>
-    <form>
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" [(ngModel)]="usuario.nombre">
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" [(ngModel)]="usuario.apellido">
-        <label for="email">Email</label>
-        <input type="email" name="email" [(ngModel)]="usuario.email">
-        <div *ngIf="modo == 'insert'">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" [(ngModel)]="password">
+<form novalidate
+        (ngSubmit)="placebo()"
+        [formGroup]="adminForm">
+    <div class="form-group">
+        <input  class="form-control"
+                type="text"
+                placeholder="Nombre *"
+                formControlName="nombre"
+                [ngClass]="{'is-invalid': (adminForm.get('nombre').touched ||
+                                            adminForm.get('nombre').dirty) &&
+                                            !adminForm.get('nombre').valid }" />
+        <span class="invalid-feedback">
+            <span *ngIf="adminForm.get('nombre').errors?.required">
+                Ingrese el nombre del administrador.
+            </span>
+            <span *ngIf="adminForm.get('nombre').errors?.minlength">
+                El nombre debe tener al menos 2 caracteres.
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <input  class="form-control"
+                type="text"
+                placeholder="Apellido *"
+                formControlName="apellido"
+                [ngClass]="{'is-invalid': (adminForm.get('apellido').touched ||
+                                            adminForm.get('apellido').dirty) &&
+                                            !adminForm.get('apellido').valid }" />
+        <span class="invalid-feedback">
+            <span *ngIf="adminForm.get('apellido').errors?.required">
+                Ingrese el apellido del administrador.
+            </span>
+            <span *ngIf="adminForm.get('apellido').errors?.minlength">
+                El apellido debe tener al menos 2 caracteres.
+            </span>
+        </span>
+    </div>
+    <div formGroupName="emailGroup">
+        <div class="form-group">
+            <input  class="form-control"
+                    type="email"
+                    placeholder="Email *"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': adminForm.get('emailGroup').errors?.match ||
+                                                ((adminForm.get('emailGroup.email').touched ||
+                                                adminForm.get('emailGroup.email').dirty) &&
+                                                !adminForm.get('emailGroup.email').valid) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="adminForm.get('emailGroup.email').errors?.required">
+                    Ingrese la dirección de email del administrador.
+                </span>
+                <span *ngIf="adminForm.get('emailGroup.email').errors?.email">
+                    Ingrese una dirección de email válida.
+                </span>
+            </span>
         </div>
-        <input class="btn btn-success" type="button" value="Registrarse" (click)="Registrar_OnClick()">        
-    </form>
-</div>
+        <div class="form-group">
+            <input  class="form-control"
+                    type="email"
+                    placeholder="Confirme su email *"
+                    formControlName="confirmEmail"
+                    [ngClass]="{'is-invalid': adminForm.get('emailGroup').errors?.match ||
+                                                ((adminForm.get('emailGroup.confirmEmail').touched ||
+                                                adminForm.get('emailGroup.confirmEmail').dirty) &&
+                                                !adminForm.get('emailGroup.confirmEmail').valid) }" />
+            <span class="invalid-feedback">
+                <span *ngIf="adminForm.get('emailGroup.confirmEmail').errors?.required">
+                    Repita la dirección de email del administrador.
+                </span>
+                <span *ngIf="adminForm.get('emailGroup').errors?.match">
+                    Las direcciones de email no coinciden.
+                </span>
+            </span>
+        </div>
+    </div>
+    <div *ngIf="modo == 'insert'">
+        <div formGroupName="passwordGroup">
+            <div class="form-group">
+                <input  class="form-control"
+                        type="password"
+                        placeholder="Contraseña *"
+                        formControlName="password"
+                        [ngClass]="{'is-invalid': adminForm.get('passwordGroup').errors?.match ||
+                                                    ((adminForm.get('passwordGroup.password').touched ||
+                                                    adminForm.get('passwordGroup.password').dirty) &&
+                                                    !adminForm.get('passwordGroup.password').valid) }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="adminForm.get('passwordGroup.password').errors?.required">
+                        Ingrese una contraseña.
+                    </span>
+                    <span *ngIf="adminForm.get('passwordGroup.password').errors?.minlength || adminForm.get('passwordGroup.password').errors?.maxlength">
+                        La contraseña debe contener entre 6 y 12 caracteres.
+                    </span>
+                </span>
+            </div>
+            <div class="form-group">
+                <input  class="form-control"
+                        type="password"
+                        placeholder="Confirme su contraseña *"
+                        formControlName="confirmPassword"
+                        [ngClass]="{'is-invalid': adminForm.get('passwordGroup').errors?.match ||
+                                                    ((adminForm.get('passwordGroup.confirmPassword').touched ||
+                                                    adminForm.get('passwordGroup.confirmPassword').dirty) &&
+                                                    !adminForm.get('passwordGroup.confirmPassword').valid) }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="adminForm.get('passwordGroup.confirmPassword').errors?.required">
+                        Repita la contraseña.
+                    </span>
+                    <span *ngIf="adminForm.get('passwordGroup').errors?.match">
+                        La contraseña no coincide.
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+        <br>
+        <br>
+        <br>
+        
+    <input  class="btn btn-success"
+            [disabled]="!adminForm.valid"
+            type="button"
+            value="Registrar"
+            (click)="Registrar_OnClick()"/>
+</form>

@@ -19,7 +19,6 @@ import { InformeDetalleComponent } from './Informe/informe-detalle/informe-detal
 import { EncuestaAltaComponent } from './Encuesta/encuesta-alta/encuesta-alta.component';
 import { EncuestaDetalleComponent } from './Encuesta/encuesta-detalle/encuesta-detalle.component';
 import { AdmisionProfesionalesComponent } from './Administracion/admision-profesionales/admision-profesionales.component';
-import { GestionAdministradoresComponent } from './Administracion/gestion-administradores/gestion-administradores.component';
 import { AtenderPacienteComponent } from './Turno/atender-paciente/atender-paciente.component';
 import { JornadaFormComponent } from './Administracion/JornadaTrabajo/jornada-form/jornada-form.component';
 import { JornadaListComponent } from './Administracion/JornadaTrabajo/jornada-list/jornada-list.component';
@@ -72,7 +71,6 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     EncuestaAltaComponent,
     EncuestaDetalleComponent,
     AdmisionProfesionalesComponent,
-    GestionAdministradoresComponent,
     AtenderPacienteComponent,
     JornadaFormComponent,
     JornadaListComponent,

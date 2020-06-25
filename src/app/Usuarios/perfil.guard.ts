@@ -48,7 +48,8 @@ export class PerfilGuard implements CanActivate {
               urlToLoad == "Estadistica1b" ||
               urlToLoad == "Estadistica2a" ||
               urlToLoad == "Estadistica2b" ||
-              urlToLoad == "Estadistica2c")
+              urlToLoad == "Estadistica2c" ||
+              urlToLoad == "GestionAdministradores")
           {
             output = true;
           }

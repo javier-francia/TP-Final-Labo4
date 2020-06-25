@@ -1,2 +1,19 @@
 <app-menu></app-menu>
-<p>gestion-administradores works!</p>
+<div *ngIf="!cargaOk" class="container" style="text-align: center;">
+    <br>
+    <br>
+    <h2>Carga de administrador</h2>
+    <br>
+    <div class="row">
+        <div class="col-12">
+
+            <app-admin-form (registrarUsuario)="tryRegister($event)"></app-admin-form>
+        </div>
+    </div>
+</div>
+<div *ngIf="cargaOk" class="container" style="text-align: center;">
+    <br>
+    <br>
+    <br>
+    <h1>La cuenta se cargó con éxito</h1>
+</div>
