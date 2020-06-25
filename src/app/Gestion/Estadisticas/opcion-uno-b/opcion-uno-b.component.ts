@@ -4,6 +4,8 @@ import { TurnosServiceService } from '../../Turno/turnos-service.service';
 import { ProfesionalesService } from '../../../Usuarios/Profesional/profesionales.service';
 import { EspecialidadService } from '../../../Shared/Servicios/especialidad.service';
 import { fadeInFastAnimation } from '../../../animationsRoot';
+import { ExcelService } from '../excel.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-opcion-uno-b',
@@ -20,14 +22,17 @@ export class OpcionUnoBComponent implements OnInit {
 
   conjuntoElementos: Array<ElementoEstadistica> = [];
 
+  turnosEspecialidad: Array<Object> = [];
+
   constructor(private turnosSvc: TurnosServiceService,
-              private especialidadSvc: EspecialidadService) { }
+              private especialidadSvc: EspecialidadService,
+              private excelSvc: ExcelService) { }
 
   ngOnInit(): void {
 
     let especialidades: Array<string> = [];
     let especialidadesCount: Array<number> = [];
-
+    
 
     let especialidadObservable = this.especialidadSvc.Get().subscribe((especialidadesSnapshot: any) => {
       for(let i = 0; i < especialidadesSnapshot.length; i++)
@@ -45,13 +50,20 @@ export class OpcionUnoBComponent implements OnInit {
 
           let indiceId = especialidades.indexOf(unTurno.payload.doc.data().especialidad);
           especialidadesCount[indiceId]++;
+
+          this.turnosEspecialidad.push({
+            IdTurno: +unTurno.payload.doc.id,
+            Fecha: new Date(unTurno.payload.doc.data().inicio.toDate()),
+            Especialidad: unTurno.payload.doc.data().especialidad,
+            Profesional: unTurno.payload.doc.data().nombreCompletoProfesional,
+            Estado: unTurno.payload.doc.data().estado
+          });
         }
         
         for(let i = 0; i < especialidades.length; i++)
         {
           this.conjuntoElementos.push(new ElementoEstadistica(especialidades[i], especialidadesCount[i].toString()));
         }
-        //console.log(this.conjuntoElementos);
 
         const dataSource = {
           chart: {
@@ -71,4 +83,10 @@ export class OpcionUnoBComponent implements OnInit {
         });
     });
   }
+
+  export() {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.turnosEspecialidad);
+    
+    this.excelSvc.exportToExcel([ws], ["Datos"], "Operaciones por especialidad");
+  }  
 }

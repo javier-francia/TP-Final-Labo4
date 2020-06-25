@@ -3,7 +3,9 @@ import { fadeInFastAnimation } from '../../../animationsRoot';
 import { AccessLoggingService } from '../../../Access/access-logging.service';
 import { AccessLog } from '../../../Access/access-log';
 import { ElementoEstadistica } from '../elemento-estadistica';
+import { ExcelService } from '../excel.service';
 import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-opcion-uno-a',
@@ -27,7 +29,8 @@ export class OpcionUnoAComponent implements OnInit {
   conjuntoProfesionales: Array<AccessLog> = [];
   conjuntoPacientes: Array<AccessLog> = [];
 
-  constructor(private accessLoggingSvc: AccessLoggingService) { }
+  constructor(private accessLoggingSvc: AccessLoggingService,
+              private excelSvc: ExcelService) { }
 
 
 
@@ -176,16 +179,25 @@ export class OpcionUnoAComponent implements OnInit {
 
   }
 
-  exportToExcel() {
+  export() {
     const wsTodos: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoTodosLosPerfiles);
     const wsAdmin: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoAdmin);
     const wsProfesionales: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoProfesionales);
     const wsPacientes: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.conjuntoPacientes);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, wsTodos, 'Todos');
-    XLSX.utils.book_append_sheet(wb, wsAdmin, 'Admin');
-    XLSX.utils.book_append_sheet(wb, wsProfesionales, 'Profesional');
-    XLSX.utils.book_append_sheet(wb, wsPacientes, 'Paciente');
-    XLSX.writeFile(wb, 'LoggingHistory.xlsx');
+    
+    let arrayWs = [];
+    arrayWs.push(XLSX.utils.json_to_sheet(this.conjuntoTodosLosPerfiles));
+    arrayWs.push(XLSX.utils.json_to_sheet(this.conjuntoAdmin));
+    arrayWs.push(XLSX.utils.json_to_sheet(this.conjuntoProfesionales));
+    arrayWs.push(XLSX.utils.json_to_sheet(this.conjuntoPacientes));
+    
+    let arrayNombres = [];
+    arrayNombres.push("Todos");
+    arrayNombres.push("Admin");
+    arrayNombres.push("Profesional");
+    arrayNombres.push("Paciente");
+    
+    
+    this.excelSvc.exportToExcel(arrayWs, arrayNombres, "Historia logueo");
   }  
 }
